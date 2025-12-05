@@ -35,7 +35,7 @@ const images = {
   balcony: "/balcony-furniture.jpeg", // Balcony design
 
   // Wood/Material Textures (keeping some Unsplash for textures)
-  woodTexture1: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+  woodTexture1: "/balcony-furniture.jpeg",
   woodTexture2: "https://images.unsplash.com/photo-1542621334-a254cf47733d?w=800&q=80",
   woodTexture3: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?w=800&q=80",
 

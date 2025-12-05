@@ -1,37 +1,48 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
-// Image URLs from Unsplash (2020+)
+// Local images from public folder - Real project photos
 const images = {
-  // Workshop & Craftsman Images
-  hero: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80", // Elegant interior with furniture
-  workshop1: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80", // Modern living room
-  workshop2: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80", // Modern workspace
-  craftsman: "https://images.unsplash.com/photo-1616137466211-f939a420be84?w=800&q=80", // Furniture detail
+  // Hero & Featured Images
+  hero: "/illuminated-shelving.jpeg", // Beautiful illuminated shelving unit
+  featured1: "/showroom-display.jpeg", // Showroom with arched displays
+  featured2: "/modern-salon.jpeg", // Modern salon interior
+  featured3: "/office-shelving.jpeg", // Office with custom shelving
 
-  // Furniture Images
-  table: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80", // Elegant sofa
-  chair: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&q=80", // Modern wooden chair
-  furniture1: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=800&q=80", // Living room furniture
-  furniture2: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80", // Modern interior
-  furniture3: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80", // Sofa
-  diningTable: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80", // Dining setup
+  // Collections Images
+  commercial: "/shop-interior-1.jpeg", // Commercial retail interior
+  office: "/tech-store-shelving.jpeg", // Tech store with display shelving
+  hospitality: "/salon-interior.jpeg", // Salon/hospitality interior
 
-  // Wood Textures
-  woodTexture1: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80", // Light oak grain
-  woodTexture2: "https://images.unsplash.com/photo-1542621334-a254cf47733d?w=800&q=80", // Dark walnut texture
-  woodTexture3: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?w=800&q=80", // Ash/light natural wood
+  // Project Showcase
+  project1: "/classic-arched-shelving.jpeg", // Classic arched built-in shelving
+  project2: "/led-shelving.jpeg", // LED backlit shelving
+  project3: "/reception-counter.jpeg", // Custom reception counter
+  project4: "/office-interior.jpeg", // Modern office interior
+  project5: "/wayfinding-signage.jpeg", // Wood slat wayfinding signage
+  project6: "/minimalist-reception.jpeg", // Minimalist reception desk
 
-  // Artisan Portraits
-  artisan1: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=400&q=80", // Craftsman portrait
-  artisan2: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80", // Professional
-  artisan3: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80", // Team member
+  // Work in Progress / Craftsmanship
+  workshop1: "/workshop-progress.jpeg", // Workshop in progress
+  workshop2: "/custom-shelving.jpeg", // Custom shelving being built
+  workshop3: "/work-in-progress.jpeg", // Work in progress shot
 
-  // Interior Shots
-  interior1: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80", // Modern living room
-  interior2: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80", // Elegant interior
+  // Specialty Items
+  nursery: "/baby-crib.jpeg", // Custom baby crib
+  balcony: "/balcony-furniture.jpeg", // Balcony design
+
+  // Wood/Material Textures (keeping some Unsplash for textures)
+  woodTexture1: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+  woodTexture2: "https://images.unsplash.com/photo-1542621334-a254cf47733d?w=800&q=80",
+  woodTexture3: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?w=800&q=80",
+
+  // Artisan Portraits (keeping Unsplash for people)
+  artisan1: "https://images.unsplash.com/photo-1540479859555-17af45c78602?w=400&q=80",
+  artisan2: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+  artisan3: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
 };
 
 export default function Home() {
@@ -67,45 +78,45 @@ export default function Home() {
 
   const collections = [
     {
-      name: "The Heirloom Collection",
-      description: "Pieces designed to be passed down through generations",
-      image: images.furniture1,
-      pieces: "12 Pieces",
+      name: "Commercial Interiors",
+      description: "Retail shops, showrooms, and display solutions that elevate your brand",
+      image: images.commercial,
+      pieces: "Retail & Display",
     },
     {
-      name: "Modern Artisan",
-      description: "Contemporary designs rooted in traditional craftsmanship",
-      image: images.furniture2,
-      pieces: "8 Pieces",
+      name: "Office & Workspace",
+      description: "Professional environments designed for productivity and style",
+      image: images.office,
+      pieces: "Corporate",
     },
     {
-      name: "Bespoke Commission",
-      description: "Your vision, our expertise, timeless results",
-      image: images.diningTable,
-      pieces: "Custom",
+      name: "Hospitality & Salon",
+      description: "Stunning interiors for salons, spas, and hospitality venues",
+      image: images.hospitality,
+      pieces: "Custom Design",
     },
   ];
 
   const artisans = [
     {
-      name: "Thomas Mercer",
+      name: "David Kibirige",
       role: "Master Craftsman",
-      experience: "32 years",
+      experience: "15 years",
       image: images.artisan1,
       specialty: "Joinery & Fine Details",
     },
     {
-      name: "Sarah Chen",
+      name: "Maximus Kabyesiza",
       role: "Design Director",
-      experience: "18 years",
-      image: images.artisan3,
+      experience: "14 years",
+      image: images.artisan2,
       specialty: "Form & Function",
     },
     {
-      name: "Marcus Williams",
+      name: "Ssenkolonto Jacob",
       role: "Wood Specialist",
-      experience: "24 years",
-      image: images.artisan2,
+      experience: "10 years",
+      image: images.artisan3,
       specialty: "Material Selection",
     },
   ];
@@ -191,23 +202,17 @@ export default function Home() {
               >
                 Our Craft
               </a>
-              <a
-                href="#materials"
+              <Link
+                href="/portfolio"
                 className="text-[var(--charcoal)] dark:text-[var(--putty)] hover:text-[var(--walnut)] transition-colors"
               >
-                Materials
-              </a>
+                Portfolio
+              </Link>
               <a
                 href="#collections"
                 className="text-[var(--charcoal)] dark:text-[var(--putty)] hover:text-[var(--walnut)] transition-colors"
               >
-                Collections
-              </a>
-              <a
-                href="#artisans"
-                className="text-[var(--charcoal)] dark:text-[var(--putty)] hover:text-[var(--walnut)] transition-colors"
-              >
-                Artisans
+                Services
               </a>
               <a
                 href="#process"
@@ -216,7 +221,7 @@ export default function Home() {
                 Process
               </a>
               <a href="#commission" className="btn-primary text-sm px-6 py-2.5">
-                Begin Your Commission
+                Get a Quote
               </a>
             </div>
 
@@ -266,26 +271,19 @@ export default function Home() {
             >
               Our Craft
             </a>
-            <a
-              href="#materials"
+            <Link
+              href="/portfolio"
               onClick={() => setIsMenuOpen(false)}
               className="text-[var(--charcoal)] dark:text-[var(--putty)] py-3 px-4 rounded-xl hover:bg-[var(--putty)] dark:hover:bg-[var(--charcoal-light)] transition-colors active:scale-98"
             >
-              Materials
-            </a>
+              Portfolio
+            </Link>
             <a
               href="#collections"
               onClick={() => setIsMenuOpen(false)}
               className="text-[var(--charcoal)] dark:text-[var(--putty)] py-3 px-4 rounded-xl hover:bg-[var(--putty)] dark:hover:bg-[var(--charcoal-light)] transition-colors active:scale-98"
             >
-              Collections
-            </a>
-            <a
-              href="#artisans"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-[var(--charcoal)] dark:text-[var(--putty)] py-3 px-4 rounded-xl hover:bg-[var(--putty)] dark:hover:bg-[var(--charcoal-light)] transition-colors active:scale-98"
-            >
-              Artisans
+              Services
             </a>
             <a
               href="#process"
@@ -299,7 +297,7 @@ export default function Home() {
               onClick={() => setIsMenuOpen(false)}
               className="btn-primary text-center mt-2"
             >
-              Begin Your Commission
+              Get a Quote
             </a>
           </div>
         </div>
@@ -374,8 +372,8 @@ export default function Home() {
             <div className="lg:hidden mt-8 animate-fade-in delay-200">
               <div className="image-reveal rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
                 <Image
-                  src={images.interior1}
-                  alt="Urbancraft handcrafted furniture"
+                  src={images.featured1}
+                  alt="Urbancraft custom interior"
                   width={600}
                   height={450}
                   className="w-full h-full object-cover"
@@ -386,8 +384,8 @@ export default function Home() {
               <div className="grid grid-cols-3 gap-3 mt-3">
                 <div className="image-reveal rounded-xl overflow-hidden aspect-square shadow-lg">
                   <Image
-                    src={images.workshop1}
-                    alt="Modern living space"
+                    src={images.project1}
+                    alt="Custom shelving"
                     width={200}
                     height={200}
                     className="w-full h-full object-cover"
@@ -395,8 +393,8 @@ export default function Home() {
                 </div>
                 <div className="image-reveal rounded-xl overflow-hidden aspect-square shadow-lg">
                   <Image
-                    src={images.chair}
-                    alt="Handcrafted furniture"
+                    src={images.featured2}
+                    alt="Salon interior"
                     width={200}
                     height={200}
                     className="w-full h-full object-cover"
@@ -404,8 +402,8 @@ export default function Home() {
                 </div>
                 <div className="image-reveal rounded-xl overflow-hidden aspect-square shadow-lg">
                   <Image
-                    src={images.craftsman}
-                    alt="Furniture detail"
+                    src={images.project5}
+                    alt="Wood slat design"
                     width={200}
                     height={200}
                     className="w-full h-full object-cover"
@@ -419,8 +417,8 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="image-reveal rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl">
                   <Image
-                    src={images.workshop1}
-                    alt="Craftsman at work"
+                    src={images.featured1}
+                    alt="Showroom display"
                     width={400}
                     height={500}
                     className="w-full h-full object-cover"
@@ -428,8 +426,8 @@ export default function Home() {
                 </div>
                 <div className="image-reveal rounded-2xl overflow-hidden aspect-square shadow-xl">
                   <Image
-                    src={images.woodTexture1}
-                    alt="Wood grain detail"
+                    src={images.project1}
+                    alt="Classic arched shelving"
                     width={400}
                     height={400}
                     className="w-full h-full object-cover"
@@ -439,8 +437,8 @@ export default function Home() {
               <div className="space-y-4 pt-8">
                 <div className="image-reveal rounded-2xl overflow-hidden aspect-square shadow-xl">
                   <Image
-                    src={images.chair}
-                    alt="Handcrafted chair"
+                    src={images.featured2}
+                    alt="Modern salon interior"
                     width={400}
                     height={400}
                     className="w-full h-full object-cover"
@@ -448,8 +446,8 @@ export default function Home() {
                 </div>
                 <div className="image-reveal rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl">
                   <Image
-                    src={images.craftsman}
-                    alt="Detail work"
+                    src={images.featured3}
+                    alt="Office interior"
                     width={400}
                     height={500}
                     className="w-full h-full object-cover"
@@ -480,7 +478,7 @@ export default function Home() {
               <div className="image-reveal rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src={images.workshop2}
-                  alt="Workshop craftsmanship"
+                  alt="Custom shelving installation"
                   width={600}
                   height={700}
                   className="w-full h-auto object-cover"
@@ -732,11 +730,11 @@ export default function Home() {
                   <p className="text-[var(--oatmeal)] mb-6 text-sm md:text-base">
                     {collection.description}
                   </p>
-                  <a
-                    href="#"
+                  <Link
+                    href="/portfolio"
                     className="inline-flex items-center text-[var(--oak)] hover:text-[var(--pine)] transition-colors group py-2"
                   >
-                    Explore Collection
+                    View Projects
                     <svg
                       className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
                       fill="none"
@@ -750,7 +748,7 @@ export default function Home() {
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -761,72 +759,94 @@ export default function Home() {
             <div className="w-2 h-1 bg-[var(--charcoal-light)] rounded-full"></div>
             <div className="w-2 h-1 bg-[var(--charcoal-light)] rounded-full"></div>
           </div>
+
+          {/* View All Button */}
+          <div className="text-center mt-12">
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[var(--oak)] text-[var(--charcoal)] font-medium rounded-full hover:bg-[var(--pine)] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              View All Projects
+              <svg
+                className="w-5 h-5 ml-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Featured Piece */}
+      {/* Featured Project */}
       <section className="section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-[var(--walnut)] dark:text-[var(--oak)] font-mono text-sm tracking-widest uppercase mb-4">
-                Featured Commission
+                Featured Project
               </p>
               <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl font-medium text-[var(--charcoal)] dark:text-[var(--putty)] mb-6 line-decoration">
-                The Morrison Dining Table
+                Luxury Retail Showroom
               </h2>
               <p className="text-[var(--slate)] dark:text-[var(--oatmeal)] text-lg mb-8">
-                Commissioned by the Morrison family to host three generations of
-                Sunday dinners. This 12-seat masterpiece features bookmatched
-                black walnut with hand-carved breadboard ends and traditional
-                trestle base.
+                A complete interior fitout for a premium electronics retailer featuring
+                custom LED-illuminated display shelving, glass showcases, and an elegant
+                reception area. Every detail designed to showcase products beautifully.
               </p>
 
               {/* Specifications */}
               <div className="grid grid-cols-2 gap-6 mb-8">
                 <div>
                   <p className="font-mono text-xs text-[var(--walnut)] dark:text-[var(--oak)] uppercase tracking-wider mb-1">
-                    Material
+                    Project Type
                   </p>
                   <p className="text-[var(--charcoal)] dark:text-[var(--putty)] font-medium">
-                    Black Walnut
+                    Retail Showroom
                   </p>
                 </div>
                 <div>
                   <p className="font-mono text-xs text-[var(--walnut)] dark:text-[var(--oak)] uppercase tracking-wider mb-1">
-                    Dimensions
+                    Area
                   </p>
                   <p className="text-[var(--charcoal)] dark:text-[var(--putty)] font-medium">
-                    120&quot; × 48&quot; × 30&quot;
+                    2,400 sq ft
                   </p>
                 </div>
                 <div>
                   <p className="font-mono text-xs text-[var(--walnut)] dark:text-[var(--oak)] uppercase tracking-wider mb-1">
-                    Craft Hours
+                    Duration
                   </p>
                   <p className="text-[var(--charcoal)] dark:text-[var(--putty)] font-medium">
-                    186 Hours
+                    6 Weeks
                   </p>
                 </div>
                 <div>
                   <p className="font-mono text-xs text-[var(--walnut)] dark:text-[var(--oak)] uppercase tracking-wider mb-1">
-                    Finish
+                    Features
                   </p>
                   <p className="text-[var(--charcoal)] dark:text-[var(--putty)] font-medium">
-                    Hand-Rubbed Oil
+                    LED Integration
                   </p>
                 </div>
               </div>
 
               <a href="#commission" className="btn-primary">
-                Commission Similar
+                Start Your Project
               </a>
             </div>
 
             <div className="image-reveal rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src={images.interior1}
-                alt="Morrison Dining Table in home"
+                src={images.project2}
+                alt="LED backlit shelving showcase"
                 width={700}
                 height={500}
                 className="w-full h-auto object-cover"
@@ -939,18 +959,18 @@ export default function Home() {
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
           <blockquote className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl lg:text-4xl text-[var(--putty)] leading-relaxed mb-8">
-            &ldquo;The dining table Thomas created for us isn&apos;t just
-            furniture—it&apos;s where our family happens. Every scratch tells a
-            story, and every meal feels like an occasion.&rdquo;
+            &ldquo;Urbancraft transformed our retail space beyond our expectations.
+            The custom shelving and display units have elevated our brand image
+            and our customers constantly compliment the design.&rdquo;
           </blockquote>
           <div className="flex items-center justify-center space-x-4">
             <div className="w-12 h-12 rounded-full bg-[var(--oak)]/30"></div>
             <div className="text-left">
               <p className="text-[var(--putty)] font-medium">
-                Catherine Morrison
+                David Kamau
               </p>
               <p className="text-[var(--oatmeal)] text-sm">
-                Commission Client, 2023
+                Tech Store Owner, 2024
               </p>
             </div>
           </div>
@@ -969,11 +989,11 @@ export default function Home() {
                 Begin Your Journey
               </p>
               <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl font-medium text-[var(--charcoal)] dark:text-[var(--putty)] mb-6 line-decoration">
-                Ready to Commission Your Heirloom?
+                Ready to Transform Your Space?
               </h2>
               <p className="text-[var(--slate)] dark:text-[var(--oatmeal)] text-lg mb-8">
-                Every great piece starts with a conversation. Share your vision,
-                and let&apos;s explore how we can bring it to life in wood.
+                Every great space starts with a conversation. Share your vision,
+                and let&apos;s explore how we can bring it to life.
               </p>
 
               {/* Contact Form */}
@@ -1013,18 +1033,19 @@ export default function Home() {
                     htmlFor="piece"
                     className="block text-sm font-medium text-[var(--charcoal)] dark:text-[var(--putty)] mb-2"
                   >
-                    What Are You Envisioning?
+                    Project Type
                   </label>
                   <select
                     id="piece"
                     className="w-full px-4 py-3 rounded-xl border border-[var(--oatmeal)] dark:border-[var(--charcoal-light)] bg-white dark:bg-[var(--charcoal-light)] text-[var(--charcoal)] dark:text-[var(--putty)] focus:outline-none focus:ring-2 focus:ring-[var(--walnut)]"
                   >
-                    <option>Dining Table</option>
-                    <option>Coffee Table</option>
-                    <option>Desk / Workspace</option>
-                    <option>Bedroom Furniture</option>
-                    <option>Storage / Shelving</option>
-                    <option>Custom Piece</option>
+                    <option>Retail / Shop Interior</option>
+                    <option>Office Fitout</option>
+                    <option>Salon / Hospitality</option>
+                    <option>Reception & Display</option>
+                    <option>Custom Shelving</option>
+                    <option>Residential Project</option>
+                    <option>Other</option>
                   </select>
                 </div>
                 <div>
@@ -1038,11 +1059,11 @@ export default function Home() {
                     id="message"
                     rows={4}
                     className="w-full px-4 py-3 rounded-xl border border-[var(--oatmeal)] dark:border-[var(--charcoal-light)] bg-white dark:bg-[var(--charcoal-light)] text-[var(--charcoal)] dark:text-[var(--putty)] focus:outline-none focus:ring-2 focus:ring-[var(--walnut)] resize-none"
-                    placeholder="Describe your dream piece, the space it will live in, and any specific requirements..."
+                    placeholder="Describe your project, the space dimensions, and any specific requirements or inspiration..."
                   ></textarea>
                 </div>
                 <button type="submit" className="btn-primary w-full sm:w-auto">
-                  Begin Your Commission
+                  Get a Free Quote
                 </button>
               </form>
             </div>
@@ -1051,8 +1072,8 @@ export default function Home() {
             <div className="hidden lg:block">
               <div className="image-reveal rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src={images.interior2}
-                  alt="Urbancraft furniture in elegant interior"
+                  src={images.project3}
+                  alt="Custom reception counter"
                   width={600}
                   height={700}
                   className="w-full h-auto object-cover"
@@ -1090,9 +1111,9 @@ export default function Home() {
                 </span>
               </div>
               <p className="text-[var(--oatmeal)] max-w-md mb-6">
-                Handcrafted furniture for those who believe in quality that
-                lasts. Every piece tells a story of dedication, skill, and the
-                enduring beauty of natural wood.
+                Premium interior fitouts for commercial spaces. From retail
+                showrooms to office environments, we craft spaces that elevate
+                your brand and inspire your customers.
               </p>
               <div className="flex space-x-4">
                 <a
@@ -1180,32 +1201,32 @@ export default function Home() {
 
             {/* Contact */}
             <div>
-              <h3 className="font-semibold mb-4">Visit the Workshop</h3>
+              <h3 className="font-semibold mb-4">Visit Our Showroom</h3>
               <ul className="space-y-3 text-[var(--oatmeal)]">
-                <li>847 Timber Lane</li>
-                <li>Portland, Oregon 97205</li>
+                <li>Industrial Area, Plot 47</li>
+                <li>Kampala, Uganda</li>
                 <li className="pt-2">
                   <a
-                    href="tel:+15035551234"
+                    href="tel:+256700123456"
                     className="hover:text-[var(--oak)] transition-colors"
                   >
-                    (503) 555-1234
+                    +256 700 123 456
                   </a>
                 </li>
                 <li>
                   <a
-                    href="mailto:craft@urbancraft.com"
+                    href="mailto:info@urbancraftfurnishings.com"
                     className="hover:text-[var(--oak)] transition-colors"
                   >
-                    craft@urbancraft.com
+                    info@urbancraftfurnishings.com
                   </a>
                 </li>
                 <li className="pt-2 text-sm">
-                  Workshop Hours:
+                  Showroom Hours:
                   <br />
-                  Mon-Fri 9am-5pm
+                  Mon-Fri 8am-6pm
                   <br />
-                  Sat by appointment
+                  Sat 9am-2pm
                 </li>
               </ul>
             </div>

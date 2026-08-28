@@ -9,7 +9,7 @@ export function ProductCard({
   product,
   priority = false,
   className,
-  sizes = "(min-width:1280px) 22vw, (min-width:768px) 30vw, 45vw",
+  sizes = "(min-width:1280px) 20vw, (min-width:768px) 26vw, 45vw",
 }: {
   product: ProductCardType;
   priority?: boolean;
@@ -95,7 +95,9 @@ export function ProductGrid({
   className?: string;
 }) {
   return (
-    <div className={cn("grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-5", className)}>
+    // Listing pages put a filter rail beside this grid, so it steps up to four
+    // columns only at xl — at lg four columns leaves the cards too narrow.
+    <div className={cn("grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-3 lg:gap-x-5 xl:grid-cols-4", className)}>
       {products.map((p, i) => (
         <ProductCard key={p.id} product={p} priority={i < priorityCount} />
       ))}

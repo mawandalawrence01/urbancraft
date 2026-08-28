@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ArrowRight2 } from "iconsax-reactjs";
 
-import { Filters } from "@/components/shop/Filters";
+import { FilterSidebar, FilterToolbar } from "@/components/shop/Filters";
 import { Pagination } from "@/components/shop/Pagination";
 import { ProductGrid } from "@/components/product/ProductCard";
 import {
@@ -102,13 +102,20 @@ export default async function CategoryPage({
 
       <div className="lg:flex lg:gap-10">
         <Suspense>
-          <Filters
+          <FilterSidebar
             bounds={bounds} categories={filterCategories}
             activeCategory={category.slug} total={total}
           />
         </Suspense>
 
         <div className="min-w-0 flex-1">
+          <Suspense>
+            <FilterToolbar
+              bounds={bounds} categories={filterCategories}
+              activeCategory={category.slug} total={total}
+            />
+          </Suspense>
+
           {items.length === 0 ? (
             <div className="rounded-2xl border border-line bg-paper px-6 py-16 text-center">
               <h2 className="font-display text-lg font-semibold">Nothing here yet</h2>

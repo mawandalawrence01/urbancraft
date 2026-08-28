@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Filters } from "@/components/shop/Filters";
+import { FilterSidebar, FilterToolbar } from "@/components/shop/Filters";
 import { Pagination } from "@/components/shop/Pagination";
 import { ProductGrid } from "@/components/product/ProductCard";
 import { getCategoryTree, getPriceBounds, listProducts, type SortKey } from "@/lib/catalog";
@@ -44,10 +44,14 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
 
       <div className="lg:flex lg:gap-10">
         <Suspense>
-          <Filters bounds={bounds} categories={categories} total={total} />
+          <FilterSidebar bounds={bounds} categories={categories} total={total} />
         </Suspense>
 
         <div className="min-w-0 flex-1">
+          <Suspense>
+            <FilterToolbar bounds={bounds} categories={categories} total={total} />
+          </Suspense>
+
           {items.length === 0 ? (
             <EmptyState />
           ) : (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { SearchNormal1 } from "iconsax-reactjs";
 
-import { Filters } from "@/components/shop/Filters";
+import { FilterSidebar, FilterToolbar } from "@/components/shop/Filters";
 import { Pagination } from "@/components/shop/Pagination";
 import { ProductGrid } from "@/components/product/ProductCard";
 import { getPriceBounds, listProducts, type SortKey } from "@/lib/catalog";
@@ -46,10 +46,14 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
 
       <div className="mt-6 lg:flex lg:gap-10">
         <Suspense>
-          <Filters bounds={bounds} total={total} />
+          <FilterSidebar bounds={bounds} total={total} />
         </Suspense>
 
         <div className="min-w-0 flex-1">
+          <Suspense>
+            <FilterToolbar bounds={bounds} total={total} />
+          </Suspense>
+
           {items.length === 0 ? (
             <div className="rounded-2xl border border-line bg-paper px-6 py-16 text-center">
               <SearchNormal1 size={34} className="mx-auto text-muted" />

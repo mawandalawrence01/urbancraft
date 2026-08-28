@@ -22,26 +22,16 @@ export type FilterProps = {
   total: number;
 };
 
-export function Filters({ bounds, categories = [], activeCategory, total }: FilterProps) {
+/** Reads the active filters from the URL and writes changes back to it. */
+function useFilters(bounds: FilterProps["bounds"]) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const [open, setOpen] = useState(false);
 
   const sort = (params.get("sort") as SortKey) ?? "featured";
   const min = Number(params.get("min") ?? bounds.min);
   const max = Number(params.get("max") ?? bounds.max);
   const inStock = params.get("stock") === "1";
-
-  const [draftMin, setDraftMin] = useState(min);
-  const [draftMax, setDraftMax] = useState(max);
-
-  useEffect(() => { setDraftMin(min); setDraftMax(max); }, [min, max]);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [open]);
 
   function apply(next: Record<string, string | null>) {
     const sp = new URLSearchParams(params.toString());
@@ -56,7 +46,20 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
   const activeCount =
     (params.get("min") ? 1 : 0) + (params.get("max") ? 1 : 0) + (inStock ? 1 : 0);
 
-  const panel = (
+  return { router, sort, min, max, inStock, apply, activeCount };
+}
+
+/** The filter controls themselves, shared by the desktop rail and mobile sheet. */
+function FilterPanel({
+  bounds, categories = [], activeCategory, onDone,
+}: FilterProps & { onDone?: () => void }) {
+  const { router, min, max, inStock, apply, activeCount } = useFilters(bounds);
+  const [draftMin, setDraftMin] = useState(min);
+  const [draftMax, setDraftMax] = useState(max);
+
+  useEffect(() => { setDraftMin(min); setDraftMax(max); }, [min, max]);
+
+  return (
     <div className="space-y-7">
       {categories.length > 0 && (
         <section>
@@ -68,7 +71,7 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
               <li key={c.slug}>
                 <button
                   type="button"
-                  onClick={() => { setOpen(false); router.push(`/c/${c.slug}`); }}
+                  onClick={() => { onDone?.(); router.push(`/c/${c.slug}`); }}
                   className={cn(
                     "flex w-full items-center justify-between rounded-lg px-2 py-2 text-left text-[0.88rem] transition hover:bg-sand",
                     activeCategory === c.slug && "bg-sand font-medium",
@@ -88,31 +91,31 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
           Price
         </h3>
         <div className="flex items-center gap-2">
-          <label className="flex-1">
+          <label className="min-w-0 flex-1">
             <span className="sr-only">Minimum price</span>
             <input
               type="number" inputMode="numeric" value={draftMin} min={bounds.min} max={bounds.max}
               onChange={(e) => setDraftMin(Number(e.target.value))}
-              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-[0.85rem] outline-none focus:border-tan"
+              className="w-full rounded-lg border border-line bg-paper px-2.5 py-2 text-[0.85rem] outline-none focus:border-tan"
             />
           </label>
           <span className="text-muted">–</span>
-          <label className="flex-1">
+          <label className="min-w-0 flex-1">
             <span className="sr-only">Maximum price</span>
             <input
               type="number" inputMode="numeric" value={draftMax} min={bounds.min} max={bounds.max}
               onChange={(e) => setDraftMax(Number(e.target.value))}
-              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-[0.85rem] outline-none focus:border-tan"
+              className="w-full rounded-lg border border-line bg-paper px-2.5 py-2 text-[0.85rem] outline-none focus:border-tan"
             />
           </label>
         </div>
-        <p className="mt-2 text-[0.75rem] text-muted">
+        <p className="mt-2 text-[0.75rem] leading-relaxed text-muted">
           Catalogue runs {formatUGX(bounds.min)} – {formatUGX(bounds.max)}
         </p>
         <Button
           size="sm" variant="outline" className="mt-3 w-full"
           onClick={() => {
-            setOpen(false);
+            onDone?.();
             apply({
               min: draftMin > bounds.min ? String(draftMin) : null,
               max: draftMax < bounds.max ? String(draftMax) : null,
@@ -126,14 +129,22 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
       <section>
         <button
           type="button"
-          onClick={() => { setOpen(false); apply({ stock: inStock ? null : "1" }); }}
-          className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-[0.88rem] transition hover:bg-sand"
+          onClick={() => { onDone?.(); apply({ stock: inStock ? null : "1" }); }}
+          role="switch"
+          aria-checked={inStock}
+          className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left text-[0.88rem] transition hover:bg-sand"
         >
-          <TickSquare
-            size={19}
-            variant={inStock ? "Bold" : "Linear"}
-            className={inStock ? "text-tan" : "text-muted"}
-          />
+          {/* A tick icon reads as "already on" even when unchecked, so draw an
+              empty box until the filter is actually applied. */}
+          <span
+            aria-hidden
+            className={cn(
+              "grid size-[18px] shrink-0 place-items-center rounded border transition",
+              inStock ? "border-tan bg-tan text-white" : "border-line bg-paper",
+            )}
+          >
+            {inStock && <TickSquare size={13} variant="Bold" />}
+          </span>
           Ready to deliver only
         </button>
       </section>
@@ -141,7 +152,7 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
       {activeCount > 0 && (
         <button
           type="button"
-          onClick={() => { setOpen(false); apply({ min: null, max: null, stock: null }); }}
+          onClick={() => { onDone?.(); apply({ min: null, max: null, stock: null }); }}
           className="text-[0.85rem] text-tan-2 underline"
         >
           Clear all filters
@@ -149,11 +160,37 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
       )}
     </div>
   );
+}
+
+/**
+ * Desktop filter rail. Rendered as the first column of the listing row, so it
+ * sits flush with the page heading and the grid takes the remaining width.
+ */
+export function FilterSidebar(props: FilterProps) {
+  return (
+    <aside className="hidden w-56 shrink-0 lg:block">
+      <FilterPanel {...props} />
+    </aside>
+  );
+}
+
+/**
+ * Sort control, result count, and the mobile filter sheet. Belongs inside the
+ * results column, above the grid.
+ */
+export function FilterToolbar(props: FilterProps) {
+  const { total, bounds } = props;
+  const { sort, apply, activeCount } = useFilters(bounds);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
     <>
-      {/* Sticky control bar — the only filter affordance on mobile */}
-      <div className="sticky top-16 z-20 -mx-4 mb-6 flex items-center gap-2 border-b border-line bg-cream/90 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 lg:top-18 lg:mx-0 lg:border-0 lg:bg-transparent lg:px-0 lg:backdrop-blur-none">
+      <div className="sticky top-16 z-20 -mx-4 mb-6 flex items-center gap-2 border-b border-line bg-cream/90 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 lg:top-18 lg:mx-0 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none">
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -184,10 +221,6 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
         </label>
       </div>
 
-      {/* Desktop rail */}
-      <aside className="hidden w-56 shrink-0 lg:block">{panel}</aside>
-
-      {/* Mobile sheet */}
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <button
@@ -201,7 +234,9 @@ export function Filters({ bounds, categories = [], activeCategory, total }: Filt
                 <CloseSquare size={22} />
               </button>
             </div>
-            <div className="px-4 py-5">{panel}</div>
+            <div className="px-4 py-5">
+              <FilterPanel {...props} onDone={() => setOpen(false)} />
+            </div>
             <div
               className="sticky bottom-0 border-t border-line bg-cream p-4"
               style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom))" }}

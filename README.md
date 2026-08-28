@@ -94,6 +94,7 @@ furniture site (`buyfurniture.co.ug`) as source material. The pipeline lives in 
 | `scripts/contact-sheet.mts`, `scripts/audit-sheets.mts` | Build contact sheets for reviewing imagery in bulk. |
 | `scripts/fix-content.mts` | Tidies punctuation artefacts carried over from the scraped copy. |
 | `scripts/db-check.mts` | Prints the tables Prisma can see — quick connectivity check. |
+| `scripts/build-icons.mjs` | Regenerates `favicon.ico`, `apple-icon.png` and the manifest icons from `app/icon.svg`. Run it after changing the mark. |
 
 ### ⚠️ Photography needs replacing
 

@@ -1,0 +1,232 @@
+[
+ {
+  "slug": "shop-interior-1",
+  "title": "Retail Shop Interior",
+  "category": "Commercial",
+  "summary": "Custom white and oak shelving built to carry retail display weight without deflecting.",
+  "coverImage": "/projects/shop-interior-1.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAABwAgCdASoMABAAAwBSJZACdAYwn2cZ0OuglshAAM4exxQ4jZ+3vQl60V9JeApeO7672+6fW3tQ3H44pvIYANw/BKfwStZ9d/Z8GHVyS3ocdld6lUXRl/IhTL3f4pohAF7wh6off8qg4jXNJh/q+xqW2U9wAAAA"
+ },
+ {
+  "slug": "showroom-display",
+  "title": "Premium Showroom",
+  "category": "Commercial",
+  "summary": "Arched display units with integrated LED lighting and glass counters.",
+  "coverImage": "/projects/showroom-display.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoMABAAAwBSJZQC7H8AGYXDl3XPn4wA/rdES9CC6iPjQSwu/LJRIAX1lbB/8FlyoTFCD/I5lht8mEvEzhLKBhU+jByJXVIHaUNoq6Dvx8WQ5tNT7af9i2gPJhQAAA=="
+ },
+ {
+  "slug": "tech-store-shelving",
+  "title": "Electronics Store",
+  "category": "Commercial",
+  "summary": "Modern tech retail space with integrated display and cable-managed shelving.",
+  "coverImage": "/projects/tech-store-shelving.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQAgCdASoMABAAAwBSJYgCdAYv1Z++ZX4AAPwn4DsZ1NLAd/OSDLbnrNHhoYx8WhiHTwg51TsIjYTjEN2gxgtbWgsGNlme2VPfoToh56iEzIYfTSgvYL0RCLmbb/OdLFj7lwNB4+YRk9CLLA5AA8ZgTXwAAA=="
+ },
+ {
+  "slug": "reception-counter",
+  "title": "Reception Counter",
+  "category": "Commercial",
+  "summary": "Branded reception desk with a full-height shelving backdrop.",
+  "coverImage": "/projects/reception-counter.webp",
+  "width": 607,
+  "height": 1080,
+  "blurDataUrl": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoJABAAAwBSJQBOgCHUuepF3QAA/uxb/E5G25RXmQ287W1I73WimPxoe6d51IP8+fLH4XJ78v6P4MVoE2M7Fn3M5P//QzoK7CHQAQnWiI3QBZAA"
+ },
+ {
+  "slug": "office-shelving",
+  "title": "Executive Office",
+  "category": "Office",
+  "summary": "Oak and navy office fit-out with custom shelving and a matching desk.",
+  "coverImage": "/projects/office-shelving.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQAQCdASoMABAAAwBSJZgCdAEWTeKhlADLHAY2TDwKOPdNklttb0n/pjqSbkKAO1aeFyP89JsM1/glJLxan84P6TstStOx5YY9WkaOB6g2kxtmbnXqA+oDU96JRb2AAAA="
+ },
+ {
+  "slug": "office-interior",
+  "title": "Modern Workspace",
+  "category": "Office",
+  "summary": "Contemporary office interior with built-in storage along the full wall.",
+  "coverImage": "/projects/office-interior.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoMABAAAwBSJZACdADzdsHd0TAA/luTxNapGJ2LP4p9XJZRRu2CmkPJuceQXVidYk+X5uHKX/vLQzc7Sx53H6UnTt2lyk+76X/ohJXDkZAyxYU1gXZWX9WauQAAAA=="
+ },
+ {
+  "slug": "wayfinding-signage",
+  "title": "Wayfinding Signage",
+  "category": "Office",
+  "summary": "Wood slat wayfinding and directional signage cut to the building's grid.",
+  "coverImage": "/projects/wayfinding-signage.webp",
+  "width": 675,
+  "height": 1200,
+  "blurDataUrl": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoJABAAAwBSJQBOgCPtnAQXn83gAP3rv8h5iyAeSXDNm3vuUVGTg1EfNApeUrTvXPsZ0Ox3q6+b4YvnzuKAAA=="
+ },
+ {
+  "slug": "minimalist-reception",
+  "title": "Minimalist Reception",
+  "category": "Office",
+  "summary": "A clean reception desk reduced to two planes and a light line.",
+  "coverImage": "/projects/minimalist-reception.webp",
+  "width": 564,
+  "height": 846,
+  "blurDataUrl": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoLABAAAwBSJYwAAlv57rAAAP7HfQxUhjpomaDFKypyzSWvHCJ1drX3VdhWGDUkPTJr77FCCzJgXadm6gMOAA=="
+ },
+ {
+  "slug": "salon-interior",
+  "title": "Beauty Salon",
+  "category": "Hospitality",
+  "summary": "Salon stations with wood slat panelling and concealed servicing.",
+  "coverImage": "/projects/salon-interior.webp",
+  "width": 736,
+  "height": 1057,
+  "blurDataUrl": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoLABAAAwBSJZQC7AD0XymQryMAAP5qYlwD7lQ6WOuyp9Gg3Rh3D+urrcmmKqUT8Q08LR5wmv4xrWrNPvyvX2GipH5Ozd/Ky3nXGN0rlvH3AAAA"
+ },
+ {
+  "slug": "modern-salon",
+  "title": "Modern Salon Interior",
+  "category": "Hospitality",
+  "summary": "Styling stations under pendant lighting, mirrors set flush into the panelling.",
+  "coverImage": "/projects/modern-salon.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoMABAAAwBSJZQCdAD7Fhv9f8wA/sFNX3WFF49T2em24C8TDRBTHH0ytcX6R2W+6YaW1wFI1/lXob9e1FoCMqxqGZX+FRrPe/KiqO9acXNi8WajoQ8TAQAA"
+ },
+ {
+  "slug": "classic-arched-shelving",
+  "title": "Boutique Display",
+  "category": "Hospitality",
+  "summary": "Classic arched shelving with walnut accents.",
+  "coverImage": "/projects/classic-arched-shelving.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoMABAAAwBSJYgCdACcr7MHgAD7xjTQyUyZ/yaaRdcxug8AVfh2D7Ni+llcFNMdtn1b00Wg0vk5hmk4VpYmcMxQgcQC9VdLOA6h4xSBtIAAAA=="
+ },
+ {
+  "slug": "arched-shelving",
+  "title": "Arched Display Wall",
+  "category": "Hospitality",
+  "summary": "A repeating arch motif carried across the length of the retail wall.",
+  "coverImage": "/projects/arched-shelving.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAABwAgCdASoMABAAAwBSJZgCdAYtzbSq5CYXYzkAAP4F9NitYTwCKmV7/myH+DjMJZbepi0rHnrWe4x3WKtnG4E2zFSTwDOqkpVhHLVocl3fpGcnaIXPuGV9eIymbmmTryWM8XiFjHoVcfZveQAAAA=="
+ },
+ {
+  "slug": "illuminated-shelving",
+  "title": "LED Illuminated Shelving",
+  "category": "Shelving",
+  "summary": "Backlit display shelving in an oak finish.",
+  "coverImage": "/projects/illuminated-shelving.webp",
+  "width": 736,
+  "height": 1104,
+  "blurDataUrl": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAQCdASoLABAAAwBSJbACdAYv1ZFTsAAA/qjmmgwL+R+2+6FbGUwtOmoHuSPXG936T2H7g6WSmfTGP6ZegFMdyzZjhQb09w3Su3vSCsLgNf/jfRm8d9KB3I3PK6xQAAA="
+ },
+ {
+  "slug": "led-shelving",
+  "title": "Corner LED Display",
+  "category": "Shelving",
+  "summary": "Floor-to-ceiling illuminated corner shelving.",
+  "coverImage": "/projects/led-shelving.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoMABAAAwBSJYgCdADZPWL7ggAA+MROTjF95J5dQymTZdu3lag3LaOHqcbHOebgr3rWCjjeeIc1BiqscujRfWfkJgkN3Uhnf00IOMIfhi8RHpY8YCAAAA=="
+ },
+ {
+  "slug": "custom-shelving",
+  "title": "Custom Built-ins",
+  "category": "Shelving",
+  "summary": "Bespoke shelving photographed mid-installation.",
+  "coverImage": "/projects/custom-shelving.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQAgCdASoMABAAAwBSJZQCdAECwXJPhiv5jAAA/OyZYEQiz4QeE6CnHZfZXvb+RssQyGu9Cxo1dOx7nTIZNT8cuN84q18QNx1mgW9BVPq4H+MMzMm6poLcg6iKgAAA"
+ },
+ {
+  "slug": "wood-slat-feature",
+  "title": "Wood Slat Feature Wall",
+  "category": "Shelving",
+  "summary": "Slatted feature wall, spacing set out so the run ends on a full slat.",
+  "coverImage": "/projects/wood-slat-feature.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoMABAAAwBSJZQCsAD/EQVO1DEEAAD+yri2XO4G0grZRwLh5p8nRsdshHxB+x5pUh8tWAiu8VL0TSCw6+7l8pba1Mj2k5VfPOp+mLdNN9wiC/B1igO3i6YdAPP7HlYef4AAAA=="
+ },
+ {
+  "slug": "baby-crib",
+  "title": "Baby Nursery Set",
+  "category": "Residential",
+  "summary": "Custom cot with matching storage, finished in a non-toxic lacquer.",
+  "coverImage": "/projects/baby-crib.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAQAgCdASoMABAAAwBSJbACdAYuRYWVrdSAAOFdwpeXcvnTfrP/cOuYlUKpa6DjiMW/Jbw/tFJUpnHW1WGsB4HQbhQoAtZUVxUUJApUQTYat5NhawU5RMuZnItoDRQesYApEyJh4NAAAA=="
+ },
+ {
+  "slug": "nursery-furniture",
+  "title": "Nursery Fit-out",
+  "category": "Residential",
+  "summary": "A full nursery built as one set so the finishes match exactly.",
+  "coverImage": "/projects/nursery-furniture.webp",
+  "width": 720,
+  "height": 720,
+  "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoQABAAAwBSJZwAAj4JKiyP6AD+7SJcA6vp4Afv3fw3gIf0fMqImKzCauvjMTgYSHi5n/5vOgKf7I7vS3tgEllOylzgfrGKq+2+v62GKek1V9QDgAA="
+ },
+ {
+  "slug": "balcony-furniture",
+  "title": "Balcony Design",
+  "category": "Residential",
+  "summary": "Balcony seating and planting integrated into a single timber frame.",
+  "coverImage": "/projects/balcony-furniture.webp",
+  "width": 736,
+  "height": 1104,
+  "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoLABAAAwBSJagCdAEQ/c/CEneQAP5ssGaZIjr+rvXuwZ2NbjIZsGal866Qtavr5/aYEXcIIhU1a3qz/WzIzeUV5U/ar//KZUK07Zu3YiXz2Q5tcAA="
+ },
+ {
+  "slug": "balcony-design",
+  "title": "Balcony Joinery",
+  "category": "Residential",
+  "summary": "Weather-finished balcony joinery sized to a narrow footprint.",
+  "coverImage": "/projects/balcony-design.webp",
+  "width": 675,
+  "height": 1200,
+  "blurDataUrl": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoJABAAAwBSJZQC7ADc6JrJwoAA/YtIk0cSC9q56SBDGUN/QjDXTYMGveaqCyFBKdPgwM6HXFJvIybCBc2prq1IAAA="
+ },
+ {
+  "slug": "workshop-progress",
+  "title": "Work in Progress",
+  "category": "Workshop",
+  "summary": "Behind the scenes during a showroom installation.",
+  "coverImage": "/projects/workshop-progress.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADQAQCdASoMABAAAwBSJZQCdAELzB1qwAD2pNhs6bIwIF6y5ARpoHAC+MuSsH0iVMF3FyaTS/hK/lGoRKkagz9vLG1f7vw20oAIJYGbyeSqW18AfA2MjgMrogCm5qAA"
+ },
+ {
+  "slug": "work-in-progress",
+  "title": "Installation Phase",
+  "category": "Workshop",
+  "summary": "Custom cabinetry during fitting.",
+  "coverImage": "/projects/work-in-progress.webp",
+  "width": 564,
+  "height": 779,
+  "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADQAQCdASoMABAAAwBSJbACdADZDf9iAAD+7jH8tTOhKS0PJzMxNJTGZqNpnxdT0gRid7UsPWVVDuznZiKdIfBqP0GNpOwVwraRQY1upctCkpPjvit4T0YMV3AAAA=="
+ },
+ {
+  "slug": "work-in-progress-2",
+  "title": "Fitting and Finishing",
+  "category": "Workshop",
+  "summary": "Final scribing and finishing on site.",
+  "coverImage": "/projects/work-in-progress-2.webp",
+  "width": 736,
+  "height": 981,
+  "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMABAAAwBSJZgCdAECsx0+7EJAAP6qGHXksxEO6vhw54zrSzSYbSQUuPVRwRI/PWn+prhy5k18IQPZP+DGqxjh9AXnpxhWCu/52HptYd/QZDqQgAA="
+ }
+]

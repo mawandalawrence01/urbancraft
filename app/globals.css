@@ -1,346 +1,170 @@
 @import "tailwindcss";
 
-:root {
-  /* Foundation Colors - Warm Neutrals */
-  --putty: #E8E4DE;
-  --oatmeal: #D4CFC6;
-  --charcoal: #2C2C2C;
-  --charcoal-light: #3D3D3D;
+/* ==========================================================================
+   UrbanCraft design tokens
+   Palette sampled directly from the workshop sign: warm near-black, cream,
+   and the wood tan of the chair mark.
+   ========================================================================== */
 
-  /* Accent Colors - Workshop Blues */
-  --toolbox: #4A6FA5;
-  --indigo: #3D5A80;
-  --slate: #6B7B8C;
+@theme {
+  --color-ink: #17150f;
+  --color-ink-2: #2a2620;
+  --color-ink-3: #4b463d;
+  --color-muted: #7d766a;
+  --color-line: #e4ddd0;
+  --color-line-2: #efe9dd;
+  --color-sand: #f2ece0;
+  --color-cream: #faf7f0;
+  --color-paper: #ffffff;
 
-  /* Wood Tones */
-  --walnut: #5C4033;
-  --oak: #C4A77D;
-  --ash: #E8DCC4;
-  --pine: #DEB887;
+  --color-tan: #b87a42;
+  --color-tan-2: #a1682f;
+  --color-tan-soft: #f5e6d5;
+  --color-bronze: #9c6e47;
 
-  /* Backgrounds */
-  --background: #FDFCFA;
-  --foreground: #1A1A1A;
-  --background-warm: #F5F3EF;
+  --color-success: #3f7d52;
+  --color-success-soft: #e7f1e9;
+  --color-warn: #b4711d;
+  --color-warn-soft: #fbeeda;
+  --color-danger: #b03a34;
+  --color-danger-soft: #f9e7e6;
+
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 14px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-putty: var(--putty);
-  --color-oatmeal: var(--oatmeal);
-  --color-charcoal: var(--charcoal);
-  --color-toolbox: var(--toolbox);
-  --color-indigo: var(--indigo);
-  --color-slate: var(--slate);
-  --color-walnut: var(--walnut);
-  --color-oak: var(--oak);
-  --color-ash: var(--ash);
-  --color-pine: var(--pine);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
-  --font-mono: var(--font-mono);
-}
+/* ------------------------------------------------------------------ base */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0F0E0D;
-    --foreground: #F5F3EF;
-    --background-warm: #1A1917;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), system-ui, sans-serif;
-}
-
-/* Custom Selection */
-::selection {
-  background-color: var(--oak);
-  color: var(--charcoal);
-}
-
-/* Smooth Scroll Offset for Fixed Header */
-html {
-  scroll-padding-top: 80px;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--putty);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--walnut);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--charcoal);
-}
-
-/* Animation Keyframes */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  30% { transform: translate(3%, -15%); }
-  50% { transform: translate(-15%, 5%); }
-  70% { transform: translate(5%, 10%); }
-  90% { transform: translate(-10%, 5%); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-}
-
-/* Animation Classes */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Stagger Delays */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-
-/* Text Utilities */
-.text-balance {
-  text-wrap: balance;
-}
-
-/* Grain Overlay Effect */
-.grain-overlay::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  animation: grain 8s steps(10) infinite;
-}
-
-/* Button Base Styles */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2rem;
-  background-color: var(--charcoal);
-  color: var(--putty);
-  font-weight: 500;
-  border-radius: 9999px;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.btn-primary:hover {
-  background-color: var(--walnut);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -10px rgba(92, 64, 51, 0.4);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2rem;
-  background-color: transparent;
-  color: var(--charcoal);
-  font-weight: 500;
-  border-radius: 9999px;
-  border: 2px solid var(--charcoal);
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: var(--charcoal);
-  color: var(--putty);
-  transform: translateY(-2px);
-}
-
-/* Section Styling */
-.section-padding {
-  padding: 6rem 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .section-padding {
-    padding: 8rem 2rem;
-  }
-}
-
-/* Card Hover Effect */
-.card-hover {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-}
-
-/* Image Reveal Effect */
-.image-reveal {
-  overflow: hidden;
-}
-
-.image-reveal img {
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.image-reveal:hover img {
-  transform: scale(1.05);
-}
-
-/* Line decoration */
-.line-decoration::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--walnut);
-  margin-top: 1.5rem;
-}
-
-.line-decoration-center::after {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-  .btn-primary {
-    background-color: var(--oak);
-    color: var(--charcoal);
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
   }
 
-  .btn-primary:hover {
-    background-color: var(--pine);
-  }
-
-  .btn-secondary {
-    color: var(--putty);
-    border-color: var(--putty);
-  }
-
-  .btn-secondary:hover {
-    background-color: var(--putty);
-    color: var(--charcoal);
-  }
-
-  .line-decoration::after {
-    background: var(--oak);
-  }
-}
-
-/* Hide scrollbar for horizontal scroll on mobile */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Mobile touch feedback */
-.active\:scale-98:active {
-  transform: scale(0.98);
-}
-
-/* Mobile-optimized section padding */
-@media (max-width: 767px) {
-  .section-padding {
-    padding: 4rem 1rem;
-  }
-}
-
-/* Improve tap targets on mobile */
-@media (max-width: 767px) {
-  a, button {
-    min-height: 44px;
-  }
-}
-
-/* Mobile image optimization */
-@media (max-width: 640px) {
-  .image-reveal:hover img {
-    transform: none; /* Disable hover zoom on mobile for performance */
-  }
-}
-
-/* Safe area padding for modern phones */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .safe-area-bottom {
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Clears the fixed mobile tab bar */
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-tan);
+    color: #fff;
+  }
+
+  /* Only show focus rings for keyboard users — taps shouldn't flash outlines */
+  :focus-visible {
+    outline: 2px solid var(--color-tan);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  input, select, textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* iOS zooms the page when a focused input is under 16px */
+  @media (max-width: 767px) {
+    input, select, textarea { font-size: 16px; }
+  }
+}
+
+/* ------------------------------------------------------------- utilities */
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 84rem;
+  @media (width >= 640px) { padding-inline: 1.5rem; }
+  @media (width >= 1024px) { padding-inline: 2rem; }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Horizontal rail that snaps, for mobile category and product carousels */
+@utility snap-rail {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+  & > * { scroll-snap-align: start; flex: none; }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------- motion */
+
+@keyframes uc-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes uc-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes uc-sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+@keyframes uc-shimmer {
+  to { background-position: 200% 0; }
+}
+
+@utility animate-fade-up {
+  animation: uc-fade-up 0.5s var(--ease-out-soft) both;
+}
+@utility animate-fade-in {
+  animation: uc-fade 0.35s var(--ease-out-soft) both;
+}
+@utility animate-sheet-up {
+  animation: uc-sheet-up 0.32s var(--ease-out-soft) both;
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, var(--color-sand) 25%, var(--color-line-2) 37%, var(--color-sand) 63%);
+  background-size: 200% 100%;
+  animation: uc-shimmer 1.3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------- print (invoices) */
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
 }

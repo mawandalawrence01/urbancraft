@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — the template is committed, real secrets never are
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +40,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Source material for the catalogue import — kept locally, not part of the app.
+# The extracted data lives in /data and the optimised images in /public/products.
+/buyfurniture.co.ug
+/demo-furea
+/wget-log
+*.pdf
+
+# Local screenshot output from scripts
+/tmp
+
+# Prisma client is generated during the build, not committed
+/lib/generated

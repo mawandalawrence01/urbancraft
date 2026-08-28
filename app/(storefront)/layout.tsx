@@ -4,9 +4,9 @@ import { MobileTabBar } from "@/components/layout/MobileTabBar";
 import { Footer } from "@/components/layout/Footer";
 import { OrganizationJsonLd } from "@/components/brand/OrganizationJsonLd";
 import { getCategoryTree } from "@/lib/catalog";
+import { siteUrl } from "@/lib/site";
 import { getSetting, type AnnouncementSettings, type ContactSettings } from "@/lib/settings";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export default async function StorefrontLayout({ children }: { children: React.ReactNode }) {
   const [tree, contact, announcement] = await Promise.all([

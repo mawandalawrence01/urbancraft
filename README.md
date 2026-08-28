@@ -32,7 +32,7 @@ or update the row in the `AdminUser` table.
 | `DATABASE_URL` | yes | Neon **pooled** connection string. Used at runtime. |
 | `DIRECT_URL` | yes | Neon **direct** (non-pooled) string. Used only for migrations — PgBouncer cannot run DDL. |
 | `AUTH_SECRET` | yes | Signs admin session cookies. Generate with `openssl rand -base64 32`. |
-| `NEXT_PUBLIC_SITE_URL` | yes in production | Canonical origin. Feeds `sitemap.xml`, `robots.txt`, Open Graph tags and the Yo! callback URLs. |
+| `NEXT_PUBLIC_SITE_URL` | no | Canonical origin, feeding `sitemap.xml`, `robots.txt`, canonicals, Open Graph tags and the Yo! callback URLs. A missing scheme or trailing slash is normalised, and on Vercel it falls back to the deployment URL — so set it once you have a custom domain. |
 | `YO_API_USERNAME` / `YO_API_PASSWORD` | for mobile money | Yo! Payments API credentials. Without them the mobile money option is disabled at checkout and the other methods still work. |
 | `YO_API_URL` | no | Defaults to the sandbox. Production: `https://paymentsapi1.yo.co.ug/ybs/task.php`. |
 | `YO_PUBLIC_KEY` | for mobile money | Yo!'s RSA public key (PEM, `\n` escaped). **Callbacks are rejected without it** — an unverified notification is never allowed to mark an order paid. |
@@ -45,7 +45,8 @@ or update the row in the `AdminUser` table.
 
 1. Push the repository and import it into Vercel.
 2. Add every variable above under **Settings → Environment Variables**.
-3. Set `NEXT_PUBLIC_SITE_URL` to the real domain — the sitemap and payment callbacks use it.
+3. Set `NEXT_PUBLIC_SITE_URL` to the real domain once you have one. Until then the deploy uses
+   Vercel's own URL, so this is not required for the first deploy.
 4. Deploy. The build runs `prisma generate && next build`, so the Prisma client is generated
    from the schema on every deploy. Migrations do **not** run automatically:
 
@@ -161,6 +162,9 @@ The end-to-end tests drive the system Chrome against a running server, so start
   without it roughly 7% of queries fail under a burst, and the production build stampedes.
 - **Category, shop and search pages read `searchParams`,** so they render per request rather
   than prerendering. Product and project pages are statically generated.
+- **`lib/site.ts` is the only place the site origin is derived.** It normalises a missing
+  scheme or trailing slash, because `new URL()` throws on a bare hostname and that kills the
+  build during metadata collection rather than at runtime.
 - **Run a clean build before deploying** (`rm -rf .next && npm run build`). Rebuilding over a
   dirty `.next` can leave prerendered HTML pointing at a CSS chunk that no longer exists.
 - **Quality classes** (Economy / Standard / Top Class) are how this workshop genuinely prices

@@ -6,19 +6,24 @@ import { prisma } from "@/lib/db";
 import { checkoutSchema, createOrder, priceCart } from "@/lib/orders";
 import { requestDeposit, isConfigured } from "@/lib/yo";
 import { detectNetwork, toMsisdn } from "@/lib/utils";
+import { siteUrl } from "@/lib/site";
 
 export type CheckoutState = {
   error?: string;
   fieldErrors?: Record<string, string>;
 };
 
-async function siteUrl() {
-  const configured = process.env.NEXT_PUBLIC_SITE_URL;
-  if (configured && !configured.includes("localhost")) return configured.replace(/\/$/, "");
+/**
+ * Origin for the Yo! callback URLs. Prefers the configured canonical origin,
+ * but falls back to the request's own host so a preview deployment still
+ * receives its notifications.
+ */
+async function callbackOrigin() {
+  if (!siteUrl.includes("localhost")) return siteUrl;
   const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host");
   const proto = h.get("x-forwarded-proto") ?? "https";
-  return host ? `${proto}://${host}` : (configured ?? "");
+  return host ? `${proto}://${host}` : siteUrl;
 }
 
 export async function placeOrder(
@@ -78,7 +83,7 @@ export async function placeOrder(
   // buzzes while they are still looking at the confirmation screen.
   if (input.paymentMethod === "MOBILE_MONEY") {
     const msisdn = toMsisdn(input.momoPhone || input.contactPhone)!;
-    const base = await siteUrl();
+    const base = await callbackOrigin();
 
     const payment = await prisma.payment.create({
       data: {

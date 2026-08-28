@@ -3,14 +3,14 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
 import { CartProvider } from "@/components/cart/CartProvider";
+import { siteUrlObject } from "@/lib/site";
 
 const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"], display: "swap" });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteUrlObject,
   title: {
     default: "UrbanCraft — Furniture Made to Order in Kampala",
     template: "%s · UrbanCraft",

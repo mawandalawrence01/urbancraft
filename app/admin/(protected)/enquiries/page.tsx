@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 import { Call, Whatsapp, Sms } from "iconsax-reactjs";
 
 import { Badge } from "@/components/ui/Badge";
@@ -7,6 +8,7 @@ import { Card, EmptyState, PageHeader } from "@/components/admin/ui";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatDate, formatPhone } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import type { EnquiryStatus } from "@/lib/generated/prisma/enums";
 
 async function setStatus(id: string, status: EnquiryStatus) {
@@ -17,15 +19,55 @@ async function setStatus(id: string, status: EnquiryStatus) {
   revalidatePath("/admin");
 }
 
-export default async function EnquiriesPage() {
-  const enquiries = await prisma.enquiry.findMany({
-    orderBy: [{ status: "asc" }, { createdAt: "desc" }],
-    take: 100,
-  });
+type Search = Promise<{ kind?: string }>;
+
+const TABS = [
+  ["", "All"],
+  ["DESIGN", "Design briefs"],
+  ["PRODUCT", "Product questions"],
+] as const;
+
+export default async function EnquiriesPage({ searchParams }: { searchParams: Search }) {
+  const { kind } = await searchParams;
+  const filter = kind === "DESIGN" || kind === "PRODUCT" ? kind : undefined;
+
+  const [enquiries, designCount] = await Promise.all([
+    prisma.enquiry.findMany({
+      where: filter ? { kind: filter } : {},
+      orderBy: [{ status: "asc" }, { createdAt: "desc" }],
+      take: 100,
+    }),
+    prisma.enquiry.count({ where: { kind: "DESIGN", status: "NEW" } }),
+  ]);
 
   return (
     <>
-      <PageHeader title="Enquiries" subtitle="Commission requests and questions from the site." />
+      <PageHeader
+        title="Enquiries"
+        subtitle="Commission requests, design briefs and questions from the site."
+      />
+
+      <div className="mb-5 flex flex-wrap gap-2">
+        {TABS.map(([value, label]) => (
+          <Link
+            key={label}
+            href={value ? `/admin/enquiries?kind=${value}` : "/admin/enquiries"}
+            className={cn(
+              "inline-flex h-9 items-center gap-1.5 rounded-full border px-4 text-[0.82rem] transition",
+              (filter ?? "") === value
+                ? "border-ink bg-ink text-cream"
+                : "border-line bg-paper hover:border-ink",
+            )}
+          >
+            {label}
+            {value === "DESIGN" && designCount > 0 && (
+              <span className="tabular rounded-full bg-tan px-1.5 text-[0.68rem] font-semibold text-white">
+                {designCount}
+              </span>
+            )}
+          </Link>
+        ))}
+      </div>
 
       {enquiries.length === 0 ? (
         <EmptyState
@@ -43,6 +85,7 @@ export default async function EnquiriesPage() {
                     <Badge tone={e.status === "NEW" ? "warn" : e.status === "CLOSED" ? "neutral" : "tan"}>
                       {e.status.replace(/_/g, " ").toLowerCase()}
                     </Badge>
+                    {e.kind === "DESIGN" && <Badge tone="ink">Design brief</Badge>}
                   </p>
                   {e.subject && <p className="mt-0.5 text-[0.88rem] text-ink-3">{e.subject}</p>}
                   <p className="text-[0.76rem] text-muted">{formatDate(e.createdAt, "long")}</p>
@@ -71,6 +114,25 @@ export default async function EnquiriesPage() {
                   )}
                 </div>
               </div>
+
+              {e.kind === "DESIGN" && (e.spaceType || e.budgetBand || e.timeline) && (
+                <dl className="mt-3 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+                  {[
+                    ["Space", e.spaceType],
+                    ["Budget", e.budgetBand],
+                    ["Timeline", e.timeline],
+                  ]
+                    .filter(([, v]) => v)
+                    .map(([label, value]) => (
+                      <div key={label} className="bg-paper px-3.5 py-2.5">
+                        <dt className="text-[0.72rem] uppercase tracking-[0.1em] text-muted">
+                          {label}
+                        </dt>
+                        <dd className="mt-0.5 text-[0.86rem] font-medium">{value}</dd>
+                      </div>
+                    ))}
+                </dl>
+              )}
 
               <p className="mt-3 whitespace-pre-line rounded-xl bg-sand p-3.5 text-[0.88rem] leading-relaxed text-ink-3">
                 {e.message}

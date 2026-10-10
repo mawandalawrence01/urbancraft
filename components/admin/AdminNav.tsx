@@ -4,12 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
-  Chart2, Box, Category, Receipt21, Gallery, Message2, Setting2, Shop, Menu, CloseSquare, Logout,
+  Chart2, Box, Category, Receipt21, Gallery, Message2, Setting2, Shop, Ruler, Menu, CloseSquare, Logout,
 } from "iconsax-reactjs";
 import { LogoMark } from "@/components/brand/Logo";
 import { cn } from "@/lib/utils";
 
-const ICONS = { Chart2, Box, Category, Receipt21, Gallery, Message2, Setting2, Shop };
+const ICONS = { Chart2, Box, Category, Receipt21, Gallery, Message2, Setting2, Shop, Ruler };
 
 export type NavItem = {
   href: string;

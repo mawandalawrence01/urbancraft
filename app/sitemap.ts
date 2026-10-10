@@ -6,7 +6,7 @@ import { siteUrl as base } from "@/lib/site";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, categories, projects] = await Promise.all([
+  const [products, categories, projects, services] = await Promise.all([
     prisma.product.findMany({
       where: { status: "ACTIVE" },
       select: { slug: true, updatedAt: true },
@@ -19,11 +19,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       where: { isPublished: true },
       select: { slug: true, updatedAt: true },
     }),
+    // Only services with an approved photo — an empty gallery is not worth
+    // sending a crawler to.
+    prisma.designService.findMany({
+      where: {
+        isPublished: true,
+        images: { some: { origin: "OWN_WORK", needsReview: false } },
+      },
+      select: { slug: true, updatedAt: true },
+    }),
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${base}/`, changeFrequency: "daily", priority: 1 },
     { url: `${base}/shop`, changeFrequency: "daily", priority: 0.9 },
+    { url: `${base}/design`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${base}/design/enquire`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/projects`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/about`, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/contact`, changeFrequency: "yearly", priority: 0.6 },
@@ -53,6 +64,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: p.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.4,
+    })),
+    ...services.map((s) => ({
+      url: `${base}/design/${s.slug}`,
+      lastModified: s.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }

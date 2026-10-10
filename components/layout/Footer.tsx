@@ -39,6 +39,8 @@ export function Footer({
           <h3 className="mb-3 text-[0.8rem] uppercase tracking-[0.16em] text-cream/45">Workshop</h3>
           <ul className="space-y-2 text-[0.88rem]">
             {[
+              ["/design", "Interior design"],
+              ["/design/enquire", "Book a site survey"],
               ["/projects", "Our work"],
               ["/about", "About us"],
               ["/orders/track", "Track an order"],

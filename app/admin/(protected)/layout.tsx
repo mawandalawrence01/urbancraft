@@ -15,10 +15,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const session = await getSession();
   if (!session) redirect("/admin/login");
 
-  const [newOrders, newEnquiries, flaggedImages] = await Promise.all([
+  const [newOrders, newEnquiries, flaggedImages, unsortedDesign] = await Promise.all([
     prisma.order.count({ where: { status: "PENDING" } }),
     prisma.enquiry.count({ where: { status: "NEW" } }),
     prisma.productImage.count({ where: { needsReview: true } }),
+    prisma.designImage.count({ where: { origin: "UNSET" } }),
   ]);
 
   const items = [
@@ -27,6 +28,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     { href: "/admin/products", label: "Products", icon: "Box" as const },
     { href: "/admin/categories", label: "Categories", icon: "Category" as const },
     { href: "/admin/images", label: "Image review", icon: "Gallery" as const, badge: flaggedImages },
+    { href: "/admin/design", label: "Interior design", icon: "Ruler" as const, badge: unsortedDesign },
     { href: "/admin/projects", label: "Our work", icon: "Shop" as const },
     { href: "/admin/enquiries", label: "Enquiries", icon: "Message2" as const, badge: newEnquiries },
     { href: "/admin/settings", label: "Settings", icon: "Setting2" as const },

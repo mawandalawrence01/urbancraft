@@ -12,6 +12,7 @@
     "db:migrate": "prisma migrate deploy",
     "db:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
+    "db:seed:design": "tsx scripts/seed-design.mts",
     "test:e2e": "tsx scripts/e2e-checkout.mts && tsx scripts/e2e-admin.mts && tsx scripts/check-assets.mts"
   },
   "dependencies": {

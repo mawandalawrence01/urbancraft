@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home2, Element3, ShoppingCart, User, Shop } from "iconsax-reactjs";
+import { Home2, Ruler, ShoppingCart, User, Shop } from "iconsax-reactjs";
 import { useCart } from "@/components/cart/CartProvider";
 import { cn } from "@/lib/utils";
 
 const TABS = [
   { href: "/", label: "Home", Icon: Home2 },
   { href: "/shop", label: "Shop", Icon: Shop },
-  { href: "/c", label: "Rooms", Icon: Element3 },
+  { href: "/design", label: "Design", Icon: Ruler },
   { href: "/cart", label: "Cart", Icon: ShoppingCart },
   { href: "/account", label: "Account", Icon: User },
 ] as const;

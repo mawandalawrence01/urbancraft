@@ -337,10 +337,81 @@ model Project {
   @@index([isPublished, position])
 }
 
+/// A fit-out discipline we sell (kitchens, staircases, ceilings…) or a
+/// furniture styling set. Galleries hang off these.
+model DesignService {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  tagline     String?
+  description String?
+  /// FITOUT = installed joinery sold by consultation.
+  /// STYLING = room scenes that sell catalogue furniture.
+  /// PROCESS = behind-the-scenes, never a sellable service.
+  kind        String  @default("FITOUT")
+  position    Int     @default(0)
+  isPublished Boolean @default(true)
+
+  seoTitle       String?
+  seoDescription String?
+
+  images DesignImage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isPublished, position])
+  @@index([kind, position])
+}
+
+/// Provenance of a portfolio photo. Imported batches land as UNSET and are
+/// invisible to the storefront until someone states what they actually are —
+/// claiming a reference shot as our own installation is the failure mode this
+/// exists to prevent.
+enum DesignOrigin {
+  UNSET
+  OWN_WORK
+  REFERENCE
+}
+
+model DesignImage {
+  id        String        @id @default(cuid())
+  serviceId String
+  service   DesignService @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  /// Unique so a re-run of the importer updates rather than duplicates.
+  url         String  @unique
+  caption     String?
+  width       Int?
+  height      Int?
+  blurDataUrl String?
+  position    Int     @default(0)
+
+  origin DesignOrigin @default(UNSET)
+
+  /// Carries a third-party watermark or burnt-in branding — never publishable.
+  needsReview Boolean @default(false)
+  reviewNote  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([serviceId, position])
+  @@index([origin])
+  @@index([needsReview])
+}
+
 enum EnquiryStatus {
   NEW
   IN_PROGRESS
   CLOSED
+}
+
+/// A product question and a fit-out brief need different follow-up, and the
+/// admin queue filters on this.
+enum EnquiryKind {
+  PRODUCT
+  DESIGN
 }
 
 model Enquiry {
@@ -352,9 +423,18 @@ model Enquiry {
   message String
   source  String?
   status  EnquiryStatus @default(NEW)
+
+  kind EnquiryKind @default(PRODUCT)
+  /// DESIGN briefs only — the service, space and budget the client picked.
+  serviceSlug String?
+  spaceType   String?
+  budgetBand  String?
+  timeline    String?
+
   createdAt DateTime    @default(now())
 
   @@index([status, createdAt])
+  @@index([kind, status, createdAt])
 }
 
 // ---------------------------------------------------------------- platform

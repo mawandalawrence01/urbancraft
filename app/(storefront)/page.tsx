@@ -8,13 +8,14 @@ import { prisma } from "@/lib/db";
 import {
   getCategoryTree, getFeaturedProducts, getHeroProducts, getNewestProducts, getRoomCovers,
 } from "@/lib/catalog";
+import { getDesignHighlights } from "@/lib/design";
 import { getSetting, type HeroSettings } from "@/lib/settings";
 import { formatUGX } from "@/lib/utils";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const [hero, tree, heroPicks, featured, newest, projects, total] = await Promise.all([
+  const [hero, tree, heroPicks, featured, newest, projects, design, total] = await Promise.all([
     getSetting<HeroSettings>("site.hero"),
     getCategoryTree(),
     getHeroProducts(3),
@@ -23,6 +24,7 @@ export default async function HomePage() {
     prisma.project.findMany({
       where: { isPublished: true }, orderBy: { position: "asc" }, take: 4,
     }),
+    getDesignHighlights(4),
     prisma.product.count({ where: { status: "ACTIVE" } }),
   ]);
 
@@ -46,8 +48,8 @@ export default async function HomePage() {
               <ButtonLink href={hero.ctaHref} size="lg">
                 {hero.ctaLabel} <ArrowRight2 size={17} />
               </ButtonLink>
-              <ButtonLink href="/contact" size="lg" variant="outline">
-                Commission a piece
+              <ButtonLink href="/design" size="lg" variant="outline">
+                Design my space
               </ButtonLink>
             </div>
 
@@ -149,6 +151,60 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ------------------------------------------------------ interior design */}
+      {design.length > 0 && (
+        <section className="container-page mt-20">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-xl">
+              <p className="text-[0.75rem] uppercase tracking-[0.2em] text-tan-2">
+                The other half of the workshop
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
+                We also build the room itself
+              </h2>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-3">
+                Kitchens, wardrobes, staircases and ceilings, measured in your space and fitted by
+                the people who made them. The survey and the drawing cost nothing.
+              </p>
+            </div>
+            <Link
+              href="/design"
+              className="flex shrink-0 items-center gap-1 text-[0.88rem] text-tan-2 hover:underline"
+            >
+              All services <ArrowRight2 size={15} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
+            {design.map((service) => (
+              <Link key={service.slug} href={`/design/${service.slug}`} className="group">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] bg-sand">
+                  <Image
+                    src={service.cover.url}
+                    alt={service.name}
+                    fill
+                    sizes="(min-width:1024px) 24vw, 45vw"
+                    placeholder={service.cover.blurDataUrl ? "blur" : "empty"}
+                    blurDataURL={service.cover.blurDataUrl ?? undefined}
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="mt-2.5 text-[0.92rem] font-medium">{service.name}</h3>
+                {service.tagline && (
+                  <p className="line-clamp-1 text-[0.78rem] text-muted">{service.tagline}</p>
+                )}
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-6">
+            <ButtonLink href="/design/enquire" size="lg">
+              Book a site survey <ArrowRight2 size={17} />
+            </ButtonLink>
+          </div>
+        </section>
+      )}
 
       {/* --------------------------------------------------------- featured */}
       {featured.length > 0 && (
@@ -260,7 +316,9 @@ export default async function HomePage() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/contact" size="lg">Start a commission</ButtonLink>
-            <ButtonLink href="/shop" size="lg" variant="outline">Browse the catalogue</ButtonLink>
+            <ButtonLink href="/design/enquire" size="lg" variant="outline">
+              Fit out a whole space
+            </ButtonLink>
           </div>
         </div>
       </section>

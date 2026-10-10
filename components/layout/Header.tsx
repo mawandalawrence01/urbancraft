@@ -32,10 +32,10 @@ export function Header({
   const [searchOpen, setSearchOpen] = useState(false);
   const [openRoom, setOpenRoom] = useState<string | null>(null);
 
-  // Ten rooms will not fit on one line; keep the busiest inline and tuck the
-  // rest behind "More" so the bar never wraps.
-  const primary = categories.slice(0, 6);
-  const overflow = categories.slice(6);
+  // Ten rooms will not fit on one line beside the Design link; keep the
+  // busiest inline and tuck the rest behind "More" so the bar never wraps.
+  const primary = categories.slice(0, 5);
+  const overflow = categories.slice(5);
 
   // Route change closes anything still open
   useEffect(() => {
@@ -145,6 +145,18 @@ export function Header({
                 )}
               </div>
             )}
+
+            <span className="mx-1.5 h-5 w-px shrink-0 bg-line" aria-hidden />
+
+            <Link
+              href="/design"
+              className={cn(
+                "whitespace-nowrap rounded-full px-2.5 py-2 text-[0.86rem] font-medium text-tan-2 transition hover:bg-tan-soft xl:px-3",
+                pathname.startsWith("/design") && "bg-tan-soft",
+              )}
+            >
+              Interior Design
+            </Link>
           </nav>
 
           <div className="ml-auto flex items-center gap-1">
@@ -222,6 +234,14 @@ export function Header({
                 <span className="text-sm text-cream/70">243 pieces</span>
               </Link>
 
+              <Link
+                href="/design"
+                className="mx-2 mb-3 flex items-center justify-between rounded-xl border border-tan bg-tan-soft px-4 py-3"
+              >
+                <span className="font-medium text-tan-2">Interior design &amp; fit-out</span>
+                <span className="text-sm text-tan-2/70">Kitchens, wardrobes, stairs</span>
+              </Link>
+
               {categories.map((room) => (
                 <div key={room.slug} className="px-2">
                   <button
@@ -264,6 +284,7 @@ export function Header({
 
               <div className="mt-3 border-t border-line px-4 pt-3">
                 {[
+                  ["/design/enquire", "Book a site survey"],
                   ["/projects", "Our Work"],
                   ["/about", "About the workshop"],
                   ["/orders/track", "Track an order"],

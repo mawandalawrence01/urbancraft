@@ -4,8 +4,16 @@
  *
  * Safe to re-run: everything is upserted by slug/key.
  */
-process.loadEnvFile?.(".env.local");
-process.loadEnvFile?.(".env");
+// `loadEnvFile` throws when the file is absent, and the optional call only
+// guards against the function missing — so each one needs its own catch or a
+// machine without .env.local cannot seed at all (CI, Vercel).
+for (const file of [".env.local", ".env"]) {
+  try {
+    process.loadEnvFile(file);
+  } catch {
+    // absent — fall through to the real environment
+  }
+}
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";

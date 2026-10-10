@@ -58,7 +58,7 @@ export default async function HomePage() {
           We build the piece, and we build the room.
         </h1>
         <p className="mt-5 max-w-[56ch] text-[1.02rem] leading-relaxed text-ink-2">
-          A workshop in Kawempe, Kampala. Buy a finished piece from the catalogue, or have us
+          A workshop in Kansanga, Kampala. Buy a finished piece from the catalogue, or have us
           measure, draw, build and fit an entire space.
         </p>
       </section>

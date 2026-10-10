@@ -196,7 +196,7 @@ async function main() {
     ["Wakiso & Mukono", 80_000, "1–2 days"],
     ["Entebbe", 100_000, "1–2 days"],
     ["Jinja, Mbarara, Gulu & other towns", 250_000, "2–4 days, quoted on distance"],
-    ["Pickup from workshop", 0, "Kawempe, Kampala"],
+    ["Pickup from workshop", 0, "Kansanga, Kitalanga"],
   ] as const;
   for (const [i, [name, fee, etaNote]] of zones.entries()) {
     await prisma.deliveryZone.upsert({
@@ -208,12 +208,12 @@ async function main() {
   // ---------------------------------------------------------- settings
   const settings: Record<string, unknown> = {
     "site.contact": {
-      phone: "+256 784 201 141",
-      whatsapp: "+256784201141",
+      phone: "+256 777 913 616",
+      whatsapp: "256777913616",
       altPhone: "+256 751 764 257",
       email: "hello@urbancraft.co.ug",
-      address: "Kawempe Division, Kampala, Uganda",
-      mapUrl: "https://maps.google.com/?q=Kawempe+Division+Kampala",
+      address: "Kansanga, Kitalanga, Kampala",
+      mapUrl: "https://maps.google.com/?q=Kansanga+Kitalanga+Kampala",
       hours: [
         "Monday – Friday · 8:00am – 6:30pm",
         "Saturday · 9:30am – 6:30pm",
@@ -237,7 +237,7 @@ async function main() {
       accountName: "UrbanCraft Furniture Workshop",
       accountNumber: "9030000000000",
       branch: "Kampala Road",
-      instructions: "Send your deposit slip or reference to WhatsApp +256 784 201 141 and we will confirm your order.",
+      instructions: "Send your deposit slip or reference to WhatsApp +256 777 913 616 and we will confirm your order.",
     },
     "checkout.deposit": {
       // Made-to-order furniture is normally started against a deposit

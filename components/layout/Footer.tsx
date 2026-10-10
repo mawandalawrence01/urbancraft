@@ -18,7 +18,7 @@ export function Footer({
         <div>
           <Logo showTagline />
           <p className="mt-4 max-w-xs text-[0.88rem] leading-relaxed text-ink-3">
-            A workshop in Kawempe, Kampala. We cut, joint and finish every piece ourselves,
+            A workshop in Kansanga, Kampala. We cut, joint and finish every piece ourselves,
             then deliver it &mdash; or measure your room, draw it, build it and fit it.
           </p>
         </div>
@@ -92,9 +92,25 @@ export function Footer({
       <div className="border-t border-line">
         <div className="container-page flex flex-col gap-3 py-6 text-[0.82rem] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} UrbanCraft &mdash; Furniture &amp; Interiors, Kampala</p>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/privacy" className="transition hover:text-ink">Privacy</Link>
             <Link href="/terms" className="transition hover:text-ink">Terms</Link>
+            <span>
+              Website by{" "}
+              <a
+                href="https://dashlead.co.ug"
+                target="_blank"
+                // An outbound credit link: noopener for safety, and nofollow so
+                // the site does not pass ranking signal it did not intend to.
+                rel="noopener noreferrer nofollow"
+                className="underline transition hover:text-ink"
+              >
+                Dashlead
+              </a>{" "}
+              <a href="tel:+256744480528" className="transition hover:text-ink">
+                0744 480 528
+              </a>
+            </span>
           </div>
         </div>
       </div>

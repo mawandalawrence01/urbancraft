@@ -17,8 +17,8 @@ export type DepositSettings = { percent: number; note: string };
 
 const FALLBACKS = {
   "site.contact": {
-    phone: "+256 784 201 141", whatsapp: "+256784201141",
-    email: "hello@urbancraft.co.ug", address: "Kawempe Division, Kampala, Uganda",
+    phone: "+256 777 913 616", whatsapp: "256777913616",
+    email: "hello@urbancraft.co.ug", address: "Kansanga, Kitalanga, Kampala",
     hours: ["Monday – Friday · 8:00am – 6:30pm", "Saturday · 9:30am – 6:30pm"],
   } satisfies ContactSettings,
   "site.hero": {

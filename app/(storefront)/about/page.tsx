@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "About the Workshop",
   description:
-    "UrbanCraft is a furniture workshop in Kawempe, Kampala. We cut, joint and finish every piece by hand, then deliver and install it ourselves.",
+    "UrbanCraft is a furniture workshop in Kansanga, Kampala. We cut, joint and finish every piece by hand, then deliver and install it ourselves.",
   alternates: { canonical: "/about" },
 };
 

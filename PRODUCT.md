@@ -32,7 +32,7 @@ cart.
 
 ## Product Purpose
 
-UrbanCraft is a furniture workshop in Kawempe, Kampala that both sells finished
+UrbanCraft is a furniture workshop in Kansanga, Kampala that both sells finished
 furniture and designs, builds and installs fitted interiors. Success is a visitor
 recognising within seconds which of those two they came for, and reaching either a
 product page or a submitted design brief without passing through the other.
@@ -115,7 +115,7 @@ Real and usable:
   services in `public/design/`.
 - 23 installed projects with titles, summaries and client types.
 - 243 real products with real UGX prices and photography.
-- Real contact details, address in Kawempe Division, and published delivery zones.
+- Real contact details, address in Kansanga (Kitalanga), and published delivery zones.
 
 Absent — must not be fabricated:
 

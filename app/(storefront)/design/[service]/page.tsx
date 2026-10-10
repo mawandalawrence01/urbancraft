@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-reactjs";
 
 import { ButtonLink } from "@/components/ui/Button";
+import { GalleryGrid } from "@/components/design/GalleryGrid";
 import { prisma } from "@/lib/db";
 import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 import { getPublishedServices, getServiceWithImages } from "@/lib/design";
@@ -93,31 +94,17 @@ export default async function DesignServicePage({ params }: { params: Params }) 
       <div className="container-page mt-10">
 
       {service.images.length > 0 ? (
-        <div className="columns-2 gap-3 lg:columns-3 lg:gap-5 [&>*]:mb-3 lg:[&>*]:mb-5">
-          {service.images.map((img, i) => (
-            <figure
-              key={img.id}
-              className="break-inside-avoid overflow-hidden rounded-[var(--radius-card)] bg-sand"
-            >
-              <Image
-                src={img.url}
-                alt={img.caption ?? `${service.name} — UrbanCraft installation`}
-                width={img.width ?? 1200}
-                height={img.height ?? 1600}
-                sizes="(min-width:1024px) 31vw, 48vw"
-                priority={i < 4}
-                placeholder={img.blurDataUrl ? "blur" : "empty"}
-                blurDataURL={img.blurDataUrl ?? undefined}
-                className="h-auto w-full"
-              />
-              {img.caption && (
-                <figcaption className="px-1 pt-2 text-[0.82rem] text-muted">
-                  {img.caption}
-                </figcaption>
-              )}
-            </figure>
-          ))}
-        </div>
+        <GalleryGrid
+          serviceName={service.name}
+          images={service.images.map((img) => ({
+            url: img.url,
+            alt: img.caption ?? `${service.name} — UrbanCraft installation`,
+            width: img.width,
+            height: img.height,
+            blurDataUrl: img.blurDataUrl,
+            caption: img.caption,
+          }))}
+        />
       ) : (
         <div className="rounded-[var(--radius-card)] border border-dashed border-rule bg-sand px-6 py-16 text-center">
           <h2 className="font-display text-lg font-semibold">Photographs on the way</h2>

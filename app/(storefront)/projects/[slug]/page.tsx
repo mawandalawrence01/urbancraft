@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft2 } from "iconsax-reactjs";
+import { ProjectGallery } from "@/components/media/ProjectGallery";
 import { prisma } from "@/lib/db";
 import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 
@@ -73,30 +74,29 @@ export default async function ProjectPage({ params }: { params: Params }) {
         )}
       </header>
 
-      {project.coverImage && (
-        <div className="relative mt-7 aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-sand">
-          <Image
-            src={project.coverImage} alt={project.title} fill priority
-            sizes="(min-width:1024px) 60vw, 100vw" className="object-cover"
-            placeholder={images[0]?.blurDataUrl ? "blur" : "empty"}
-            blurDataURL={images[0]?.blurDataUrl}
-          />
-        </div>
-      )}
+      <ProjectGallery
+        title={project.title}
+        images={[
+          ...(project.coverImage
+            ? [{
+                url: project.coverImage,
+                alt: project.title,
+                blurDataUrl: images[0]?.blurDataUrl ?? null,
+              }]
+            : []),
+          ...images.slice(1).map((img) => ({
+            url: img.url,
+            alt: null,
+            width: img.width ?? null,
+            height: img.height ?? null,
+            blurDataUrl: img.blurDataUrl ?? null,
+          })),
+        ]}
+      />
 
       {body.length > 0 && (
         <div className="mt-8 max-w-2xl space-y-4 text-[0.96rem] leading-relaxed text-ink-3">
           {body.filter((b) => b.type === "p").map((b, i) => <p key={i}>{b.text}</p>)}
-        </div>
-      )}
-
-      {images.length > 1 && (
-        <div className="mt-8 grid grid-cols-2 gap-3">
-          {images.slice(1).map((img) => (
-            <div key={img.url} className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] bg-sand">
-              <Image src={img.url} alt="" fill sizes="(min-width:1024px) 30vw, 45vw" className="object-cover" />
-            </div>
-          ))}
         </div>
       )}
 

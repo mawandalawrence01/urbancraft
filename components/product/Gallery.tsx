@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-reactjs";
+import { Lightbox } from "@/components/media/Lightbox";
 import { cn } from "@/lib/utils";
 
 export type GalleryImage = {
@@ -12,6 +13,7 @@ export type GalleryImage = {
 
 export function Gallery({ images, name }: { images: GalleryImage[]; name: string }) {
   const [active, setActive] = useState(0);
+  const [zoomed, setZoomed] = useState<number | null>(null);
   const railRef = useRef<HTMLDivElement>(null);
 
   if (images.length === 0) {
@@ -60,7 +62,13 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
           className="snap-rail -mx-4 aspect-[4/5] px-4 sm:mx-0 sm:px-0 lg:hidden"
         >
           {images.map((img, i) => (
-            <div key={img.url} className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-card)] bg-sand">
+            <button
+              key={img.url}
+              type="button"
+              onClick={() => setZoomed(i)}
+              aria-label={`Open ${name} image ${i + 1} full screen`}
+              className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-card)] bg-sand"
+            >
               <Image
                 src={img.url}
                 alt={img.alt ?? `${name} — view ${i + 1}`}
@@ -69,21 +77,28 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
                 blurDataURL={img.blurDataUrl ?? undefined}
                 className="object-cover"
               />
-            </div>
+            </button>
           ))}
         </div>
 
         {/* Desktop main image */}
         <div className="group relative hidden aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] bg-sand lg:block">
-          <Image
-            key={images[active].url}
-            src={images[active].url}
-            alt={images[active].alt ?? name}
-            fill sizes="(min-width:1024px) 45vw, 100vw" priority
-            placeholder={images[active].blurDataUrl ? "blur" : "empty"}
-            blurDataURL={images[active].blurDataUrl ?? undefined}
-            className="animate-fade-in object-cover"
-          />
+          <button
+            type="button"
+            onClick={() => setZoomed(active)}
+            aria-label={`Open ${name} full screen`}
+            className="absolute inset-0 cursor-zoom-in"
+          >
+            <Image
+              key={images[active].url}
+              src={images[active].url}
+              alt={images[active].alt ?? name}
+              fill sizes="(min-width:1024px) 45vw, 100vw" priority
+              placeholder={images[active].blurDataUrl ? "blur" : "empty"}
+              blurDataURL={images[active].blurDataUrl ?? undefined}
+              className="animate-fade-in object-cover"
+            />
+          </button>
 
           {images.length > 1 && (
             <>
@@ -107,6 +122,19 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
           </div>
         )}
       </div>
+
+      <Lightbox
+        images={images.map((img, i) => ({
+          url: img.url,
+          alt: img.alt ?? `${name} — view ${i + 1}`,
+          width: img.width,
+          height: img.height,
+          blurDataUrl: img.blurDataUrl,
+        }))}
+        index={zoomed}
+        onClose={() => setZoomed(null)}
+        label={name}
+      />
     </div>
   );
 }
@@ -119,7 +147,9 @@ function GalleryArrow({ side, onClick }: { side: "left" | "right"; onClick: () =
       onClick={onClick}
       aria-label={side === "left" ? "Previous image" : "Next image"}
       className={cn(
-        "absolute top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-[var(--radius-card)] bg-paper/90 opacity-0 shadow-sm backdrop-blur transition hover:bg-paper group-hover:opacity-100",
+        // z-10 keeps the arrows above the full-screen overlay button, which covers
+        // the whole frame; without it they would only work by source order.
+        "absolute top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-[var(--radius-card)] bg-paper/90 opacity-0 shadow-sm backdrop-blur transition hover:bg-paper group-hover:opacity-100",
         side === "left" ? "left-3" : "right-3",
       )}
     >

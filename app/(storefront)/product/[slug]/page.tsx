@@ -12,7 +12,9 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Badge } from "@/components/ui/Badge";
 import { getProductBySlug, getRelatedProducts } from "@/lib/catalog";
 import { prisma } from "@/lib/db";
+import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 import { getSetting, type ContactSettings } from "@/lib/settings";
+import { absoluteUrl } from "@/lib/site";
 import { discountPercent, formatUGX } from "@/lib/utils";
 
 export const revalidate = 600;
@@ -47,7 +49,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       type: "website",
       title: product.name,
       description: product.summary ?? undefined,
-      images: image ? [{ url: image, width: 1200, height: 1500 }] : undefined,
+      url: `/product/${product.slug}`,
+      // The rendered card, not the raw WebP: crawlers want 1200x630 JPEG.
+      images: image
+        ? ogImageMeta(`/og/product/${product.slug}`, product.name)
+        : ogImageMeta(DEFAULT_OG_PATH, "UrbanCraft, Kampala"),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      images: [image ? `/og/product/${product.slug}` : DEFAULT_OG_PATH],
     },
   };
 }
@@ -78,7 +89,10 @@ export default async function ProductPage({ params }: { params: Params }) {
     name: product.name,
     description: product.summary ?? product.name,
     sku: product.sku ?? undefined,
-    image: product.images.map((i) => i.url),
+    image: product.images
+      .filter((i) => !i.needsReview)
+      .map((i) => absoluteUrl(i.url)),
+    url: absoluteUrl(`/product/${product.slug}`),
     brand: { "@type": "Brand", name: "UrbanCraft" },
     category: product.category?.name,
     offers: {
@@ -90,6 +104,7 @@ export default async function ProductPage({ params }: { params: Params }) {
       availability: product.inStock
         ? "https://schema.org/InStock"
         : "https://schema.org/PreOrder",
+      url: absoluteUrl(`/product/${product.slug}`),
       seller: { "@type": "Organization", name: "UrbanCraft Furniture Workshop" },
     },
   };

@@ -9,7 +9,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [products, categories, projects, services] = await Promise.all([
     prisma.product.findMany({
       where: { status: "ACTIVE" },
-      select: { slug: true, updatedAt: true },
+      select: {
+        slug: true,
+        updatedAt: true,
+        // Google Images indexes what the sitemap declares, so each product
+        // carries its own photography. Flagged shots are never listed.
+        images: {
+          where: { needsReview: false },
+          orderBy: { position: "asc" },
+          take: 5,
+          select: { url: true },
+        },
+      },
     }),
     prisma.category.findMany({
       where: { isActive: true },
@@ -17,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
     prisma.project.findMany({
       where: { isPublished: true },
-      select: { slug: true, updatedAt: true },
+      select: { slug: true, updatedAt: true, coverImage: true },
     }),
     // Only services with an approved photo — an empty gallery is not worth
     // sending a crawler to.
@@ -26,9 +37,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         isPublished: true,
         images: { some: { origin: "OWN_WORK", needsReview: false } },
       },
-      select: { slug: true, updatedAt: true },
+      select: {
+        slug: true,
+        updatedAt: true,
+        images: {
+          where: { origin: "OWN_WORK", needsReview: false },
+          orderBy: { position: "asc" },
+          take: 5,
+          select: { url: true },
+        },
+      },
     }),
   ]);
+
+  const abs = (path: string) => new URL(path, base).toString();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${base}/`, changeFrequency: "daily", priority: 1 },
@@ -58,18 +80,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: p.updatedAt,
       changeFrequency: "weekly" as const,
       priority: 0.7,
+      images: p.images.map((i) => abs(i.url)),
     })),
     ...projects.map((p) => ({
       url: `${base}/projects/${p.slug}`,
       lastModified: p.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.4,
+      images: p.coverImage ? [abs(p.coverImage)] : undefined,
     })),
     ...services.map((s) => ({
       url: `${base}/design/${s.slug}`,
       lastModified: s.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+      images: s.images.map((i) => abs(i.url)),
     })),
   ];
 }

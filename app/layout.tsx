@@ -3,6 +3,7 @@ import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
 import { CartProvider } from "@/components/cart/CartProvider";
+import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 import { siteUrlObject } from "@/lib/site";
 
 // One neutral grotesque across the whole site. Nothing competes with the
@@ -22,9 +23,30 @@ export const metadata: Metadata = {
   },
   description:
     "Sofas, beds, wall units, dining sets and office furniture handmade in Kampala. Choose your timber and finish, pay by mobile money, delivered across Uganda.",
-  openGraph: { type: "website", siteName: "UrbanCraft Furniture Workshop", locale: "en_UG" },
-  twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+  // Every page inherits this card unless it declares its own, so a shared
+  // link never renders as a bare grey box.
+  openGraph: {
+    type: "website",
+    siteName: "UrbanCraft Furniture Workshop",
+    locale: "en_UG",
+    url: "/",
+    images: ogImageMeta(DEFAULT_OG_PATH, "A fitted kitchen built and installed by UrbanCraft, Kampala"),
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_OG_PATH],
+  },
+  // No canonical here on purpose: Next merges metadata downward, so a root
+  // canonical makes every page without its own claim to be the home page.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  // Set GOOGLE_SITE_VERIFICATION once Search Console gives you the token.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {

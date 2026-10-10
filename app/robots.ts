@@ -8,7 +8,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Nothing here is useful in an index, and cart/checkout URLs are per-visitor
+        // Nothing here is useful in an index, and cart/checkout URLs are per-visitor.
+        // /og/* is deliberately NOT listed: those are the link-preview images,
+        // and a crawler that cannot fetch them shows a link with no picture.
         disallow: ["/admin", "/api/", "/cart", "/checkout", "/orders/", "/account", "/search"],
       },
     ],

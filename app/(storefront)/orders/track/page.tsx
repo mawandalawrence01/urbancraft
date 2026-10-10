@@ -7,6 +7,7 @@ import { getOrderByNumber } from "@/lib/orders";
 export const metadata: Metadata = {
   title: "Track an Order",
   description: "Look up an UrbanCraft order with your order number and phone number.",
+  robots: { index: false, follow: true },
 };
 
 type SearchParams = Promise<{ error?: string }>;

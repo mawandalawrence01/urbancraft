@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight2 } from "iconsax-reactjs";
 
 import { getPublishedServices } from "@/lib/design";
+import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 import { getSetting, type ContactSettings } from "@/lib/settings";
 
 export const revalidate = 3600;
@@ -13,6 +14,15 @@ export const metadata: Metadata = {
   description:
     "Kitchens, wardrobes, staircases, ceilings and feature walls designed, built and installed by the UrbanCraft workshop in Kampala. We survey, draw, build and fit.",
   alternates: { canonical: "/design" },
+  openGraph: {
+    type: "website",
+    title: "Interior Design & Fit-Out — UrbanCraft Kampala",
+    description:
+      "Kitchens, wardrobes, staircases, ceilings and feature walls, measured in your space and fitted by the workshop that built them.",
+    url: "/design",
+    images: ogImageMeta(DEFAULT_OG_PATH, "A fitted kitchen built and installed by UrbanCraft, Kampala"),
+  },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_PATH] },
 };
 
 /** Numbered because the sequence is the product: each stage gates the next. */

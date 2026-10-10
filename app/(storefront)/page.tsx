@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight2 } from "iconsax-reactjs";
@@ -11,6 +12,10 @@ import { getDesignHighlights, getPublishedServices } from "@/lib/design";
 import { getSetting, type ContactSettings } from "@/lib/settings";
 
 export const revalidate = 300;
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /** The four stages of a fit-out. Numbered because the sequence is the product. */
 const STAGES = [

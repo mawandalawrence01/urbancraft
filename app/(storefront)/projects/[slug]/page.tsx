@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft2 } from "iconsax-reactjs";
 import { prisma } from "@/lib/db";
+import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -24,7 +25,20 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: project.title,
     description: project.summary ?? undefined,
     alternates: { canonical: `/projects/${project.slug}` },
-    openGraph: project.coverImage ? { images: [{ url: project.coverImage }] } : undefined,
+    openGraph: {
+      type: "article",
+      title: project.title,
+      description: project.summary ?? undefined,
+      url: `/projects/${project.slug}`,
+      images: ogImageMeta(
+        project.coverImage ? `/og/project/${project.slug}` : DEFAULT_OG_PATH,
+        `${project.title} — installed by UrbanCraft`,
+      ),
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [project.coverImage ? `/og/project/${project.slug}` : DEFAULT_OG_PATH],
+    },
   };
 }
 

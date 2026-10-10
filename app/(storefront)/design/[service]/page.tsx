@@ -6,6 +6,7 @@ import { ArrowLeft2, ArrowRight2 } from "iconsax-reactjs";
 
 import { ButtonLink } from "@/components/ui/Button";
 import { prisma } from "@/lib/db";
+import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 import { getPublishedServices, getServiceWithImages } from "@/lib/design";
 
 export const revalidate = 3600;
@@ -27,10 +28,25 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   });
   if (!service) return {};
 
+  const hasArt = await prisma.designImage.count({
+    where: { serviceId: service.id, origin: "OWN_WORK", needsReview: false },
+  });
+
+  const card = hasArt ? `/og/design/${service.slug}` : DEFAULT_OG_PATH;
+  const title = service.seoTitle ?? service.name;
+
   return {
-    title: service.seoTitle ?? service.name,
+    title,
     description: service.seoDescription ?? service.description ?? undefined,
     alternates: { canonical: `/design/${service.slug}` },
+    openGraph: {
+      type: "website",
+      title,
+      description: service.tagline ?? service.description ?? undefined,
+      url: `/design/${service.slug}`,
+      images: ogImageMeta(card, `${service.name} built and installed by UrbanCraft`),
+    },
+    twitter: { card: "summary_large_image", title, images: [card] },
   };
 }
 

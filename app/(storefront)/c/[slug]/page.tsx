@@ -91,7 +91,7 @@ export default async function CategoryPage({
           {category.children.map((c) => (
             <Link
               key={c.slug} href={`/c/${c.slug}`}
-              className="rounded-full border border-line bg-paper px-4 py-2 text-[0.85rem] transition hover:border-ink"
+              className="rounded-[var(--radius-card)] border border-line bg-paper px-4 py-2 text-[0.85rem] transition hover:border-ink"
             >
               {c.name}
               <span className="tabular ml-1.5 text-xs text-muted">{c._count.productLinks}</span>
@@ -117,7 +117,7 @@ export default async function CategoryPage({
           </Suspense>
 
           {items.length === 0 ? (
-            <div className="rounded-2xl border border-line bg-paper px-6 py-16 text-center">
+            <div className="rounded-[var(--radius-card)] border border-line bg-paper px-6 py-16 text-center">
               <h2 className="font-display text-lg font-semibold">Nothing here yet</h2>
               <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
                 Try clearing the filters, or{" "}

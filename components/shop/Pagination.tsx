@@ -27,7 +27,7 @@ export function Pagination({
       {page > 1 && (
         <Link
           href={href(page - 1)} rel="prev" aria-label="Previous page"
-          className="grid size-10 place-items-center rounded-full border border-line bg-paper hover:border-ink"
+          className="grid size-10 place-items-center rounded-[var(--radius-card)] border border-line bg-paper hover:border-ink"
         >
           <ArrowLeft2 size={16} />
         </Link>
@@ -40,7 +40,7 @@ export function Pagination({
             href={href(p)}
             aria-current={p === page ? "page" : undefined}
             className={cn(
-              "tabular grid size-10 place-items-center rounded-full text-[0.85rem] transition",
+              "tabular grid size-10 place-items-center rounded-[var(--radius-card)] text-[0.85rem] transition",
               p === page
                 ? "bg-ink text-cream"
                 : "border border-line bg-paper hover:border-ink",
@@ -54,7 +54,7 @@ export function Pagination({
       {page < pageCount && (
         <Link
           href={href(page + 1)} rel="next" aria-label="Next page"
-          className="grid size-10 place-items-center rounded-full border border-line bg-paper hover:border-ink"
+          className="grid size-10 place-items-center rounded-[var(--radius-card)] border border-line bg-paper hover:border-ink"
         >
           <ArrowRight2 size={16} />
         </Link>

@@ -26,7 +26,7 @@ export default async function TrackPage({ searchParams }: { searchParams: Search
 
   return (
     <div className="container-page max-w-md pt-10">
-      <div className="rounded-2xl border border-line bg-paper p-7">
+      <div className="rounded-[var(--radius-card)] border border-line bg-paper p-7">
         <Receipt21 size={30} className="text-tan" />
         <h1 className="mt-3 text-2xl font-semibold">Track an order</h1>
         <p className="mt-2 text-[0.9rem] leading-relaxed text-muted">
@@ -34,7 +34,7 @@ export default async function TrackPage({ searchParams }: { searchParams: Search
         </p>
 
         {error && (
-          <p className="mt-5 flex items-start gap-2 rounded-xl bg-danger-soft px-4 py-3 text-[0.86rem] text-danger">
+          <p className="mt-5 flex items-start gap-2 rounded-[var(--radius-card)] bg-danger-soft px-4 py-3 text-[0.86rem] text-danger">
             <Warning2 size={17} className="mt-0.5 shrink-0" />
             We could not find an order with that number and phone number.
           </p>
@@ -45,7 +45,7 @@ export default async function TrackPage({ searchParams }: { searchParams: Search
             <span className="mb-1.5 block text-[0.83rem] font-medium">Order number</span>
             <input
               name="orderNumber" required placeholder="UC-A1B2C3" autoComplete="off"
-              className="w-full rounded-xl border border-line bg-cream px-4 py-3 uppercase outline-none transition focus:border-tan"
+              className="w-full rounded-[var(--radius-card)] border border-line bg-cream px-4 py-3 uppercase outline-none transition focus:border-tan"
             />
           </label>
           <label className="block">
@@ -53,7 +53,7 @@ export default async function TrackPage({ searchParams }: { searchParams: Search
             <input
               name="phone" required type="tel" inputMode="tel" placeholder="0772 123 456"
               autoComplete="tel"
-              className="w-full rounded-xl border border-line bg-cream px-4 py-3 outline-none transition focus:border-tan"
+              className="w-full rounded-[var(--radius-card)] border border-line bg-cream px-4 py-3 outline-none transition focus:border-tan"
             />
           </label>
           <Button type="submit" size="lg" className="w-full">Find my order</Button>

@@ -12,7 +12,7 @@ export default function GlobalNotFound() {
       </p>
       <Link
         href="/"
-        className="mt-7 inline-flex h-12 items-center rounded-full bg-ink px-7 font-medium text-cream transition hover:bg-ink-2"
+        className="mt-7 inline-flex h-12 items-center rounded-[var(--radius-card)] bg-ink px-7 font-medium text-cream transition hover:bg-ink-2"
       >
         Back to UrbanCraft
       </Link>

@@ -39,7 +39,7 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
               aria-label={`View image ${i + 1} of ${images.length}`}
               aria-current={i === active}
               className={cn(
-                "relative aspect-square overflow-hidden rounded-lg bg-sand ring-offset-2 transition",
+                "relative aspect-square overflow-hidden rounded-[var(--radius-card)] bg-sand ring-offset-2 transition",
                 i === active ? "ring-2 ring-ink" : "opacity-65 hover:opacity-100",
               )}
             >
@@ -99,7 +99,7 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
               <span
                 key={img.url}
                 className={cn(
-                  "h-1.5 rounded-full transition-all",
+                  "h-1.5 rounded-[var(--radius-card)] transition-all",
                   i === active ? "w-5 bg-ink" : "w-1.5 bg-line",
                 )}
               />
@@ -119,7 +119,7 @@ function GalleryArrow({ side, onClick }: { side: "left" | "right"; onClick: () =
       onClick={onClick}
       aria-label={side === "left" ? "Previous image" : "Next image"}
       className={cn(
-        "absolute top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/90 opacity-0 shadow-sm backdrop-blur transition hover:bg-paper group-hover:opacity-100",
+        "absolute top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-[var(--radius-card)] bg-paper/90 opacity-0 shadow-sm backdrop-blur transition hover:bg-paper group-hover:opacity-100",
         side === "left" ? "left-3" : "right-3",
       )}
     >

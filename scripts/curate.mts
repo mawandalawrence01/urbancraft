@@ -4,7 +4,10 @@
  *  - flags photos carrying a third-party watermark or burnt-in price badge
  *  - ranks a hand-picked set of well-shot pieces for hero and category artwork
  */
-process.loadEnvFile(".env");
+// Same guard as the other scripts: loadEnvFile throws when the file is absent.
+for (const f of [".env.local", ".env"]) {
+  try { process.loadEnvFile(f); } catch { /* fall through to the real environment */ }
+}
 import { unlink } from "node:fs/promises";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../lib/generated/prisma/client.js";
@@ -30,14 +33,21 @@ const WATERMARKED = [
   "keith-bent-5-seaters-sofa-2", "little-ian-bunk-bed-1", "lorenzo-center-table-1",
   "louis-sink-cabinet-1", "makato-wooden-bed-1", "mikalus-l-sofa-1", "monaco-bunk-bed-1",
   "morgan-love-u-8-seater-sofa-1", "natalia-5-seater-sofa-2", "nkore-leather-6-seater-1",
-  "noelle-l-shaped-6-seaters-sofa-1", "round-head-vintage-dining-set-1", "slim-j-sofa-bed-1",
+  "noelle-l-shaped-6-seaters-sofa-1", "richmond-buttoned-6-seater-sofa-1",
+  "round-head-vintage-dining-set-1", "slim-j-sofa-bed-1",
   "slim-j-sofa-bed-2", "triplet-3-in-1-bed-available-on-order-1", "u-shaped-kitchen-cabinets-1",
   "u-shaped-kitchen-cabinets-2", "zibu-white-trending-tv-stand-1",
 ];
 
-/** Well-composed, watermark-free photography, in the order we want to show it. */
+/**
+ * Well-composed, watermark-free photography, in the order we want to show it.
+ *
+ * This ranks COMPOSITION, not provenance: several entries are supplier
+ * catalogue renders rather than photographs of our own finished work, so it
+ * orders the product grids and must not be treated as a source of "our work".
+ */
 const HERO_PRODUCTS = [
-  "richmond-buttoned-6-seater-sofa", "salvadoress-u-shaped-sofa", "piper-trending-l-sofa",
+  "salvadoress-u-shaped-sofa", "piper-trending-l-sofa",
   "yolande-wooden-6-seater-chair", "pookie-wooden-6-seater-chair", "gasolina-wooden-bed-2",
   "arizona-curved-sofa", "nike-curved-shaped-sofa", "taro-8-seater-dining-set",
   "grey-moose-4-seater-dining-set", "domonick-wooden-chair", "cooper-l-shaped-sofa",

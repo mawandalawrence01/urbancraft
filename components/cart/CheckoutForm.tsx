@@ -71,7 +71,7 @@ export function CheckoutForm({
 
   if (ready && lines.length === 0) {
     return (
-      <div className="mt-10 rounded-2xl border border-line bg-paper px-6 py-14 text-center">
+      <div className="mt-10 rounded-[var(--radius-card)] border border-line bg-paper px-6 py-14 text-center">
         <h2 className="font-display text-lg font-semibold">Your cart is empty</h2>
         <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
           Add a piece before checking out.
@@ -91,7 +91,7 @@ export function CheckoutForm({
 
       <div className="min-w-0 flex-1 space-y-8">
         {state.error && (
-          <p className="flex items-start gap-2.5 rounded-xl bg-danger-soft px-4 py-3 text-[0.88rem] text-danger">
+          <p className="flex items-start gap-2.5 rounded-[var(--radius-card)] bg-danger-soft px-4 py-3 text-[0.88rem] text-danger">
             <Warning2 size={18} className="mt-0.5 shrink-0" /> {state.error}
           </p>
         )}
@@ -126,7 +126,7 @@ export function CheckoutForm({
                 <label
                   key={z.id}
                   className={cn(
-                    "flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition",
+                    "flex cursor-pointer items-start gap-3 rounded-[var(--radius-card)] border p-3.5 transition",
                     z.id === zoneId ? "border-ink bg-sand" : "border-line bg-paper hover:border-ink-3",
                   )}
                 >
@@ -176,7 +176,7 @@ export function CheckoutForm({
                   <label
                     key={value}
                     className={cn(
-                      "flex items-start gap-3 rounded-xl border p-4 transition",
+                      "flex items-start gap-3 rounded-[var(--radius-card)] border p-4 transition",
                       disabled
                         ? "cursor-not-allowed border-line bg-sand/50 opacity-60"
                         : "cursor-pointer",
@@ -205,7 +205,7 @@ export function CheckoutForm({
           </fieldset>
 
           {method === "MOBILE_MONEY" && (
-            <div className="mt-4 rounded-xl border border-line bg-paper p-4">
+            <div className="mt-4 rounded-[var(--radius-card)] border border-line bg-paper p-4">
               <Field
                 label="Mobile money number" name="momoPhone" error={err("momoPhone")}
                 type="tel" inputMode="tel" placeholder={phone || "0772 123 456"}
@@ -220,7 +220,7 @@ export function CheckoutForm({
           )}
 
           {method === "BANK_DEPOSIT" && bank.accountNumber && (
-            <dl className="mt-4 space-y-1.5 rounded-xl border border-line bg-paper p-4 text-[0.87rem]">
+            <dl className="mt-4 space-y-1.5 rounded-[var(--radius-card)] border border-line bg-paper p-4 text-[0.87rem]">
               {[
                 ["Bank", bank.bankName],
                 ["Account name", bank.accountName],
@@ -246,22 +246,22 @@ export function CheckoutForm({
           <textarea
             name="customerNote" rows={3}
             placeholder="Colour preference, timber, exact dimensions, delivery timing…"
-            className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-[0.92rem] outline-none transition focus:border-tan"
+            className="w-full rounded-[var(--radius-card)] border border-line bg-paper px-4 py-3 text-[0.92rem] outline-none transition focus:border-tan"
           />
         </section>
       </div>
 
       {/* --------------------------------------------------------- summary */}
       <aside className="mt-8 lg:sticky lg:top-24 lg:mt-0 lg:w-80 lg:shrink-0">
-        <div className="rounded-2xl border border-line bg-paper p-5">
+        <div className="rounded-[var(--radius-card)] border border-line bg-paper p-5">
           <h2 className="font-display text-lg font-semibold">Your order</h2>
 
           <ul className="mt-4 max-h-64 space-y-3 overflow-y-auto">
             {lines.map((l) => (
               <li key={`${l.productId}:${l.variantId ?? ""}`} className="flex gap-3">
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-sand">
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-[var(--radius-card)] bg-sand">
                   {l.imageUrl && <Image src={l.imageUrl} alt="" fill sizes="56px" className="object-cover" />}
-                  <span className="tabular absolute -right-1 -top-1 grid size-5 place-items-center rounded-full bg-ink text-[0.62rem] font-semibold text-cream">
+                  <span className="tabular absolute -right-1 -top-1 grid size-5 place-items-center rounded-[var(--radius-card)] bg-ink text-[0.62rem] font-semibold text-cream">
                     {l.quantity}
                   </span>
                 </div>
@@ -309,7 +309,7 @@ export function CheckoutForm({
 function SectionTitle({ step, children }: { step: number; children: React.ReactNode }) {
   return (
     <h2 className="mb-4 flex items-center gap-2.5 font-display text-lg font-semibold">
-      <span className="tabular grid size-7 shrink-0 place-items-center rounded-full bg-ink text-[0.75rem] text-cream">
+      <span className="tabular grid size-7 shrink-0 place-items-center rounded-[var(--radius-card)] bg-ink text-[0.75rem] text-cream">
         {step}
       </span>
       {children}
@@ -340,7 +340,7 @@ function Field({
         {...props}
         aria-invalid={error ? true : undefined}
         className={cn(
-          "w-full rounded-xl border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
+          "w-full rounded-[var(--radius-card)] border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
           error ? "border-danger" : "border-line focus:border-tan",
         )}
       />

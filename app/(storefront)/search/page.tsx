@@ -55,7 +55,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
           </Suspense>
 
           {items.length === 0 ? (
-            <div className="rounded-2xl border border-line bg-paper px-6 py-16 text-center">
+            <div className="rounded-[var(--radius-card)] border border-line bg-paper px-6 py-16 text-center">
               <SearchNormal1 size={34} className="mx-auto text-muted" />
               <h2 className="mt-4 font-display text-lg font-semibold">Nothing matched</h2>
               <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">

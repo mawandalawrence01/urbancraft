@@ -37,7 +37,7 @@ export function PaymentWatcher({ orderNumber }: { orderNumber: string }) {
 
   return (
     <p className="mt-3 flex items-center gap-2 text-[0.8rem] text-muted">
-      <span className="size-2 animate-pulse rounded-full bg-warn" />
+      <span className="size-2 animate-pulse rounded-[var(--radius-card)] bg-warn" />
       {elapsed >= 180
         ? "Still waiting. If you did not get a prompt, call us and we will sort it out."
         : "Waiting for your approval…"}

@@ -85,7 +85,7 @@ export default async function DesignEnquirePage({
             {contact?.phone && (
               <a
                 href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-[0.9rem] font-medium text-cream transition hover:bg-ink-2"
+                className="mt-6 flex items-center justify-center gap-2 rounded-[var(--radius-card)] bg-ink px-5 py-3 text-[0.9rem] font-medium text-cream transition hover:bg-ink-2"
               >
                 <Call size={17} /> {contact.phone}
               </a>

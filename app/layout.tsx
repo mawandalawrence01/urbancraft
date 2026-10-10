@@ -1,13 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
 import { CartProvider } from "@/components/cart/CartProvider";
 import { siteUrlObject } from "@/lib/site";
 
-const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"], display: "swap" });
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
-
+// One neutral grotesque across the whole site. Nothing competes with the
+// photography, so the type stays in the normal weight range and gets out of
+// the way; the variable axis covers every role from caption to display.
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: siteUrlObject,
@@ -23,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17150f",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -31,7 +36,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-UG" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en-UG" className={hanken.variable}>
       <body className="min-h-dvh antialiased">
         {/* The cart lives in localStorage, so the provider spans admin too
             without cost — it keeps a single mount point for the whole app. */}

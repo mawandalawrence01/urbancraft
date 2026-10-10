@@ -24,7 +24,7 @@ export function DesignBriefForm({
 
   if (state.ok) {
     return (
-      <div className="rounded-2xl border border-success/25 bg-success-soft p-8 text-center">
+      <div className="rounded-[var(--radius-card)] border border-success/25 bg-success-soft p-8 text-center">
         <TickCircle size={34} variant="Bold" className="mx-auto text-success" />
         <h2 className="mt-3 font-display text-lg font-semibold">Brief received</h2>
         <p className="mx-auto mt-2 max-w-sm text-[0.9rem] leading-relaxed text-ink-3">
@@ -50,7 +50,7 @@ export function DesignBriefForm({
       />
 
       {state.error && (
-        <p className="flex items-center gap-2 rounded-xl bg-danger-soft px-4 py-3 text-[0.88rem] text-danger">
+        <p className="flex items-center gap-2 rounded-[var(--radius-card)] bg-danger-soft px-4 py-3 text-[0.88rem] text-danger">
           <Warning2 size={17} /> {state.error}
         </p>
       )}
@@ -133,7 +133,7 @@ export function DesignBriefForm({
           required
           placeholder="Room sizes if you know them, how many rooms, what is there now, and anything you have already decided."
           className={cn(
-            "w-full rounded-xl border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
+            "w-full rounded-[var(--radius-card)] border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
             err("message") ? "border-danger" : "border-line focus:border-tan",
           )}
         />
@@ -168,7 +168,7 @@ function Field({
         {...props}
         aria-invalid={error ? true : undefined}
         className={cn(
-          "w-full rounded-xl border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
+          "w-full rounded-[var(--radius-card)] border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
           error ? "border-danger" : "border-line focus:border-tan",
         )}
       />
@@ -202,7 +202,7 @@ function Select({
         {...props}
         aria-invalid={error ? true : undefined}
         className={cn(
-          "w-full appearance-none rounded-xl border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
+          "w-full appearance-none rounded-[var(--radius-card)] border bg-paper px-4 py-3 text-[0.92rem] outline-none transition",
           error ? "border-danger" : "border-line focus:border-tan",
         )}
       >

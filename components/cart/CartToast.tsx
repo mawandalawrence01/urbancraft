@@ -23,8 +23,8 @@ export function CartToast() {
       role="status"
       className="fixed inset-x-3 bottom-20 z-40 animate-fade-up lg:inset-x-auto lg:right-6 lg:bottom-6 lg:w-96"
     >
-      <div className="flex items-center gap-3 rounded-2xl border border-line bg-paper p-3 shadow-[0_20px_50px_-20px_rgba(23,21,15,0.45)]">
-        <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-sand">
+      <div className="flex items-center gap-3 rounded-[var(--radius-card)] border border-line bg-paper p-3 shadow-[0_20px_50px_-20px_rgba(23,21,15,0.45)]">
+        <div className="relative size-14 shrink-0 overflow-hidden rounded-[var(--radius-card)] bg-sand">
           {justAdded.imageUrl && (
             <Image src={justAdded.imageUrl} alt="" fill sizes="56px" className="object-cover" />
           )}
@@ -39,7 +39,7 @@ export function CartToast() {
         <Link
           href="/cart"
           onClick={dismissToast}
-          className="shrink-0 rounded-full bg-ink px-4 py-2.5 text-[0.8rem] font-medium text-cream"
+          className="shrink-0 rounded-[var(--radius-card)] bg-ink px-4 py-2.5 text-[0.8rem] font-medium text-cream"
         >
           Cart ({count})
         </Link>

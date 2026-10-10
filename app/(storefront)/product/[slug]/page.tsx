@@ -163,7 +163,7 @@ export default async function ProductPage({ params }: { params: Params }) {
               />
             </div>
 
-            <ul className="mt-7 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+            <ul className="mt-7 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-2">
               {[
                 [Clock, "Build time", `${product.leadTimeDays} working days`],
                 [ShieldTick, "Warranty", `${Math.round(product.warrantyMonths / 12)} year${product.warrantyMonths >= 24 ? "s" : ""}`],
@@ -175,7 +175,7 @@ export default async function ProductPage({ params }: { params: Params }) {
                   <li key={label as string} className="flex items-start gap-3 bg-cream p-4">
                     <I size={19} className="mt-0.5 shrink-0 text-tan" />
                     <div>
-                      <p className="text-[0.75rem] uppercase tracking-[0.1em] text-muted">
+                      <p className="label-xs text-[0.6rem] text-muted">
                         {label as string}
                       </p>
                       <p className="text-[0.88rem] font-medium">{value as string}</p>
@@ -195,7 +195,7 @@ export default async function ProductPage({ params }: { params: Params }) {
                   <ul className="mt-4 space-y-2">
                     {bullets.map((b, i) => (
                       <li key={i} className="flex gap-2.5 text-[0.9rem] text-ink-3">
-                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-tan" />
+                        <span className="mt-2 size-1.5 shrink-0 rounded-[var(--radius-card)] bg-tan" />
                         {b.text}
                       </li>
                     ))}
@@ -222,7 +222,7 @@ export default async function ProductPage({ params }: { params: Params }) {
             </dl>
 
             {product.variants.length <= 1 && (
-              <section className="mt-8 rounded-2xl border border-line bg-sand p-5">
+              <section className="mt-8 rounded-[var(--radius-card)] border border-line bg-sand p-5">
                 <h2 className="flex items-center gap-2 font-display text-[1rem] font-semibold">
                   <Award size={19} className="text-tan" /> Available in three quality classes
                 </h2>

@@ -3,13 +3,13 @@ import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition " +
+  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-card)] font-medium transition " +
   "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
 
 const variants = {
-  primary: "bg-ink text-cream hover:bg-ink-2",
-  tan: "bg-tan text-white hover:bg-tan-2",
-  outline: "border border-line bg-paper text-ink hover:border-ink hover:bg-sand",
+  primary: "bg-ink text-white hover:bg-ink-2",
+  tan: "bg-accent text-white hover:bg-accent-2",
+  outline: "border border-rule bg-paper text-ink hover:border-ink",
   ghost: "text-ink hover:bg-sand",
   danger: "bg-danger text-white hover:brightness-95",
 } as const;

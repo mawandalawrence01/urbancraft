@@ -27,7 +27,6 @@ export default async function ProjectsPage() {
   return (
     <div className="container-page pt-8">
       <header className="max-w-2xl">
-        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-tan-2">Our work</p>
         <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">
           Rooms we have measured, built and fitted
         </h1>
@@ -72,7 +71,7 @@ export default async function ProjectsPage() {
         </p>
         <Link
           href="/contact"
-          className="mt-6 inline-flex h-12 items-center rounded-full bg-ink px-7 font-medium text-cream transition hover:bg-ink-2"
+          className="mt-6 inline-flex h-12 items-center rounded-[var(--radius-card)] bg-ink px-7 font-medium text-cream transition hover:bg-ink-2"
         >
           Start a conversation
         </Link>

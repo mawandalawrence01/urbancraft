@@ -42,26 +42,42 @@ export default async function DesignServicePage({ params }: { params: Params }) 
   const siblings = (await getPublishedServices(service.kind)).filter((s) => s.slug !== slug);
 
   return (
-    <div className="container-page pt-6">
-      <Link
-        href="/design"
-        className="inline-flex items-center gap-1.5 text-[0.85rem] text-muted transition hover:text-ink"
-      >
-        <ArrowLeft2 size={15} /> Interior design
-      </Link>
+    <div>
+      <section className="container-page pt-12 lg:pt-20">
+        <Link
+          href="/design"
+          className="inline-flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink"
+        >
+          <ArrowLeft2 size={13} /> Interiors
+        </Link>
 
-      <header className="mt-5 max-w-2xl">
-        {service.tagline && (
-          <p className="text-[0.75rem] uppercase tracking-[0.2em] text-tan-2">{service.tagline}</p>
+        <header className="mt-6">
+          <h1 className="max-w-[20ch] text-[clamp(2.1rem,5.2vw,3.5rem)] font-medium leading-[1.05] tracking-[-0.025em]">
+            {service.name}
+          </h1>
+          {service.tagline && (
+            <p className="mt-4 max-w-[44ch] text-[1.05rem] text-ink-2">
+              {service.tagline}
+            </p>
+          )}
+          {service.description && (
+            <p className="mt-3 max-w-[60ch] text-[0.96rem] leading-relaxed text-ink-3">
+              {service.description}
+            </p>
+          )}
+        </header>
+
+        {service.images.length > 0 && (
+          <p className="mt-6 border-t border-line pt-4 text-[0.88rem] text-muted">
+            {service.images.length} photograph{service.images.length === 1 ? "" : "s"} &mdash; our own installations
+          </p>
         )}
-        <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">{service.name}</h1>
-        {service.description && (
-          <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-3">{service.description}</p>
-        )}
-      </header>
+      </section>
+
+      <div className="container-page mt-10">
 
       {service.images.length > 0 ? (
-        <div className="mt-10 columns-2 gap-3 lg:columns-3 lg:gap-5 [&>*]:mb-3 lg:[&>*]:mb-5">
+        <div className="columns-2 gap-3 lg:columns-3 lg:gap-5 [&>*]:mb-3 lg:[&>*]:mb-5">
           {service.images.map((img, i) => (
             <figure
               key={img.id}
@@ -79,7 +95,7 @@ export default async function DesignServicePage({ params }: { params: Params }) 
                 className="h-auto w-full"
               />
               {img.caption && (
-                <figcaption className="px-3 py-2 text-[0.78rem] text-muted">
+                <figcaption className="px-1 pt-2 text-[0.82rem] text-muted">
                   {img.caption}
                 </figcaption>
               )}
@@ -87,7 +103,7 @@ export default async function DesignServicePage({ params }: { params: Params }) 
           ))}
         </div>
       ) : (
-        <div className="mt-10 rounded-[var(--radius-card)] border border-dashed border-line bg-paper px-6 py-14 text-center">
+        <div className="rounded-[var(--radius-card)] border border-dashed border-rule bg-sand px-6 py-16 text-center">
           <h2 className="font-display text-lg font-semibold">Photographs on the way</h2>
           <p className="mx-auto mt-2 max-w-sm text-[0.88rem] leading-relaxed text-muted">
             We are still photographing this work properly. In the meantime, ring the workshop and we
@@ -97,7 +113,7 @@ export default async function DesignServicePage({ params }: { params: Params }) 
       )}
 
       {/* ------------------------------------------------------------- cta */}
-      <section className="mt-16 rounded-[var(--radius-card)] border border-line bg-sand px-6 py-12 text-center">
+      <section className="mt-16 rounded-[var(--radius-card)] bg-sand px-6 py-14 text-center">
         <h2 className="text-2xl font-semibold">
           Want this in your space?
         </h2>
@@ -149,6 +165,7 @@ export default async function DesignServicePage({ params }: { params: Params }) 
           </div>
         </section>
       )}
+      </div>
     </div>
   );
 }

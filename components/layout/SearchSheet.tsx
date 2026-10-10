@@ -65,7 +65,7 @@ export function SearchSheet({ open, onClose }: { open: boolean; onClose: () => v
       <div className="absolute inset-x-0 top-0 animate-fade-in bg-cream shadow-xl">
         <div className="container-page py-4">
           <form onSubmit={submit} className="flex items-center gap-2">
-            <div className="flex flex-1 items-center gap-3 rounded-full border border-line bg-paper px-4">
+            <div className="flex flex-1 items-center gap-3 rounded-[var(--radius-card)] border border-line bg-paper px-4">
               <SearchNormal1 size={19} className="shrink-0 text-muted" />
               <input
                 ref={inputRef}
@@ -80,7 +80,7 @@ export function SearchSheet({ open, onClose }: { open: boolean; onClose: () => v
             </div>
             <button
               type="button" onClick={onClose}
-              className="grid size-11 shrink-0 place-items-center rounded-full hover:bg-sand"
+              className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-card)] hover:bg-sand"
               aria-label="Close search"
             >
               <CloseSquare size={22} />
@@ -99,9 +99,9 @@ export function SearchSheet({ open, onClose }: { open: boolean; onClose: () => v
                 key={hit.slug}
                 href={`/product/${hit.slug}`}
                 onClick={onClose}
-                className="flex items-center gap-3 rounded-xl px-1 py-2 transition hover:bg-sand"
+                className="flex items-center gap-3 rounded-[var(--radius-card)] px-1 py-2 transition hover:bg-sand"
               >
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-sand">
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-[var(--radius-card)] bg-sand">
                   {hit.images[0] && (
                     <Image
                       src={hit.images[0].url} alt="" fill sizes="56px"
@@ -121,7 +121,7 @@ export function SearchSheet({ open, onClose }: { open: boolean; onClose: () => v
             {q.trim() && hits.length > 0 && (
               <button
                 type="button" onClick={submit as never}
-                className="mt-1 w-full rounded-xl py-3 text-center text-[0.85rem] font-medium text-tan-2 hover:bg-sand"
+                className="mt-1 w-full rounded-[var(--radius-card)] py-3 text-center text-[0.85rem] font-medium text-tan-2 hover:bg-sand"
               >
                 See all results for “{q}”
               </button>

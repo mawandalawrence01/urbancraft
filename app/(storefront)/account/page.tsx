@@ -25,7 +25,7 @@ export default async function AccountPage() {
         address. Keep your order number and you can look it up any time.
       </p>
 
-      <div className="mt-7 grid gap-px overflow-hidden rounded-2xl border border-line bg-line">
+      <div className="mt-7 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line">
         {links.map(({ href, Icon, title, body }) => (
           <Link key={href} href={href} className="flex items-start gap-4 bg-paper p-5 transition hover:bg-sand">
             <Icon size={22} className="mt-0.5 shrink-0 text-tan" />
@@ -37,12 +37,12 @@ export default async function AccountPage() {
         ))}
       </div>
 
-      <div className="mt-6 rounded-2xl border border-line bg-paper p-5">
+      <div className="mt-6 rounded-[var(--radius-card)] border border-line bg-paper p-5">
         <h2 className="font-display text-base font-semibold">Need a hand?</h2>
         <div className="mt-3 flex flex-wrap gap-3">
           <a
             href={`tel:${contact.phone.replace(/\s/g, "")}`}
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-line px-5 text-[0.88rem] font-medium transition hover:border-ink"
+            className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-card)] border border-line px-5 text-[0.88rem] font-medium transition hover:border-ink"
           >
             <Call size={17} className="text-tan" /> {contact.phone}
           </a>
@@ -50,7 +50,7 @@ export default async function AccountPage() {
             <a
               href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`}
               target="_blank" rel="noreferrer"
-              className="inline-flex h-11 items-center gap-2 rounded-full border border-line px-5 text-[0.88rem] font-medium transition hover:border-ink"
+              className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-card)] border border-line px-5 text-[0.88rem] font-medium transition hover:border-ink"
             >
               <Whatsapp size={17} className="text-success" /> WhatsApp
             </a>

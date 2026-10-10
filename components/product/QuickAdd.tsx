@@ -24,7 +24,7 @@ export function QuickAdd({ product }: { product: ProductCard }) {
           imageUrl: product.images[0]?.url ?? null,
         });
       }}
-      className="absolute bottom-2.5 right-2.5 grid size-10 place-items-center rounded-full bg-paper/95 text-ink shadow-sm backdrop-blur transition hover:bg-ink hover:text-cream active:scale-95 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
+      className="absolute bottom-2.5 right-2.5 grid size-10 place-items-center rounded-[var(--radius-card)] bg-paper/95 text-ink shadow-sm backdrop-blur transition hover:bg-ink hover:text-cream active:scale-95 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
     >
       <ShoppingCart size={18} />
     </button>

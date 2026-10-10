@@ -33,7 +33,7 @@ export default async function DeliveryPage() {
         </h2>
         <table className="mt-4 w-full border-collapse text-[0.9rem]">
           <thead>
-            <tr className="border-b border-line text-left text-[0.78rem] uppercase tracking-[0.1em] text-muted">
+            <tr className="label-xs border-b border-line text-left text-muted">
               <th className="pb-2 font-medium">Area</th>
               <th className="pb-2 text-right font-medium">Fee</th>
             </tr>

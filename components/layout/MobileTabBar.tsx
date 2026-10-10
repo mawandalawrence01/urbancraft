@@ -23,7 +23,7 @@ export function MobileTabBar() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-cream/95 backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 backdrop-blur-md lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Primary"
     >
@@ -36,15 +36,15 @@ export function MobileTabBar() {
               <Link
                 href={href}
                 className={cn(
-                  "relative flex flex-col items-center gap-1 py-2.5 text-[0.66rem] transition",
-                  active ? "text-tan-2" : "text-muted",
+                  "relative flex flex-col items-center gap-1 py-2.5 text-[0.68rem] transition",
+                  active ? "text-ink" : "text-muted",
                 )}
                 aria-current={active ? "page" : undefined}
               >
                 <span className="relative">
                   <Icon size={21} variant={active ? "Bold" : "Linear"} />
                   {href === "/cart" && ready && count > 0 && (
-                    <span className="tabular absolute -right-2 -top-1.5 grid min-w-[1.05rem] place-items-center rounded-full bg-tan px-1 text-[0.58rem] font-semibold text-white">
+                    <span className="figure-num absolute -right-2.5 -top-1.5 grid min-w-[1.05rem] place-items-center rounded-full bg-accent px-1 text-[0.6rem] font-semibold text-white">
                       {count > 9 ? "9+" : count}
                     </span>
                   )}

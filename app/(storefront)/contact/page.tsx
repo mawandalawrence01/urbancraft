@@ -16,7 +16,6 @@ export default async function ContactPage() {
   return (
     <div className="container-page pt-8">
       <header className="max-w-2xl">
-        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-tan-2">Contact</p>
         <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">Start a commission</h1>
         <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-3">
           Send a photo, a sketch, or just the measurements. We will come back with a price in all
@@ -30,7 +29,7 @@ export default async function ContactPage() {
         </div>
 
         <aside className="mt-10 lg:mt-0 lg:w-80 lg:shrink-0">
-          <div className="rounded-2xl border border-line bg-paper p-6">
+          <div className="rounded-[var(--radius-card)] border border-line bg-paper p-6">
             <h2 className="font-display text-base font-semibold">Reach the workshop</h2>
             <ul className="mt-4 space-y-4 text-[0.9rem]">
               <li>
@@ -80,7 +79,7 @@ export default async function ContactPage() {
                 </li>
               )}
             </ul>
-            <p className="mt-5 rounded-xl bg-sand p-3 text-[0.82rem] leading-relaxed text-ink-3">
+            <p className="mt-5 rounded-[var(--radius-card)] bg-sand p-3 text-[0.82rem] leading-relaxed text-ink-3">
               We work by appointment. Please call before setting off so we can give you proper time.
             </p>
           </div>

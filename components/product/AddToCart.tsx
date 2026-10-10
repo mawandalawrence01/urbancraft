@@ -47,7 +47,7 @@ export function AddToCart({
     <div className="space-y-5">
       {variants.length > 1 && (
         <fieldset>
-          <legend className="mb-2.5 text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-muted">
+          <legend className="label-xs mb-2.5 text-[0.62rem] text-ink-3">
             Quality class
           </legend>
           <div className="space-y-2">
@@ -55,7 +55,7 @@ export function AddToCart({
               <label
                 key={v.id}
                 className={cn(
-                  "flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition",
+                  "flex cursor-pointer items-start gap-3 rounded-[var(--radius-card)] border p-3.5 transition",
                   v.id === variantId ? "border-ink bg-sand" : "border-line bg-paper hover:border-ink-3",
                 )}
               >
@@ -87,12 +87,12 @@ export function AddToCart({
         </fieldset>
       )}
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center rounded-full border border-line bg-paper">
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center rounded-[var(--radius-card)] border border-rule bg-paper">
           <button
             type="button" onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             disabled={quantity <= 1}
-            className="grid size-11 place-items-center rounded-full disabled:opacity-30"
+            className="grid size-11 place-items-center rounded-[var(--radius-card)] disabled:opacity-30"
             aria-label="Decrease quantity"
           >
             <Minus size={17} />
@@ -100,14 +100,19 @@ export function AddToCart({
           <span className="tabular w-8 text-center font-medium" aria-live="polite">{quantity}</span>
           <button
             type="button" onClick={() => setQuantity((q) => Math.min(99, q + 1))}
-            className="grid size-11 place-items-center rounded-full"
+            className="grid size-11 place-items-center rounded-[var(--radius-card)]"
             aria-label="Increase quantity"
           >
             <Add size={17} />
           </button>
         </div>
 
-        <Button size="lg" className="flex-1" onClick={submit} data-testid="add-to-cart">
+        <Button
+          size="lg"
+          className="min-w-0 basis-full sm:basis-0 sm:flex-1"
+          onClick={submit}
+          data-testid="add-to-cart"
+        >
           <ShoppingCart size={18} /> Add to cart · {formatUGX(unitPrice * quantity)}
         </Button>
       </div>
@@ -120,7 +125,7 @@ export function AddToCart({
             }.`,
           )}`}
           target="_blank" rel="noreferrer"
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-line bg-paper font-medium transition hover:border-ink"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-card)] border border-line bg-paper font-medium transition hover:border-ink"
         >
           <Whatsapp size={19} className="text-success" />
           Ask about this piece

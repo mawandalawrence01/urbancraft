@@ -63,7 +63,7 @@ function FilterPanel({
     <div className="space-y-7">
       {categories.length > 0 && (
         <section>
-          <h3 className="mb-3 text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-muted">
+          <h3 className="label-xs mb-3 border-b border-line pb-1.5 text-[0.62rem] text-ink-3">
             Category
           </h3>
           <ul className="space-y-0.5">
@@ -73,7 +73,7 @@ function FilterPanel({
                   type="button"
                   onClick={() => { onDone?.(); router.push(`/c/${c.slug}`); }}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-lg px-2 py-2 text-left text-[0.88rem] transition hover:bg-sand",
+                    "flex w-full items-center justify-between rounded-[var(--radius-card)] px-2 py-2 text-left text-[0.88rem] transition hover:bg-sand",
                     activeCategory === c.slug && "bg-sand font-medium",
                   )}
                 >
@@ -87,7 +87,7 @@ function FilterPanel({
       )}
 
       <section>
-        <h3 className="mb-3 text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-muted">
+        <h3 className="label-xs mb-3 border-b border-line pb-1.5 text-[0.62rem] text-ink-3">
           Price
         </h3>
         <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ function FilterPanel({
             <input
               type="number" inputMode="numeric" value={draftMin} min={bounds.min} max={bounds.max}
               onChange={(e) => setDraftMin(Number(e.target.value))}
-              className="w-full rounded-lg border border-line bg-paper px-2.5 py-2 text-[0.85rem] outline-none focus:border-tan"
+              className="w-full rounded-[var(--radius-card)] border border-line bg-paper px-2.5 py-2 text-[0.85rem] outline-none focus:border-tan"
             />
           </label>
           <span className="text-muted">–</span>
@@ -105,7 +105,7 @@ function FilterPanel({
             <input
               type="number" inputMode="numeric" value={draftMax} min={bounds.min} max={bounds.max}
               onChange={(e) => setDraftMax(Number(e.target.value))}
-              className="w-full rounded-lg border border-line bg-paper px-2.5 py-2 text-[0.85rem] outline-none focus:border-tan"
+              className="w-full rounded-[var(--radius-card)] border border-line bg-paper px-2.5 py-2 text-[0.85rem] outline-none focus:border-tan"
             />
           </label>
         </div>
@@ -132,7 +132,7 @@ function FilterPanel({
           onClick={() => { onDone?.(); apply({ stock: inStock ? null : "1" }); }}
           role="switch"
           aria-checked={inStock}
-          className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left text-[0.88rem] transition hover:bg-sand"
+          className="flex w-full items-center gap-2.5 rounded-[var(--radius-card)] px-2 py-2 text-left text-[0.88rem] transition hover:bg-sand"
         >
           {/* A tick icon reads as "already on" even when unchecked, so draw an
               empty box until the filter is actually applied. */}
@@ -194,12 +194,12 @@ export function FilterToolbar(props: FilterProps) {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-2 text-[0.85rem] lg:hidden"
+          className="flex items-center gap-2 rounded-[var(--radius-card)] border border-line bg-paper px-4 py-2 text-[0.85rem] lg:hidden"
         >
           <Filter size={17} />
           Filter
           {activeCount > 0 && (
-            <span className="grid size-5 place-items-center rounded-full bg-tan text-[0.65rem] font-semibold text-white">
+            <span className="grid size-5 place-items-center rounded-[var(--radius-card)] bg-tan text-[0.65rem] font-semibold text-white">
               {activeCount}
             </span>
           )}
@@ -214,7 +214,7 @@ export function FilterToolbar(props: FilterProps) {
           <select
             value={sort}
             onChange={(e) => apply({ sort: e.target.value === "featured" ? null : e.target.value })}
-            className="rounded-full border border-line bg-paper px-3 py-2 text-[0.85rem] outline-none focus:border-tan"
+            className="rounded-[var(--radius-card)] border border-line bg-paper px-3 py-2 text-[0.85rem] outline-none focus:border-tan"
           >
             {SORTS.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
           </select>
@@ -227,7 +227,7 @@ export function FilterToolbar(props: FilterProps) {
             type="button" aria-label="Close filters" onClick={() => setOpen(false)}
             className="absolute inset-0 animate-fade-in bg-ink/40"
           />
-          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] animate-sheet-up overflow-y-auto rounded-t-2xl bg-cream">
+          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] animate-sheet-up overflow-y-auto rounded-[var(--radius-card)] bg-cream">
             <div className="sticky top-0 flex items-center justify-between border-b border-line bg-cream px-4 py-4">
               <h2 className="font-display text-lg font-semibold">Filter</h2>
               <button type="button" onClick={() => setOpen(false)} aria-label="Close filters">

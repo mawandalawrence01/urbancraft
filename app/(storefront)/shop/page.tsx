@@ -74,7 +74,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-line bg-paper px-6 py-16 text-center">
+    <div className="rounded-[var(--radius-card)] border border-line bg-paper px-6 py-16 text-center">
       <h2 className="font-display text-lg font-semibold">Nothing matches those filters</h2>
       <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
         Widen the price range or clear the filters to see the full catalogue.

@@ -28,7 +28,6 @@ export default async function AboutPage() {
   return (
     <div className="container-page pt-8">
       <header className="max-w-2xl">
-        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-tan-2">The workshop</p>
         <h1 className="mt-3 text-3xl font-semibold sm:text-[2.6rem] sm:leading-[1.1]">
           We build furniture the slow way, in Kampala
         </h1>
@@ -85,7 +84,7 @@ export default async function AboutPage() {
           ].map(([Icon, title, body]) => {
             const I = Icon as typeof Award;
             return (
-              <div key={title as string} className="flex gap-4 rounded-2xl border border-line bg-paper p-5">
+              <div key={title as string} className="flex gap-4 rounded-[var(--radius-card)] border border-line bg-paper p-5">
                 <I size={22} className="mt-0.5 shrink-0 text-tan" />
                 <div>
                   <h3 className="font-medium">{title as string}</h3>
@@ -118,7 +117,7 @@ export default async function AboutPage() {
           <ButtonLink href="/contact" variant="tan" size="lg">Start a commission</ButtonLink>
           <Link
             href="/projects"
-            className="inline-flex h-12 items-center rounded-full border border-cream/25 px-6 font-medium transition hover:bg-cream/10"
+            className="inline-flex h-12 items-center rounded-[var(--radius-card)] border border-cream/25 px-6 font-medium transition hover:bg-cream/10"
           >
             See our work
           </Link>

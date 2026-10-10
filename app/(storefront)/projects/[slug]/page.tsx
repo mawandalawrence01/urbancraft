@@ -48,10 +48,12 @@ export default async function ProjectPage({ params }: { params: Params }) {
       </Link>
 
       <header>
+        <h1 className="text-[clamp(1.9rem,4.6vw,2.9rem)] font-medium leading-[1.06] tracking-[-0.025em]">
+          {project.title}
+        </h1>
         {project.clientType && (
-          <p className="text-[0.75rem] uppercase tracking-[0.2em] text-tan-2">{project.clientType}</p>
+          <p className="label-xs mt-3 text-muted">{project.clientType}</p>
         )}
-        <h1 className="mt-2.5 text-3xl font-semibold sm:text-4xl">{project.title}</h1>
         {project.summary && (
           <p className="mt-3 max-w-2xl text-[0.98rem] leading-relaxed text-ink-3">{project.summary}</p>
         )}

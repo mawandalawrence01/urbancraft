@@ -13,14 +13,14 @@ export function CartView({ freeFrom }: { freeFrom: number }) {
   if (!ready) {
     return (
       <div className="mt-8 space-y-3">
-        {[0, 1, 2].map((i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}
+        {[0, 1, 2].map((i) => <div key={i} className="skeleton h-28 rounded-[var(--radius-card)]" />)}
       </div>
     );
   }
 
   if (lines.length === 0) {
     return (
-      <div className="mt-10 rounded-2xl border border-line bg-paper px-6 py-16 text-center">
+      <div className="mt-10 rounded-[var(--radius-card)] border border-line bg-paper px-6 py-16 text-center">
         <ShoppingCart size={38} className="mx-auto text-muted" />
         <h2 className="mt-4 font-display text-lg font-semibold">Your cart is empty</h2>
         <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
@@ -40,7 +40,7 @@ export function CartView({ freeFrom }: { freeFrom: number }) {
             <li key={key} className="flex gap-3 py-4 sm:gap-4">
               <Link
                 href={`/product/${line.slug}`}
-                className="relative size-24 shrink-0 overflow-hidden rounded-xl bg-sand sm:size-28"
+                className="relative size-24 shrink-0 overflow-hidden rounded-[var(--radius-card)] bg-sand sm:size-28"
               >
                 {line.imageUrl && (
                   <Image src={line.imageUrl} alt="" fill sizes="112px" className="object-cover" />
@@ -64,18 +64,18 @@ export function CartView({ freeFrom }: { freeFrom: number }) {
                     type="button"
                     onClick={() => remove(key)}
                     aria-label={`Remove ${line.name}`}
-                    className="grid size-9 shrink-0 place-items-center rounded-full text-muted transition hover:bg-sand hover:text-danger"
+                    className="grid size-9 shrink-0 place-items-center rounded-[var(--radius-card)] text-muted transition hover:bg-sand hover:text-danger"
                   >
                     <Trash size={17} />
                   </button>
                 </div>
 
                 <div className="mt-auto flex items-center justify-between gap-3 pt-3">
-                  <div className="flex items-center rounded-full border border-line bg-paper">
+                  <div className="flex items-center rounded-[var(--radius-card)] border border-line bg-paper">
                     <button
                       type="button"
                       onClick={() => setQuantity(key, line.quantity - 1)}
-                      className="grid size-9 place-items-center rounded-full"
+                      className="grid size-9 place-items-center rounded-[var(--radius-card)]"
                       aria-label="Decrease quantity"
                     >
                       <Minus size={15} />
@@ -86,7 +86,7 @@ export function CartView({ freeFrom }: { freeFrom: number }) {
                     <button
                       type="button"
                       onClick={() => setQuantity(key, line.quantity + 1)}
-                      className="grid size-9 place-items-center rounded-full"
+                      className="grid size-9 place-items-center rounded-[var(--radius-card)]"
                       aria-label="Increase quantity"
                     >
                       <Add size={15} />
@@ -103,7 +103,7 @@ export function CartView({ freeFrom }: { freeFrom: number }) {
       </ul>
 
       <aside className="mt-6 lg:sticky lg:top-24 lg:mt-0 lg:w-80 lg:shrink-0">
-        <div className="rounded-2xl border border-line bg-paper p-5">
+        <div className="rounded-[var(--radius-card)] border border-line bg-paper p-5">
           <h2 className="font-display text-lg font-semibold">Summary</h2>
 
           <dl className="mt-4 space-y-2.5 text-[0.9rem]">

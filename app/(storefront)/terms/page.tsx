@@ -58,7 +58,7 @@ export default async function TermsPage() {
         </section>
       ))}
 
-      <p className="mt-10 rounded-xl bg-sand p-4 text-[0.9rem] leading-relaxed text-ink-3">
+      <p className="mt-10 rounded-[var(--radius-card)] bg-sand p-4 text-[0.9rem] leading-relaxed text-ink-3">
         Questions about any of this? Call {contact.phone} or{" "}
         <Link href="/contact" className="text-tan-2 underline">send us a message</Link>.
       </p>

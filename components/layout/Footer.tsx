@@ -13,51 +13,51 @@ export function Footer({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 border-t border-line bg-ink text-cream/80">
+    <footer className="mt-20 border-t border-line bg-paper text-ink-2 lg:mt-28">
       <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo className="text-cream" showTagline />
-          <p className="mt-4 max-w-xs text-[0.88rem] leading-relaxed text-cream/60">
-            A furniture workshop in Kampala. We cut, joint and finish every piece by hand,
-            then deliver and install it ourselves.
+          <Logo showTagline />
+          <p className="mt-4 max-w-xs text-[0.88rem] leading-relaxed text-ink-3">
+            A workshop in Kawempe, Kampala. We cut, joint and finish every piece ourselves,
+            then deliver it &mdash; or measure your room, draw it, build it and fit it.
           </p>
         </div>
 
         <div>
-          <h3 className="mb-3 text-[0.8rem] uppercase tracking-[0.16em] text-cream/45">Shop</h3>
+          <h3 className="label-xs mb-4 text-muted">Furniture</h3>
           <ul className="space-y-2 text-[0.88rem]">
-            <li><Link href="/shop" className="transition hover:text-tan">All furniture</Link></li>
+            <li><Link href="/shop" className="transition hover:text-ink">All furniture</Link></li>
             {categories.slice(0, 6).map((c) => (
               <li key={c.slug}>
-                <Link href={`/c/${c.slug}`} className="transition hover:text-tan">{c.name}</Link>
+                <Link href={`/c/${c.slug}`} className="transition hover:text-ink">{c.name}</Link>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h3 className="mb-3 text-[0.8rem] uppercase tracking-[0.16em] text-cream/45">Workshop</h3>
+          <h3 className="label-xs mb-4 text-muted">Interiors</h3>
           <ul className="space-y-2 text-[0.88rem]">
             {[
               ["/design", "Interior design"],
               ["/design/enquire", "Book a site survey"],
-              ["/projects", "Our work"],
-              ["/about", "About us"],
+              ["/projects", "Installed work"],
+              ["/about", "About the workshop"],
               ["/orders/track", "Track an order"],
               ["/delivery", "Delivery & returns"],
               ["/contact", "Contact"],
             ].map(([href, label]) => (
-              <li key={href}><Link href={href} className="transition hover:text-tan">{label}</Link></li>
+              <li key={href}><Link href={href} className="transition hover:text-ink">{label}</Link></li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h3 className="mb-3 text-[0.8rem] uppercase tracking-[0.16em] text-cream/45">Reach us</h3>
+          <h3 className="label-xs mb-4 text-muted">Reach us</h3>
           <ul className="space-y-3 text-[0.88rem]">
             <li>
-              <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="flex items-center gap-2.5 transition hover:text-tan">
-                <Call size={17} className="shrink-0 text-tan" /> {contact.phone}
+              <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="flex items-center gap-2.5 transition hover:text-ink">
+                <Call size={17} className="shrink-0 text-muted" /> {contact.phone}
               </a>
             </li>
             {contact.whatsapp && (
@@ -65,23 +65,23 @@ export function Footer({
                 <a
                   href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`}
                   target="_blank" rel="noreferrer"
-                  className="flex items-center gap-2.5 transition hover:text-tan"
+                  className="flex items-center gap-2.5 transition hover:text-ink"
                 >
-                  <Whatsapp size={17} className="shrink-0 text-tan" /> WhatsApp
+                  <Whatsapp size={17} className="shrink-0 text-muted" /> WhatsApp
                 </a>
               </li>
             )}
             <li>
-              <a href={`mailto:${contact.email}`} className="flex items-center gap-2.5 transition hover:text-tan">
-                <Sms size={17} className="shrink-0 text-tan" /> {contact.email}
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-2.5 transition hover:text-ink">
+                <Sms size={17} className="shrink-0 text-muted" /> {contact.email}
               </a>
             </li>
             <li className="flex items-start gap-2.5">
-              <Location size={17} className="mt-0.5 shrink-0 text-tan" /> {contact.address}
+              <Location size={17} className="mt-0.5 shrink-0 text-muted" /> {contact.address}
             </li>
             {contact.hours?.length > 0 && (
               <li className="flex items-start gap-2.5">
-                <Clock size={17} className="mt-0.5 shrink-0 text-tan" />
+                <Clock size={17} className="mt-0.5 shrink-0 text-muted" />
                 <span>{contact.hours.map((h) => <span key={h} className="block">{h}</span>)}</span>
               </li>
             )}
@@ -89,12 +89,12 @@ export function Footer({
         </div>
       </div>
 
-      <div className="border-t border-cream/10">
-        <div className="container-page flex flex-col gap-3 py-5 text-[0.78rem] text-cream/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} UrbanCraft Furniture Workshop. All rights reserved.</p>
+      <div className="border-t border-line">
+        <div className="container-page flex flex-col gap-3 py-6 text-[0.82rem] text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} UrbanCraft &mdash; Furniture &amp; Interiors, Kampala</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="transition hover:text-cream">Privacy</Link>
-            <Link href="/terms" className="transition hover:text-cream">Terms</Link>
+            <Link href="/privacy" className="transition hover:text-ink">Privacy</Link>
+            <Link href="/terms" className="transition hover:text-ink">Terms</Link>
           </div>
         </div>
       </div>

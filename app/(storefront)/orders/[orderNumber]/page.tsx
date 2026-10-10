@@ -55,7 +55,7 @@ export default async function OrderPage({
     <div className="container-page max-w-3xl pt-8">
       {isNew && <ClearCartOnMount />}
 
-      <div className="rounded-2xl border border-line bg-paper p-6 sm:p-8">
+      <div className="rounded-[var(--radius-card)] border border-line bg-paper p-6 sm:p-8">
         {isNew && (
           <p className="mb-4 flex items-center gap-2 text-[0.88rem] font-medium text-success">
             <TickCircle size={18} variant="Bold" /> Order received
@@ -75,7 +75,7 @@ export default async function OrderPage({
         </div>
 
         {awaitingMomo && (
-          <div className="mt-5 rounded-xl border border-warn/30 bg-warn-soft p-4">
+          <div className="mt-5 rounded-[var(--radius-card)] border border-warn/30 bg-warn-soft p-4">
             <p className="flex items-center gap-2 font-medium text-warn">
               <Wallet3 size={18} /> Check your phone
             </p>
@@ -88,7 +88,7 @@ export default async function OrderPage({
         )}
 
         {order.paymentMethod === "BANK_DEPOSIT" && order.paymentStatus !== "PAID" && bank.accountNumber && (
-          <div className="mt-5 rounded-xl border border-line bg-sand p-4">
+          <div className="mt-5 rounded-[var(--radius-card)] border border-line bg-sand p-4">
             <p className="flex items-center gap-2 font-medium"><Bank size={18} className="text-tan" /> Bank deposit</p>
             <dl className="mt-3 space-y-1.5 text-[0.87rem]">
               {[["Bank", bank.bankName], ["Account name", bank.accountName],
@@ -110,7 +110,7 @@ export default async function OrderPage({
         )}
 
         {order.paymentMethod === "CASH_ON_DELIVERY" && (
-          <p className="mt-5 flex items-start gap-2.5 rounded-xl border border-line bg-sand p-4 text-[0.88rem] leading-relaxed">
+          <p className="mt-5 flex items-start gap-2.5 rounded-[var(--radius-card)] border border-line bg-sand p-4 text-[0.88rem] leading-relaxed">
             <Truck size={19} className="mt-0.5 shrink-0 text-tan" />
             Pay {formatUGX(order.total)} to our driver on delivery. We will call
             {" "}{formatPhone(order.contactPhone)} to arrange a time.
@@ -125,7 +125,7 @@ export default async function OrderPage({
               return (
                 <li key={step.key} className="flex flex-col items-center gap-1.5 text-center">
                   <span
-                    className={`grid size-7 place-items-center rounded-full text-[0.7rem] ${
+                    className={`grid size-7 place-items-center rounded-[var(--radius-card)] text-[0.7rem] ${
                       done ? "bg-tan text-white" : "bg-sand text-muted"
                     }`}
                   >
@@ -140,19 +140,19 @@ export default async function OrderPage({
           </ol>
         )}
         {cancelled && (
-          <p className="mt-6 rounded-xl bg-danger-soft px-4 py-3 text-[0.88rem] text-danger">
+          <p className="mt-6 rounded-[var(--radius-card)] bg-danger-soft px-4 py-3 text-[0.88rem] text-danger">
             This order was cancelled. Call us if that looks wrong.
           </p>
         )}
       </div>
 
       {/* ------------------------------------------------------------ items */}
-      <section className="mt-6 rounded-2xl border border-line bg-paper p-6 sm:p-8">
+      <section className="mt-6 rounded-[var(--radius-card)] border border-line bg-paper p-6 sm:p-8">
         <h2 className="font-display text-lg font-semibold">What you ordered</h2>
         <ul className="mt-4 divide-y divide-line">
           {order.items.map((item) => (
             <li key={item.id} className="flex gap-3 py-3">
-              <div className="relative size-16 shrink-0 overflow-hidden rounded-lg bg-sand">
+              <div className="relative size-16 shrink-0 overflow-hidden rounded-[var(--radius-card)] bg-sand">
                 {item.imageUrl && <Image src={item.imageUrl} alt="" fill sizes="64px" className="object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
@@ -191,7 +191,7 @@ export default async function OrderPage({
 
       {/* --------------------------------------------------------- delivery */}
       <section className="mt-6 grid gap-6 sm:grid-cols-2">
-        <div className="rounded-2xl border border-line bg-paper p-6">
+        <div className="rounded-[var(--radius-card)] border border-line bg-paper p-6">
           <h2 className="font-display text-base font-semibold">Delivering to</h2>
           <address className="mt-2 space-y-0.5 text-[0.88rem] not-italic leading-relaxed text-ink-3">
             <p className="font-medium text-ink">{order.contactName}</p>
@@ -202,18 +202,18 @@ export default async function OrderPage({
             <p>{order.deliveryDistrict}</p>
           </address>
           {order.customerNote && (
-            <p className="mt-3 rounded-lg bg-sand p-3 text-[0.83rem] leading-relaxed text-ink-3">
+            <p className="mt-3 rounded-[var(--radius-card)] bg-sand p-3 text-[0.83rem] leading-relaxed text-ink-3">
               “{order.customerNote}”
             </p>
           )}
         </div>
 
-        <div className="rounded-2xl border border-line bg-paper p-6">
+        <div className="rounded-[var(--radius-card)] border border-line bg-paper p-6">
           <h2 className="font-display text-base font-semibold">Progress</h2>
           <ol className="mt-3 space-y-3">
             {order.events.map((event) => (
               <li key={event.id} className="flex gap-3">
-                <span className="mt-1.5 size-2 shrink-0 rounded-full bg-tan" />
+                <span className="mt-1.5 size-2 shrink-0 rounded-[var(--radius-card)] bg-tan" />
                 <div className="min-w-0">
                   <p className="text-[0.86rem] font-medium">{event.label}</p>
                   {event.detail && <p className="text-[0.8rem] text-muted">{event.detail}</p>}
@@ -229,7 +229,7 @@ export default async function OrderPage({
         <ButtonLink href="/shop" variant="outline">Continue shopping</ButtonLink>
         <a
           href={`tel:${contact.phone.replace(/\s/g, "")}`}
-          className="inline-flex h-11 items-center gap-2 rounded-full px-5 text-[0.9rem] font-medium text-tan-2 hover:underline"
+          className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-card)] px-5 text-[0.9rem] font-medium text-tan-2 hover:underline"
         >
           <Call size={17} /> Call us about this order
         </a>

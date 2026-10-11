@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Award, Ruler, ShieldTick, Truck, Whatsapp } from "iconsax-reactjs";
+import { ArrowRight2, Award, Ruler, ShieldTick, Truck } from "iconsax-reactjs";
 import { ButtonLink } from "@/components/ui/Button";
 import { prisma } from "@/lib/db";
+import { FOUNDER } from "@/lib/founder";
 import { DEFAULT_OG_PATH, ogImageMeta } from "@/lib/og";
 import { getSetting, type ContactSettings } from "@/lib/settings";
 
 export const revalidate = 3600;
-
-const FOUNDER = {
-  name: "David Collins Kibirige",
-  role: "Founder and lead designer",
-  photo: "/brand/founder-david-collins-kibirige.webp",
-  blur:
-    "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoMABAAAwBSJaQAAlmI6mG8g9+AAP7uH+6F5YUfLEKKBvzdt93MZKgvY30gTmgdTc/cCRitPurNBe/TR6gfZ7jCrq3DLgAA",
-} as const;
 
 export const metadata: Metadata = {
   title: "About Urbancraft",
@@ -41,8 +34,6 @@ export default async function AboutPage() {
     }),
     prisma.product.count({ where: { status: "ACTIVE" } }),
   ]);
-
-  const whatsapp = contact.whatsapp?.replace(/\D/g, "");
 
   return (
     <div className="container-page pt-12 lg:pt-20">
@@ -100,55 +91,33 @@ export default async function AboutPage() {
         </div>
       )}
 
-      {/* ----------------------------------------------------------- the founder */}
       <section className="mt-16 border-t border-line pt-12 lg:mt-24 lg:pt-16">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-card)] bg-sand">
+        <div className="flex flex-wrap items-center gap-8">
+          <Link
+            href="/founder"
+            className="group relative size-24 shrink-0 overflow-hidden rounded-full bg-sand"
+            aria-label={`Meet ${FOUNDER.name}, ${FOUNDER.role.toLowerCase()}`}
+          >
             <Image
               src={FOUNDER.photo}
-              alt={`${FOUNDER.name}, ${FOUNDER.role.toLowerCase()} at Urbancraft`}
+              alt=""
               fill
-              sizes="(min-width:1024px) 34vw, 92vw"
+              sizes="96px"
               placeholder="blur"
               blurDataURL={FOUNDER.blur}
-              className="object-cover"
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
-          </div>
-
-          <div className="lg:pt-4">
-            <h2 className="text-[clamp(1.5rem,3.4vw,2.2rem)] font-medium leading-[1.1] tracking-[-0.02em]">
-              Meet the founder
-            </h2>
-            <p className="mt-2 text-[1.05rem] font-medium">{FOUNDER.name}</p>
-            <p className="label-xs mt-1 text-muted">{FOUNDER.role}</p>
-
-            <div className="mt-6 max-w-[58ch] space-y-4 text-[0.98rem] leading-relaxed text-ink-2">
-              <p>
-                I started Urbancraft with a simple belief: Ugandan homes deserve high-quality,
-                custom furniture that fits perfectly and lasts for years &mdash; without the cost
-                of importing it.
-              </p>
-              <p>
-                At my workshop in Kansanga, Kitalanga, I personally supervise every project, so
-                every sofa, door, floor and interior detail is done right.
-              </p>
-              <p>
-                When you choose Urbancraft you work directly with me and my team. No middlemen, no
-                shortcuts &mdash; just honest work and beautiful results.
-              </p>
-            </div>
-
-            {whatsapp && (
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-7 inline-flex h-12 items-center gap-2.5 rounded-[var(--radius-card)] bg-accent px-7 text-[0.92rem] font-medium text-white transition hover:bg-accent-2"
-              >
-                <Whatsapp size={19} />
-                Chat with David on WhatsApp
-              </a>
-            )}
+          </Link>
+          <div className="min-w-0">
+            <p className="text-[1.05rem] leading-relaxed text-ink-2">
+              Urbancraft is run by {FOUNDER.name}, who supervises every project himself.
+            </p>
+            <Link
+              href="/founder"
+              className="mt-2 inline-flex items-center gap-2 border-b border-ink pb-1 text-[0.95rem] font-medium transition hover:gap-3"
+            >
+              Meet the founder <ArrowRight2 size={15} />
+            </Link>
           </div>
         </div>
       </section>

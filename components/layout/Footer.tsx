@@ -43,6 +43,7 @@ export function Footer({
               ["/design/enquire", "Book a site survey"],
               ["/projects", "Installed work"],
               ["/about", "About the workshop"],
+              ["/founder", "Meet the founder"],
               ["/orders/track", "Track an order"],
               ["/delivery", "Delivery & returns"],
               ["/contact", "Contact"],

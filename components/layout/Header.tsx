@@ -301,6 +301,7 @@ export function Header({
                 {[
                   ["/projects", "Our work"],
                   ["/about", "About the workshop"],
+                  ["/founder", "Meet the founder"],
                   ["/orders/track", "Track an order"],
                   ["/account", "Your account"],
                   ["/delivery", "Delivery & returns"],

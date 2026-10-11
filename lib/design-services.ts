@@ -68,6 +68,14 @@ export const DESIGN_SERVICES = [
       "Counters, back-bars and display joinery for spaces that take daily punishment. Built to carry weight, take knocks and still look considered at the end of a trading year.",
   },
   {
+    slug: "floor-decking",
+    name: "Floor Decking",
+    kind: "FITOUT",
+    tagline: "Indoor and outdoor, laid to fall",
+    description:
+      "Timber decking inside and out, laid on a frame that is set out before the first board goes down. Outdoor runs are given a fall so water leaves them, and finished for sun and rain rather than for a showroom floor.",
+  },
+  {
     slug: "outdoor",
     name: "Outdoor Bars & Garden Structures",
     kind: "FITOUT",

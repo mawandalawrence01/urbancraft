@@ -13,7 +13,14 @@ export function OrganizationJsonLd({
       {
         "@type": ["FurnitureStore", "Organization"],
         "@id": `${siteUrl}/#organization`,
-        name: "UrbanCraft Furniture Workshop",
+        name: "Urbancraft Furniture and Interior Designing",
+        alternateName: "UrbanCraft",
+        founder: {
+          "@type": "Person",
+          name: "David Collins Kibirige",
+          jobTitle: "Founder and lead designer",
+          image: `${siteUrl}/brand/founder-david-collins-kibirige.webp`,
+        },
         url: siteUrl,
         telephone: contact.phone,
         email: contact.email,
@@ -28,6 +35,12 @@ export function OrganizationJsonLd({
           addressLocality: "Kampala",
           addressCountry: "UG",
         },
+        knowsAbout: [
+          "Furniture making",
+          "Doors and door frames",
+          "Floor decking",
+          "Interior design and fit-out",
+        ],
         openingHours: contact.hours,
       },
       {

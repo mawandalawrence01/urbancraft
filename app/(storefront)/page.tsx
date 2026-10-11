@@ -54,12 +54,13 @@ export default async function HomePage() {
     <>
       {/* ===================================================== the two paths */}
       <section className="container-page pt-12 lg:pt-20">
-        <h1 className="max-w-[22ch] text-[clamp(2.1rem,5.2vw,3.9rem)] font-medium leading-[1.04] tracking-[-0.025em]">
-          We build the piece, and we build the room.
+        <h1 className="max-w-[20ch] text-[clamp(2.1rem,5.2vw,3.9rem)] font-medium leading-[1.04] tracking-[-0.025em]">
+          Beautiful spaces. Furniture built to last.
         </h1>
-        <p className="mt-5 max-w-[56ch] text-[1.02rem] leading-relaxed text-ink-2">
-          A workshop in Kansanga, Kampala. Buy a finished piece from the catalogue, or have us
-          measure, draw, build and fit an entire space.
+        <p className="mt-5 max-w-[60ch] text-[1.02rem] leading-relaxed text-ink-2">
+          We design, build and install all furniture, doors and frames, floor decking and complete
+          interior solutions &mdash; custom-made in Kansanga, Kitalanga for homes, offices and
+          hotels across Kampala.
         </p>
       </section>
 

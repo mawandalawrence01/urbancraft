@@ -53,3 +53,7 @@ next-env.d.ts
 
 # Prisma client is generated during the build, not committed
 /lib/generated
+
+# Raw photo drops; optimised assets live in public/
+IMG-*WA*.jpg*
+IMG-*WA*.jpeg

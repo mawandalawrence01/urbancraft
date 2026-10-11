@@ -74,7 +74,10 @@ export function Header({
         </div>
       )}
 
-      <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
+      <header
+        className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md"
+        onMouseLeave={() => setOpenTrade(null)}
+      >
         <div className="container-page flex h-[4.25rem] items-center gap-6 lg:h-20">
           <button
             type="button"
@@ -91,90 +94,32 @@ export function Header({
 
           {/* ------------------------------------------------- the two trades */}
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Trades">
-            <div
-              className="relative"
+            <Link
+              href="/shop"
+              className={trade(onShop)}
               onMouseEnter={() => setOpenTrade("furniture")}
-              onMouseLeave={() => setOpenTrade(null)}
+              onFocus={() => setOpenTrade("furniture")}
             >
-              <Link href="/shop" className={trade(onShop)}>
-                Furniture
-                {categories.length > 0 && <ArrowDown2 size={13} />}
-              </Link>
+              Furniture
+              {categories.length > 0 && <ArrowDown2 size={13} />}
+            </Link>
 
-              {openTrade === "furniture" && categories.length > 0 && (
-                <div className="absolute left-1/2 top-full z-50 w-[min(46rem,88vw)] -translate-x-1/2 pt-4">
-                  <div className="animate-fade-in rounded-[var(--radius-card)] border border-line bg-paper p-6 shadow-[0_24px_60px_-32px_rgba(26,26,24,0.35)]">
-                    <div className="grid grid-cols-3 gap-x-8 gap-y-1">
-                      {categories.map((room) => (
-                        <Link
-                          key={room.slug}
-                          href={`/c/${room.slug}`}
-                          className="flex items-baseline justify-between gap-3 rounded-[2px] px-2 py-2 text-[0.9rem] text-ink-2 transition hover:bg-sand hover:text-ink"
-                        >
-                          {room.name}
-                          <span className="figure-num text-[0.75rem] text-muted">
-                            {room.children.reduce((n, c) => n + c.count, 0)}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                    <Link
-                      href="/shop"
-                      className="mt-4 inline-block border-b border-ink pb-0.5 text-[0.85rem] text-ink"
-                    >
-                      All furniture
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div
-              className="relative"
+            <Link
+              href="/design"
+              className={trade(onDesign)}
               onMouseEnter={() => setOpenTrade("interiors")}
-              onMouseLeave={() => setOpenTrade(null)}
+              onFocus={() => setOpenTrade("interiors")}
             >
-              <Link href="/design" className={trade(onDesign)}>
-                Interiors
-                <ArrowDown2 size={13} />
-              </Link>
+              Interiors
+              <ArrowDown2 size={13} />
+            </Link>
 
-              {openTrade === "interiors" && (
-                <div className="absolute left-1/2 top-full z-50 w-[min(46rem,88vw)] -translate-x-1/2 pt-4">
-                  <div className="animate-fade-in rounded-[var(--radius-card)] border border-line bg-paper p-6 shadow-[0_24px_60px_-32px_rgba(26,26,24,0.35)]">
-                    {services.length > 0 ? (
-                      <div className="grid grid-cols-3 gap-x-8 gap-y-1">
-                        {services.map((s) => (
-                          <Link
-                            key={s.slug}
-                            href={`/design/${s.slug}`}
-                            className="flex items-baseline justify-between gap-3 rounded-[2px] px-2 py-2 text-[0.9rem] text-ink-2 transition hover:bg-sand hover:text-ink"
-                          >
-                            {s.name}
-                            {s.count > 0 && (
-                              <span className="figure-num text-[0.75rem] text-muted">{s.count}</span>
-                            )}
-                          </Link>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="px-2 py-2 text-[0.88rem] text-ink-3">
-                        Galleries are being photographed. Call the workshop and we will walk you
-                        through recent installations.
-                      </p>
-                    )}
-                    <Link
-                      href="/design/enquire"
-                      className="mt-4 inline-block border-b border-accent pb-0.5 text-[0.85rem] text-accent"
-                    >
-                      Book a site survey
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <Link href="/projects" className={trade(pathname.startsWith("/projects"))}>
+            <Link
+              href="/projects"
+              className={trade(pathname.startsWith("/projects"))}
+              onMouseEnter={() => setOpenTrade(null)}
+              onFocus={() => setOpenTrade(null)}
+            >
               Our work
             </Link>
           </nav>
@@ -221,6 +166,74 @@ export function Header({
             </Link>
           </div>
         </div>
+
+        {/* One panel for both trades, spanning the page container rather than
+            hanging off the trigger: a 46rem sheet centred under "Furniture"
+            ran straight off the left edge of the window. */}
+        {openTrade && (
+          <div className="absolute inset-x-0 top-full hidden border-b border-line bg-paper shadow-[0_24px_60px_-40px_rgba(26,26,24,0.4)] lg:block">
+            <div className="container-page animate-fade-in py-7">
+              {openTrade === "furniture" ? (
+                categories.length > 0 && (
+                  <>
+                    <div className="grid grid-cols-3 gap-x-10 gap-y-1 xl:grid-cols-4">
+                      {categories.map((room) => (
+                        <Link
+                          key={room.slug}
+                          href={`/c/${room.slug}`}
+                          className="flex items-baseline justify-between gap-4 rounded-[2px] px-2 py-2.5 text-[0.92rem] text-ink-2 transition hover:bg-sand hover:text-ink"
+                        >
+                          <span>{room.name}</span>
+                          <span className="figure-num shrink-0 text-[0.78rem] text-muted">
+                            {room.children.reduce((n, c) => n + c.count, 0)}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                    <Link
+                      href="/shop"
+                      className="mt-5 inline-block border-b border-ink pb-0.5 text-[0.88rem] text-ink"
+                    >
+                      All furniture
+                    </Link>
+                  </>
+                )
+              ) : (
+                <>
+                  {services.length > 0 ? (
+                    <div className="grid grid-cols-3 gap-x-10 gap-y-1 xl:grid-cols-4">
+                      {services.map((sv) => (
+                        <Link
+                          key={sv.slug}
+                          href={`/design/${sv.slug}`}
+                          className="flex items-baseline justify-between gap-4 rounded-[2px] px-2 py-2.5 text-[0.92rem] text-ink-2 transition hover:bg-sand hover:text-ink"
+                        >
+                          <span>{sv.name}</span>
+                          {sv.count > 0 && (
+                            <span className="figure-num shrink-0 text-[0.78rem] text-muted">
+                              {sv.count}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="px-2 text-[0.9rem] text-ink-3">
+                      Galleries are being photographed. Call the workshop and we will walk you
+                      through recent installations.
+                    </p>
+                  )}
+                  <Link
+                    href="/design/enquire"
+                    className="mt-5 inline-block border-b border-accent pb-0.5 text-[0.88rem] text-accent"
+                  >
+                    Book a site survey
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ---------------------------------------------------- mobile drawer */}

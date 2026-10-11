@@ -2,6 +2,12 @@
 import { chromium } from "playwright";
 import { mkdir } from "node:fs/promises";
 
+// Never a literal: this file is in a public repository.
+const adminPassword = process.env.ADMIN_PASSWORD;
+if (!adminPassword) {
+  throw new Error("ADMIN_PASSWORD is not set; the admin walkthrough cannot sign in without it.");
+}
+
 const OUT = process.env.SHOT_DIR ?? "tmp";
 await mkdir(OUT, { recursive: true });
 
@@ -24,7 +30,7 @@ try {
     page.url().includes("/admin/login") ? "PASS" : `FAIL (${page.url()})`);
 
   await page.fill("input[name='email']", "admin@urbancraft.co.ug");
-  await page.fill("input[name='password']", "urbancraft2026");
+  await page.fill("input[name='password']", adminPassword);
   // Wait for the redirect to actually land — /admin/login also matches /admin
   await Promise.all([
     page.waitForNavigation({ waitUntil: "networkidle", timeout: 30_000 }),

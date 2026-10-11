@@ -76,7 +76,7 @@ export function AdminNav({
       <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-line bg-cream px-4 py-3 lg:hidden">
         <button
           type="button" onClick={() => setOpen(true)}
-          className="-ml-1 grid size-10 place-items-center rounded-full"
+          className="-ml-1 grid size-11 place-items-center rounded-full"
           aria-label="Open admin menu"
         >
           <Menu size={22} />

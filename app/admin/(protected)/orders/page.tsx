@@ -74,7 +74,7 @@ export default async function AdminOrdersPage({ searchParams }: { searchParams: 
             <option key={s} value={s}>{s.replace(/_/g, " ").toLowerCase()}</option>
           ))}
         </select>
-        <button type="submit" className="rounded-xl bg-ink px-5 text-[0.88rem] font-medium text-cream">
+        <button type="submit" className="h-11 shrink-0 rounded-xl bg-ink px-5 text-[0.88rem] font-medium text-cream sm:h-auto sm:py-2.5">
           Filter
         </button>
       </form>

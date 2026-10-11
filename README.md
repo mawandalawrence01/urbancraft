@@ -19,9 +19,12 @@ npm run dev
 
 The site runs at `http://localhost:3000`, the back office at `/admin`.
 
-Seeded admin credentials are `admin@urbancraft.co.ug` / `urbancraft2026`.
-**Change these before going live** — set `ADMIN_EMAIL` and `ADMIN_PASSWORD` and re-run the seed,
-or update the row in the `AdminUser` table.
+The seed will not create an admin without `ADMIN_PASSWORD`; there is no default,
+because this repository is public and a committed password is a published one.
+
+```bash
+ADMIN_EMAIL='you@urbancraft.co.ug' ADMIN_PASSWORD='<choose one>' npm run db:seed
+```
 
 ---
 

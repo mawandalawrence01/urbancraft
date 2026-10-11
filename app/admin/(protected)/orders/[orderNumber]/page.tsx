@@ -45,7 +45,7 @@ export default async function AdminOrderPage({ params }: { params: Params }) {
 
   return (
     <>
-      <Link href="/admin/orders" className="mb-4 inline-flex items-center gap-1.5 text-[0.85rem] text-muted hover:text-ink no-print">
+      <Link href="/admin/orders" className="mb-4 inline-flex items-center gap-1.5 py-2.5 text-[0.85rem] text-muted hover:text-ink no-print">
         <ArrowLeft2 size={14} /> All orders
       </Link>
 
@@ -56,20 +56,20 @@ export default async function AdminOrderPage({ params }: { params: Params }) {
           <div className="flex flex-wrap gap-2 no-print">
             <a
               href={`tel:${order.contactPhone}`}
-              className="inline-flex h-9 items-center gap-2 rounded-full border border-line px-4 text-[0.85rem] font-medium transition hover:border-ink"
+              className="inline-flex h-11 items-center sm:h-9 gap-2 rounded-full border border-line px-4 text-[0.85rem] font-medium transition hover:border-ink"
             >
               <Call size={15} className="text-tan" /> Call
             </a>
             <a
               href={`https://wa.me/${order.contactPhone}?text=${waText}`}
               target="_blank" rel="noreferrer"
-              className="inline-flex h-9 items-center gap-2 rounded-full border border-line px-4 text-[0.85rem] font-medium transition hover:border-ink"
+              className="inline-flex h-11 items-center sm:h-9 gap-2 rounded-full border border-line px-4 text-[0.85rem] font-medium transition hover:border-ink"
             >
               <Whatsapp size={15} className="text-success" /> WhatsApp
             </a>
             <Link
               href={`/orders/${order.orderNumber}`} target="_blank"
-              className="inline-flex h-9 items-center gap-2 rounded-full border border-line px-4 text-[0.85rem] font-medium transition hover:border-ink"
+              className="inline-flex h-11 items-center sm:h-9 gap-2 rounded-full border border-line px-4 text-[0.85rem] font-medium transition hover:border-ink"
             >
               <Printer size={15} /> Customer view
             </Link>

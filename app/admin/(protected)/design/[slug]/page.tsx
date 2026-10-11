@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft2, TickCircle, Gallery, Warning2, Eye, EyeSlash } from "iconsax-reactjs";
 
+import { SortableShot } from "@/components/admin/SortableShot";
 import { Card, PageHeader } from "@/components/admin/ui";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -36,7 +36,7 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
     <>
       <Link
         href="/admin/design"
-        className="mb-4 inline-flex items-center gap-1.5 text-[0.85rem] text-muted transition hover:text-ink"
+        className="mb-4 inline-flex items-center gap-1.5 py-2.5 text-[0.85rem] text-muted transition hover:text-ink"
       >
         <ArrowLeft2 size={15} /> Interior design
       </Link>
@@ -49,7 +49,7 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
             {own.length > 0 && (
               <Link
                 href={`/design/${service.slug}`}
-                className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line bg-paper px-4 text-[0.8rem] font-medium"
+                className="inline-flex h-11 items-center sm:h-9 gap-1.5 rounded-full border border-line bg-paper px-4 text-[0.8rem] font-medium"
               >
                 <Gallery size={14} /> View gallery
               </Link>
@@ -95,20 +95,24 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
         </div>
       )}
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {service.images.map((img) => (
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
+        {service.images.map((img, i) => (
           <Card key={img.id} className="overflow-hidden">
             <div className="relative aspect-[4/5] bg-sand">
-              <Image
-                src={img.url}
-                alt=""
-                fill
-                sizes="(min-width:1280px) 23vw, (min-width:640px) 45vw, 90vw"
-                placeholder={img.blurDataUrl ? "blur" : "empty"}
-                blurDataURL={img.blurDataUrl ?? undefined}
-                className="object-cover"
+              <SortableShot
+                images={service.images.map((im) => ({
+                  url: im.url,
+                  alt: im.caption ?? service.name,
+                  width: im.width,
+                  height: im.height,
+                  blurDataUrl: im.blurDataUrl,
+                  caption: im.reviewNote ?? im.caption,
+                }))}
+                index={i}
+                alt={img.caption ?? service.name}
+                label={service.name}
               />
-              <span className="absolute left-2 top-2 flex flex-wrap gap-1">
+              <span className="pointer-events-none absolute left-2 top-2 flex flex-wrap gap-1">
                 {img.needsReview && <Badge tone="danger">Watermark</Badge>}
                 {img.origin === "OWN_WORK" && <Badge tone="success">Live</Badge>}
                 {img.origin === "REFERENCE" && <Badge>Reference</Badge>}

@@ -112,9 +112,10 @@ export default async function SettingsPage({ searchParams }: { searchParams: Sea
 
           <Card className="space-y-4 p-5">
             <h2 className="font-display font-semibold">Announcement bar</h2>
-            <label className="flex items-center gap-2.5 text-[0.88rem]">
+            {/* The whole row is the target: a 16px box is not thumb-sized. */}
+            <label className="-mx-2 flex min-h-11 cursor-pointer items-center gap-3 px-2 text-[0.88rem]">
               <input type="checkbox" name="announcementEnabled" defaultChecked={announcement.enabled}
-                     className="size-4 accent-[var(--color-tan)]" />
+                     className="size-5 shrink-0 accent-[var(--color-accent)]" />
               Show the bar at the top of every page
             </label>
             <Field label="Message">

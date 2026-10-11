@@ -77,7 +77,7 @@ export default async function ImageReviewPage() {
               <div className="p-4">
                 <Link
                   href={`/admin/products/${img.product.id}`}
-                  className="line-clamp-2 text-[0.88rem] font-medium hover:underline"
+                  className="line-clamp-2 flex min-h-11 items-center text-[0.88rem] font-medium hover:underline"
                 >
                   {img.product.name}
                 </Link>
@@ -88,7 +88,7 @@ export default async function ImageReviewPage() {
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Link
                     href={`/admin/products/${img.product.id}`}
-                    className="inline-flex h-9 items-center gap-1.5 rounded-full bg-ink px-4 text-[0.8rem] font-medium text-cream"
+                    className="inline-flex h-11 items-center sm:h-9 gap-1.5 rounded-full bg-ink px-4 text-[0.8rem] font-medium text-cream"
                   >
                     Replace <ExportSquare size={13} />
                   </Link>

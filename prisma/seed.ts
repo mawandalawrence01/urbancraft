@@ -252,7 +252,16 @@ async function main() {
 
   // ---------------------------------------------------------- admin
   const email = process.env.ADMIN_EMAIL ?? "admin@urbancraft.co.ug";
-  const password = process.env.ADMIN_PASSWORD ?? "urbancraft2026";
+  // No default. A password committed here is a password on the public
+  // internet: this repository is public, and the previous default was live
+  // on production for weeks before anyone noticed.
+  const password = process.env.ADMIN_PASSWORD;
+  if (!password) {
+    throw new Error(
+      "ADMIN_PASSWORD is not set. Choose one and pass it in rather than seeding a known password:\n" +
+      "  ADMIN_PASSWORD='...' npm run db:seed",
+    );
+  }
   await prisma.adminUser.upsert({
     where: { email },
     create: { email, name: "Workshop Admin", passwordHash: await bcrypt.hash(password, 10), role: "OWNER" },

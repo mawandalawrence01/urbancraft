@@ -75,4 +75,6 @@ export function Field({
 }
 
 export const inputClass =
-  "w-full rounded-xl border border-line bg-cream px-3.5 py-2.5 text-[0.9rem] outline-none transition focus:border-tan";
+  // min-h-11 is the comfortable tap target on a phone; the admin is run from
+  // one. Font size stays >=16px below sm so iOS does not zoom the page on focus.
+  "w-full min-h-11 rounded-xl border border-line bg-cream px-3.5 py-2.5 text-base outline-none transition focus:border-tan sm:min-h-0 sm:text-[0.9rem]";

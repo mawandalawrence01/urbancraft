@@ -53,7 +53,7 @@ export default async function EnquiriesPage({ searchParams }: { searchParams: Se
             key={label}
             href={value ? `/admin/enquiries?kind=${value}` : "/admin/enquiries"}
             className={cn(
-              "inline-flex h-9 items-center gap-1.5 rounded-full border px-4 text-[0.82rem] transition",
+              "inline-flex h-11 items-center sm:h-9 gap-1.5 rounded-full border px-4 text-[0.82rem] transition",
               (filter ?? "") === value
                 ? "border-ink bg-ink text-cream"
                 : "border-line bg-paper hover:border-ink",

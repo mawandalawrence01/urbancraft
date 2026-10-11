@@ -15,7 +15,9 @@ const variants = {
 } as const;
 
 const sizes = {
-  sm: "h-9 px-4 text-sm",
+  // 44px is Apple's minimum comfortable tap target, and the admin is run from
+  // an iPhone; the old 36px was a mouse size.
+  sm: "h-11 px-4 text-sm sm:h-9",
   md: "h-11 px-5 text-[0.9rem]",
   lg: "h-13 px-7 text-base",
 } as const;

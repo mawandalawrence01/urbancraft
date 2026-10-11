@@ -100,7 +100,7 @@ export default async function AdminDashboard() {
         <Card className="overflow-hidden">
           <div className="flex items-center justify-between border-b border-line px-5 py-4">
             <h2 className="font-display font-semibold">Recent orders</h2>
-            <Link href="/admin/orders" className="flex items-center gap-1 text-[0.83rem] text-tan-2 hover:underline">
+            <Link href="/admin/orders" className="flex items-center gap-1 py-2.5 text-[0.83rem] text-tan-2 hover:underline">
               All orders <ArrowRight2 size={13} />
             </Link>
           </div>

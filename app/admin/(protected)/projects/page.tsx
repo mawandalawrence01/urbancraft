@@ -73,20 +73,20 @@ export default async function AdminProjectsPage() {
                   </form>
                   <Link
                     href={`/projects/${p.slug}`} target="_blank"
-                    className="grid size-8 place-items-center rounded-lg text-muted hover:bg-sand"
+                    className="grid size-11 sm:size-8 place-items-center rounded-lg text-muted hover:bg-sand"
                     aria-label="View on site"
                   >
                     <Eye size={15} />
                   </Link>
                   <form action={move.bind(null, p.id, "up")}>
                     <button type="submit" disabled={i === 0} aria-label="Move up"
-                            className="grid size-8 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
+                            className="grid size-11 sm:size-8 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
                       <ArrowUp2 size={14} />
                     </button>
                   </form>
                   <form action={move.bind(null, p.id, "down")}>
                     <button type="submit" disabled={i === projects.length - 1} aria-label="Move down"
-                            className="grid size-8 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
+                            className="grid size-11 sm:size-8 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
                       <ArrowDown2 size={14} />
                     </button>
                   </form>

@@ -71,7 +71,7 @@ export default async function EditProductPage({
 
   return (
     <>
-      <Link href="/admin/products" className="mb-4 inline-flex items-center gap-1.5 text-[0.85rem] text-muted hover:text-ink">
+      <Link href="/admin/products" className="mb-4 inline-flex items-center gap-1.5 py-2.5 text-[0.85rem] text-muted hover:text-ink">
         <ArrowLeft2 size={14} /> All products
       </Link>
       <h1 className="mb-5 text-2xl font-semibold">{product.name}</h1>

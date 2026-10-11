@@ -88,7 +88,7 @@ export default async function CategoriesPage() {
         <div className="space-y-3">
           {rooms.map((room, roomIndex) => (
             <Card key={room.id} className="overflow-hidden">
-              <div className="flex items-center gap-3 border-b border-line px-4 py-3">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line px-4 py-3">
                 <div className="min-w-0 flex-1">
                   <p className="flex items-center gap-2 font-display font-semibold">
                     {room.name}
@@ -101,13 +101,13 @@ export default async function CategoriesPage() {
                 <div className="flex shrink-0 gap-0.5">
                   <form action={moveCategory.bind(null, room.id, "up")}>
                     <button type="submit" disabled={roomIndex === 0} aria-label="Move up"
-                            className="grid size-8 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
+                            className="grid size-11 shrink-0 place-items-center rounded-lg hover:bg-sand disabled:opacity-25 sm:size-8">
                       <ArrowUp2 size={14} />
                     </button>
                   </form>
                   <form action={moveCategory.bind(null, room.id, "down")}>
                     <button type="submit" disabled={roomIndex === rooms.length - 1} aria-label="Move down"
-                            className="grid size-8 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
+                            className="grid size-11 shrink-0 place-items-center rounded-lg hover:bg-sand disabled:opacity-25 sm:size-8">
                       <ArrowDown2 size={14} />
                     </button>
                   </form>
@@ -116,7 +116,7 @@ export default async function CategoriesPage() {
 
               <ul className="divide-y divide-line-2">
                 {room.children.map((child, i) => (
-                  <li key={child.id} className="flex items-center gap-3 px-4 py-2.5">
+                  <li key={child.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2">
                     <div className="min-w-0 flex-1">
                       <p className="flex items-center gap-2 text-[0.88rem]">
                         {child.name}
@@ -129,19 +129,19 @@ export default async function CategoriesPage() {
                     <div className="flex shrink-0 gap-0.5">
                       <form action={moveCategory.bind(null, child.id, "up")}>
                         <button type="submit" disabled={i === 0} aria-label="Move up"
-                                className="grid size-7 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
+                                className="grid size-11 shrink-0 place-items-center rounded-lg hover:bg-sand disabled:opacity-25 sm:size-7">
                           <ArrowUp2 size={13} />
                         </button>
                       </form>
                       <form action={moveCategory.bind(null, child.id, "down")}>
                         <button type="submit" disabled={i === room.children.length - 1} aria-label="Move down"
-                                className="grid size-7 place-items-center rounded-lg hover:bg-sand disabled:opacity-25">
+                                className="grid size-11 shrink-0 place-items-center rounded-lg hover:bg-sand disabled:opacity-25 sm:size-7">
                           <ArrowDown2 size={13} />
                         </button>
                       </form>
                       <Link
                         href={`/c/${child.slug}`} target="_blank"
-                        className="grid size-7 place-items-center rounded-lg text-[0.7rem] text-tan-2 hover:bg-sand"
+                        className="grid size-11 shrink-0 place-items-center rounded-lg text-[0.7rem] text-tan-2 hover:bg-sand sm:size-7"
                       >
                         ↗
                       </Link>

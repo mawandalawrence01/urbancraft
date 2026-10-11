@@ -2995,54 +2995,6 @@
    ]
   },
   {
-   "sourceId": 338,
-   "slug": "monaco-bunk-bed",
-   "name": "Monaco bunk bed",
-   "price": 2400000,
-   "compareAt": null,
-   "sku": "BFU KF 12",
-   "parent": "kids-nursery",
-   "child": "baby-cradles",
-   "allCategories": [
-    "baby-cradles",
-    "baby-cots",
-    "kids-storage",
-    "kids-beds",
-    "nursery",
-    "beds"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2021/12/Monacobunkbed.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Monaco bunk bed is made to order in our Kampala workshop, for the children's room."
-    ],
-    [
-     "p",
-     "Balanced to rock evenly and stop on its own, in a finish that is safe for a baby who will inevitably chew the rail."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "baby-cots",
-    "baby-cradle",
-    "bedroom",
-    "beds",
-    "kids-beds",
-    "kids-furniture",
-    "kids-storage",
-    "nursery-furniture"
-   ]
-  },
-  {
    "sourceId": 221,
    "slug": "mario-white-orange-decker",
    "name": "Mario White & Orange Decker",
@@ -3172,94 +3124,6 @@
     "kids-beds",
     "baby-cots",
     "baby-cradle",
-    "nursery-furniture"
-   ]
-  },
-  {
-   "sourceId": 3093,
-   "slug": "triplet-3-in-1-bed-available-on-order",
-   "name": "Triplet 3 in 1 Bed",
-   "price": 899000,
-   "compareAt": null,
-   "sku": "BFU KF 16",
-   "parent": "kids-nursery",
-   "child": "baby-cradles",
-   "allCategories": [
-    "baby-cradles",
-    "baby-cots",
-    "kids-beds",
-    "nursery"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/Triplet3in1bed.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Triplet 3 in 1 Bed is made to order in our Kampala workshop, for the children's room."
-    ],
-    [
-     "p",
-     "Balanced to rock evenly and stop on its own, in a finish that is safe for a baby who will inevitably chew the rail."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "baby-cots",
-    "baby-cradle",
-    "kids-beds",
-    "kids-furniture",
-    "nursery-furniture"
-   ]
-  },
-  {
-   "sourceId": 3313,
-   "slug": "bunk-bed-with-2-beds-drawers",
-   "name": "Bunk bed with 2 beds & Drawers",
-   "price": 850000,
-   "compareAt": null,
-   "sku": "BFU KF 02",
-   "parent": "kids-nursery",
-   "child": "baby-cradles",
-   "allCategories": [
-    "baby-cradles",
-    "baby-cots",
-    "kids-storage",
-    "kids-beds",
-    "nursery"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/BFU-KF-003.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Bunk bed with 2 beds & Drawers is made to order in our Kampala workshop, for the children's room."
-    ],
-    [
-     "p",
-     "Balanced to rock evenly and stop on its own, in a finish that is safe for a baby who will inevitably chew the rail."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "baby-cots",
-    "baby-cradle",
-    "kids-beds",
-    "kids-furniture",
-    "kids-storage",
     "nursery-furniture"
    ]
   },
@@ -3474,48 +3338,6 @@
    ],
    "tiers": [],
    "sourceCats": [
-    "kids-beds",
-    "kids-furniture",
-    "nursery-furniture"
-   ]
-  },
-  {
-   "sourceId": 211,
-   "slug": "makato-wooden-bed",
-   "name": "Makato wooden bed",
-   "price": 850000,
-   "compareAt": null,
-   "sku": "BFU B016",
-   "parent": "kids-nursery",
-   "child": "kids-beds",
-   "allCategories": [
-    "kids-beds",
-    "nursery",
-    "beds"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2021/12/Makatowoodenbed.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Makato wooden bed is made to order in our Kampala workshop, in solid hardwood, for the children's room."
-    ],
-    [
-     "p",
-     "Guard rails and ladders are fixed, not clipped, and every reachable edge is rounded and sanded smooth."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "bedroom",
-    "beds",
     "kids-beds",
     "kids-furniture",
     "nursery-furniture"
@@ -3995,43 +3817,6 @@
     [
      "p",
      "The Meaghen L Kitchen Cabinets is made to order in our Kampala workshop, for the kitchen."
-    ],
-    [
-     "p",
-     "Measured and fitted to your kitchen rather than trimmed to fit, with carcasses sealed against steam and splashes."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "kitchen-furniture-in-uganda"
-   ]
-  },
-  {
-   "sourceId": 6020,
-   "slug": "u-shaped-kitchen-cabinets",
-   "name": "U shaped Kitchen Cabinets",
-   "price": 7000000,
-   "compareAt": null,
-   "sku": "UC-6020",
-   "parent": "kitchen",
-   "child": "kitchen-cabinets",
-   "allCategories": [
-    "kitchen-cabinets"
-   ],
-   "featured": false,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2024/12/IMG_20241212_125845_1080_x_1368_pixel.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2024/12/IMG_20241212_125904_1080_x_1368_pixel.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The U shaped Kitchen Cabinets is made to order in our Kampala workshop, for the kitchen."
     ],
     [
      "p",
@@ -4580,44 +4365,6 @@
    ]
   },
   {
-   "sourceId": 3293,
-   "slug": "a1-skyline-center-table",
-   "name": "A1 Skyline center table",
-   "price": 450000,
-   "compareAt": null,
-   "sku": "BFU CT 01",
-   "parent": "living-room",
-   "child": "centre-tables",
-   "allCategories": [
-    "centre-tables"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/A1SKylinecentertable1.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/A1SKylinecentertable2.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The A1 Skyline center table is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Sized to sit comfortably against a three- or five-seater without crowding the walkway around it."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "center-tables",
-    "living-room-furniture"
-   ]
-  },
-  {
    "sourceId": 5225,
    "slug": "twin-jurrien-metallic-center-table",
    "name": "Twin Jurrien metallic Center Table",
@@ -4641,45 +4388,6 @@
     [
      "p",
      "The Twin Jurrien metallic Center Table is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Sized to sit comfortably against a three- or five-seater without crowding the walkway around it."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "center-tables",
-    "living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 3300,
-   "slug": "ferann-3-in-1-tables",
-   "name": "Ferann 3 in 1 Tables",
-   "price": 450000,
-   "compareAt": null,
-   "sku": "BFU CP 003",
-   "parent": "living-room",
-   "child": "centre-tables",
-   "allCategories": [
-    "centre-tables"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/Ferann3in1tables.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/newsletter.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/support.png"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Ferann 3 in 1 Tables is made to order in our Kampala workshop, for the living room."
     ],
     [
      "p",
@@ -5079,81 +4787,6 @@
    ]
   },
   {
-   "sourceId": 3291,
-   "slug": "lorenzo-center-table",
-   "name": "Lorenzo Center Table",
-   "price": 280000,
-   "compareAt": null,
-   "sku": "BFU CP 006",
-   "parent": "living-room",
-   "child": "centre-tables",
-   "allCategories": [
-    "centre-tables"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/Lorenzocentertable.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Lorenzo Center Table is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Sized to sit comfortably against a three- or five-seater without crowding the walkway around it."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "center-tables",
-    "living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 3127,
-   "slug": "cenary-center-table",
-   "name": "Cenary Center Table",
-   "price": 250000,
-   "compareAt": null,
-   "sku": "UC-3127",
-   "parent": "living-room",
-   "child": "centre-tables",
-   "allCategories": [
-    "centre-tables"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/CenaryCenterTable.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/CenaryCenterTable1.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Cenary Center Table is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Sized to sit comfortably against a three- or five-seater without crowding the walkway around it."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "center-tables",
-    "living-room-furniture"
-   ]
-  },
-  {
    "sourceId": 401,
    "slug": "verrati-ottoman-stools",
    "name": "Verrati Ottoman stools",
@@ -5386,43 +5019,6 @@
    ]
   },
   {
-   "sourceId": 3282,
-   "slug": "bachelors-mini-cupboard",
-   "name": "Bachelors Mini Cupboard",
-   "price": 750000,
-   "compareAt": null,
-   "sku": "BFU CUPB 01",
-   "parent": "living-room",
-   "child": "cupboards",
-   "allCategories": [
-    "cupboards"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/BachelorsMinicupboard.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Bachelors Mini Cupboard is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Doors are hung on concealed hinges and the shelves are load-rated, so nothing sags once the cupboard is full."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "cupboards",
-    "living-room-furniture"
-   ]
-  },
-  {
    "sourceId": 6241,
    "slug": "keisha-curved-sofa",
    "name": "Keisha curved Sofa",
@@ -5481,43 +5077,6 @@
     [
      "p",
      "The Zues 8 seater U shaped sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 447,
-   "slug": "nkore-leather-6-seater",
-   "name": "Nkore leather 6 seater",
-   "price": 2500000,
-   "compareAt": null,
-   "sku": "BFU SO 46",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2021/12/Nkoreleather6seater.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Nkore leather 6 seater is made to order in our Kampala workshop, in leather, for the living room."
     ],
     [
      "p",
@@ -5648,43 +5207,6 @@
    ]
   },
   {
-   "sourceId": 373,
-   "slug": "morgan-love-u-8-seater-sofa",
-   "name": "Morgan Love U 8 seater sofa",
-   "price": 1900000,
-   "compareAt": null,
-   "sku": "BFU SO 45",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2021/12/MorganLoveUsofa.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Morgan Love U 8 seater sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
    "sourceId": 3862,
    "slug": "leonard-7-seater-wooden-l-sofa-set",
    "name": "Leonard 7 seater wooden L sofa set",
@@ -5743,43 +5265,6 @@
     [
      "p",
      "The Salvadoress U-Shaped Sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 3255,
-   "slug": "richmond-buttoned-6-seater-sofa",
-   "name": "Richmond Buttoned 6 seater sofa",
-   "price": 1900000,
-   "compareAt": null,
-   "sku": "BFU SO 37",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2023/03/IMG_07032023_095335_1080_x_1368_pixel.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Richmond Buttoned 6 seater sofa is made to order in our Kampala workshop, for the living room."
     ],
     [
      "p",
@@ -6023,80 +5508,6 @@
    ]
   },
   {
-   "sourceId": 359,
-   "slug": "mikalus-l-sofa",
-   "name": "Mikalus L-Shaped Sofa",
-   "price": 1400000,
-   "compareAt": null,
-   "sku": "BFU SO 31",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/06/workshop-17-958x958-1.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Mikalus L-Shaped Sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 310,
-   "slug": "noelle-l-shaped-6-seaters-sofa",
-   "name": "Noelle L-Shaped 6 seaters Sofa",
-   "price": 1400000,
-   "compareAt": null,
-   "sku": "BFU SO 35",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/06/l-sofa-w-1-958x958-1.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Noelle L-Shaped 6 seaters Sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
    "sourceId": 6446,
    "slug": "nike-curved-shaped-sofa",
    "name": "Nike Curved shaped sofa",
@@ -6233,84 +5644,6 @@
     [
      "p",
      "The Modern L shaped sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 3158,
-   "slug": "ameire-6-seater-l-sofa",
-   "name": "Ameire 6 seater L sofa",
-   "price": 1200000,
-   "compareAt": 1300000,
-   "sku": "BFU SO 01",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/AmeireLsofa1.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/06/buy-furniture-uganda-31.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Ameire 6 seater L sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 3177,
-   "slug": "keith-bent-5-seaters-sofa",
-   "name": "Keith Bent 5 seaters sofa",
-   "price": 1200000,
-   "compareAt": 1500000,
-   "sku": "BFU SO 51",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/KeithBentarms1.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/KeithBentarms3.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/newsletter.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/support.png"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Keith Bent 5 seaters sofa is made to order in our Kampala workshop, for the living room."
     ],
     [
      "p",
@@ -6668,44 +6001,6 @@
    ]
   },
   {
-   "sourceId": 315,
-   "slug": "natalia-5-seater-sofa",
-   "name": "Natalia 5 seater sofa",
-   "price": 850000,
-   "compareAt": null,
-   "sku": "BFU SO 34",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/06/workshop-1-958x958-1.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2021/12/Natalia5seatersofa.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Natalia 5 seater sofa is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
    "sourceId": 6505,
    "slug": "bruce-leather-l-shape-sofa-6-seater-850000-to-1700000-buy-sofas-in-uganda",
    "name": "Bruce leather L-Shape Sofa | 6-Seater | 850,000 to 1,700,000 | Buy sofas in Uganda",
@@ -6854,47 +6149,6 @@
    ],
    "tiers": [],
    "sourceCats": [
-    "living-room-furniture",
-    "sofas-living-room-furniture"
-   ]
-  },
-  {
-   "sourceId": 3850,
-   "slug": "slim-j-sofa-bed",
-   "name": "slim j sofa bed",
-   "price": 550000,
-   "compareAt": null,
-   "sku": "BFU SO 05-1",
-   "parent": "living-room",
-   "child": "sofas",
-   "allCategories": [
-    "sofas",
-    "beds"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/06/IMG_24062022_114251_1080_x_1368_pixel.jpg",
-    "https://buyfurniture.co.ug/wp-content/uploads/2021/12/SlimJsofabed2.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The slim j sofa bed is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Seat frames are jointed in seasoned hardwood, webbed, and filled with high-density foam that holds its shape through years of daily use."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "bedroom",
-    "beds",
     "living-room-furniture",
     "sofas-living-room-furniture"
    ]
@@ -8075,43 +7329,6 @@
    ]
   },
   {
-   "sourceId": 5283,
-   "slug": "zibu-white-trending-tv-stand",
-   "name": "Zibu white Trending Tv stand",
-   "price": 200000,
-   "compareAt": 250000,
-   "sku": "BFU TVS 03-1-1-1-1-2-1-1-2",
-   "parent": "living-room",
-   "child": "tv-stands",
-   "allCategories": [
-    "tv-stands"
-   ],
-   "featured": false,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2024/03/IMG_20240301_125213_1080_x_1368_pixel.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "The Zibu white Trending Tv stand is made to order in our Kampala workshop, for the living room."
-    ],
-    [
-     "p",
-     "Cable routing is cut into the back panel and the shelves are set to clear a soundbar, so the whole setup sits flush against the wall."
-    ],
-    [
-     "p",
-     "Choose your timber, colour and finish at the point of order. Production takes one to two weeks from deposit, and we deliver and install across Kampala."
-    ]
-   ],
-   "tiers": [],
-   "sourceCats": [
-    "living-room-furniture",
-    "tv-stands"
-   ]
-  },
-  {
    "sourceId": 5293,
    "slug": "mnizi-nice-tv-stand",
    "name": "Mnizi nice Tv stand",
@@ -8698,60 +7915,6 @@
    ],
    "sourceCats": [
     "cupboards",
-    "living-room-furniture",
-    "tv-stands",
-    "wall-units"
-   ]
-  },
-  {
-   "sourceId": 3286,
-   "slug": "jovanic-3-peice-tv-stand",
-   "name": "Jovanic 3 Peice Tv Stand",
-   "price": 650000,
-   "compareAt": null,
-   "sku": "BFU TVS 04",
-   "parent": "living-room",
-   "child": "wall-units",
-   "allCategories": [
-    "wall-units",
-    "tv-stands"
-   ],
-   "featured": true,
-   "inStock": true,
-   "images": [
-    "https://buyfurniture.co.ug/wp-content/uploads/2022/05/Jovanic3peiceTvstand.jpg"
-   ],
-   "blocks": [
-    [
-     "p",
-     "Jovanic 3 Peice Tv Stand Upgrade now your living room entertainment area with the new modern leather Tv stand, it comes in 3 pieces ( 2 side speaker stands & 1 main center stand). You can now make your order in any color and material (leather or fabric) of your choice and in 1-2 weeks we deliver depending on when the deposit is made."
-    ],
-    [
-     "p",
-     "Economy class quality here we make very affordable furniture but not long lasting due to the materials used. Here hand painting finishing is applied thus making the given piece of furniture economy class appealing. (no warrant)"
-    ],
-    [
-     "p",
-     "Standard class quality , here furniture is more long lasting than in economy class because of stronger materials like musambya, Muvule among others. Warrant is 2 year"
-    ],
-    [
-     "p",
-     "Top class quality,This is the best of and all furniture in this class come with a 5 yr warrant high qualitty timber is used like mahogany, Elgon teak, mugavu and other hard woods. Finishing machine spraying is used to give the furniture item an outstanding elegant touch thus making it look imported."
-    ]
-   ],
-   "tiers": [
-    {
-     "name": "Standard",
-     "price": 650000,
-     "warrantyMonths": 24
-    },
-    {
-     "name": "Top Class",
-     "price": 950000,
-     "warrantyMonths": 60
-    }
-   ],
-   "sourceCats": [
     "living-room-furniture",
     "tv-stands",
     "wall-units"

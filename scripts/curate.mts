@@ -16,28 +16,13 @@ const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL! }),
 });
 
-const PLACEHOLDERS = [
-  "5-seater-leather-box-sofa-set-311-seater-premium-leather-seating-3", "dottie-grey-cup-board-3",
-  "eland-throne-chair-2", "ferann-3-in-1-tables-2", "mahogany-wooden-l-6-seater-sofa-2",
-  "makena-modern-wall-unit-2", "milo-purple-8-seater-sofas-1", "modern-l-shaped-sofa-2",
-  "putin-glass-center-table-2", "round-head-vintage-dining-set-2", "treasure-diamond-aquarium-3",
-  "twin-jurrien-metallic-center-table-3", "twin-turner-metallic-center-table-3",
-  "verrati-ottoman-stools-3",
-];
+// Empty: every scraped placeholder has been deleted along with its product.
+// Add a base filename here to remove a new one.
+const PLACEHOLDERS: string[] = [];
 
-const WATERMARKED = [
-  "a1-skyline-center-table-2", "ameire-6-seater-l-sofa-1", "ameire-6-seater-l-sofa-2",
-  "bachelors-mini-cupboard-1", "bunk-bed-with-2-beds-drawers-1", "cenary-center-table-2",
-  "ferann-3-in-1-tables-1", "jiffy-wooden-towel-rack-1", "jiffy-wooden-towel-rack-2",
-  "jovanic-3-peice-tv-stand-1", "kate-purple-bathroom-cabinets-1", "keith-bent-5-seaters-sofa-1",
-  "keith-bent-5-seaters-sofa-2", "little-ian-bunk-bed-1", "lorenzo-center-table-1",
-  "louis-sink-cabinet-1", "makato-wooden-bed-1", "mikalus-l-sofa-1", "monaco-bunk-bed-1",
-  "morgan-love-u-8-seater-sofa-1", "natalia-5-seater-sofa-2", "nkore-leather-6-seater-1",
-  "noelle-l-shaped-6-seaters-sofa-1", "richmond-buttoned-6-seater-sofa-1",
-  "round-head-vintage-dining-set-1", "slim-j-sofa-bed-1",
-  "slim-j-sofa-bed-2", "triplet-3-in-1-bed-available-on-order-1", "u-shaped-kitchen-cabinets-1",
-  "u-shaped-kitchen-cabinets-2", "zibu-white-trending-tv-stand-1",
-];
+// Empty: the watermarked photos, and the products carrying them, are gone.
+// Add a base filename here to flag a new one for replacement.
+const WATERMARKED: string[] = [];
 
 /**
  * Well-composed, watermark-free photography, in the order we want to show it.
@@ -47,11 +32,10 @@ const WATERMARKED = [
  * orders the product grids and must not be treated as a source of "our work".
  */
 const HERO_PRODUCTS = [
-  "salvadoress-u-shaped-sofa", "piper-trending-l-sofa",
-  "yolande-wooden-6-seater-chair", "pookie-wooden-6-seater-chair", "gasolina-wooden-bed-2",
-  "arizona-curved-sofa", "nike-curved-shaped-sofa", "taro-8-seater-dining-set",
-  "grey-moose-4-seater-dining-set", "domonick-wooden-chair", "cooper-l-shaped-sofa",
-  "baguette-simple-l-shaped-sofa",
+  "salvadoress-u-shaped-sofa", "piper-trending-l-sofa", "yolande-wooden-6-seater-chair",
+  "pookie-wooden-6-seater-chair", "gasolina-wooden-bed-2", "arizona-curved-sofa",
+  "nike-curved-shaped-sofa", "taro-8-seater-dining-set", "grey-moose-4-seater-dining-set",
+  "domonick-wooden-chair", "cooper-l-shaped-sofa", "baguette-simple-l-shaped-sofa",
 ];
 
 const url = (base: string) => `/products/${base}.webp`;

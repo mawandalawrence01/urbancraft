@@ -11,7 +11,7 @@ const BLANK: ProductFormData = {
   summary: "", bodyText: "",
   categoryId: null, status: "DRAFT",
   inStock: true, isFeatured: false, heroRank: null,
-  leadTimeDays: 10, warrantyMonths: 24,
+  leadTimeDays: 10, warrantyMonths: 6,
   material: "", dimensions: "", colour: "",
   seoTitle: "", seoDescription: "",
   images: [], variants: [],

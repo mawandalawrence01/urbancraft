@@ -21,7 +21,7 @@ export default async function TermsPage() {
       "Photographs show the design. Because timber is a natural material, grain and colour vary between pieces; that variation is not a defect.",
     ]],
     ["Quality classes", [
-      "Every design can be built in Economy, Standard or Top class. The class determines the timber, the finishing and the warranty, and is agreed before we start. Economy class carries no warranty and we will say so plainly at the point of sale.",
+      "Every design can be built in Economy, Standard or Top class. The class determines the timber and the finishing, and is agreed before we start.",
     ]],
     ["Payment", [
       "We accept mobile money, bank deposit and cash on delivery. For made-to-order pieces we start production once the agreed deposit clears, with the balance due on delivery.",
@@ -32,7 +32,7 @@ export default async function TermsPage() {
       "Please inspect your piece before our driver leaves. Transit damage reported at the point of delivery is ours to put right.",
     ]],
     ["Warranty", [
-      "Standard class carries two years and Top class five years, covering joinery and finish under normal household use. The warranty does not cover accidental damage, water damage, alterations by others, or commercial use of furniture sold for the home.",
+      "Every piece carries six months on joinery and finish under normal household use, whatever class it is built in. The warranty does not cover accidental damage, water damage, alterations by others, or commercial use of furniture sold for the home.",
     ]],
     ["Liability", [
       "Our liability for any order is limited to the value of that order. Nothing here limits liability that Ugandan law does not allow us to limit.",

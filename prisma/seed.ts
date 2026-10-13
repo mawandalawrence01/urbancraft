@@ -115,7 +115,8 @@ async function main() {
         price: p.price, compareAtPrice: p.compareAt ?? null,
         inStock: p.inStock, isFeatured: p.featured,
         categoryId, position: i,
-        warrantyMonths: p.tiers.find((t) => /standard/i.test(t.name))?.warrantyMonths ?? 24,
+        // Six months on every class; the class changes the timber, not the cover.
+        warrantyMonths: 6,
         seoTitle: `${p.name} — Price in Uganda`,
         seoDescription: summary ?? `${p.name} made to order by UrbanCraft Kampala.`,
       },
@@ -163,7 +164,7 @@ async function main() {
           // appending "Class" produced "Top Class Class".
           name: t.name,
           price: t.price,
-          warrantyMonths: t.warrantyMonths || null,
+          warrantyMonths: 6,
           isDefault: /standard/i.test(t.name),
           position: idx,
           description: TIER_NOTES[t.name.toLowerCase()] ?? null,

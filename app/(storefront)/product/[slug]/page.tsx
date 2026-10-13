@@ -181,7 +181,9 @@ export default async function ProductPage({ params }: { params: Params }) {
             <ul className="mt-7 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-2">
               {[
                 [Clock, "Build time", `${product.leadTimeDays} working days`],
-                [ShieldTick, "Warranty", `${Math.round(product.warrantyMonths / 12)} year${product.warrantyMonths >= 24 ? "s" : ""}`],
+                [ShieldTick, "Warranty", product.warrantyMonths >= 12
+                  ? `${Math.round(product.warrantyMonths / 12)} year${product.warrantyMonths >= 24 ? "s" : ""}`
+                  : `${product.warrantyMonths} months`],
                 [Truck, "Delivery", "Free in Kampala Central"],
                 [Ruler, "Sizing", "Built to your measurements"],
               ].map(([Icon, label, value]) => {
@@ -242,9 +244,10 @@ export default async function ProductPage({ params }: { params: Params }) {
                   <Award size={19} className="text-tan" /> Available in three quality classes
                 </h2>
                 <p className="mt-2 text-[0.87rem] leading-relaxed text-ink-3">
-                  This price is our Standard class — musambya, muvule or similar hardwood with a
-                  2 year warranty. Economy and Top class are quoted on request; Top class uses
-                  mahogany, Elgon teak or mugavu and carries 5 years.
+                  This price is our Standard class — musambya, muvule or similar hardwood.
+                  Economy and Top class are quoted on request; Top class uses mahogany, Elgon
+                  teak or mugavu. Every class carries the same 6 month warranty on joinery and
+                  finish; the class changes the timber and the finishing, not the cover.
                 </p>
                 <Link href="/contact" className="mt-3 inline-flex items-center gap-1 text-[0.87rem] font-medium text-tan-2 hover:underline">
                   Ask for a class quote <ArrowRight2 size={14} />

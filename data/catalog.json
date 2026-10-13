@@ -7487,12 +7487,12 @@
     {
      "name": "Standard",
      "price": 1700000,
-     "warrantyMonths": 24
+     "warrantyMonths": 6
     },
     {
      "name": "Top Class",
      "price": 2350000,
-     "warrantyMonths": 60
+     "warrantyMonths": 6
     }
    ],
    "sourceCats": [
@@ -7542,12 +7542,12 @@
     {
      "name": "Standard",
      "price": 850000,
-     "warrantyMonths": 24
+     "warrantyMonths": 6
     },
     {
      "name": "Top Class",
      "price": 1300000,
-     "warrantyMonths": 60
+     "warrantyMonths": 6
     }
    ],
    "sourceCats": [
@@ -7905,12 +7905,12 @@
     {
      "name": "Standard",
      "price": 650000,
-     "warrantyMonths": 24
+     "warrantyMonths": 6
     },
     {
      "name": "Top Class",
      "price": 850000,
-     "warrantyMonths": 60
+     "warrantyMonths": 6
     }
    ],
    "sourceCats": [
@@ -8091,12 +8091,12 @@
     {
      "name": "Standard",
      "price": 750000,
-     "warrantyMonths": 24
+     "warrantyMonths": 6
     },
     {
      "name": "Top Class",
      "price": 950000,
-     "warrantyMonths": 60
+     "warrantyMonths": 6
     }
    ],
    "sourceCats": [
@@ -8496,12 +8496,12 @@
     {
      "name": "Standard",
      "price": 350000,
-     "warrantyMonths": 24
+     "warrantyMonths": 6
     },
     {
      "name": "Top Class",
      "price": 550000,
-     "warrantyMonths": 60
+     "warrantyMonths": 6
     }
    ],
    "sourceCats": [
@@ -8630,12 +8630,12 @@
     {
      "name": "Standard",
      "price": 330000,
-     "warrantyMonths": 24
+     "warrantyMonths": 6
     },
     {
      "name": "Top Class",
      "price": 550000,
-     "warrantyMonths": 60
+     "warrantyMonths": 6
     }
    ],
    "sourceCats": [

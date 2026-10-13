@@ -149,7 +149,7 @@ export default async function AboutPage() {
           {[
             [Award, "Three quality classes", "Economy, Standard and Top class — priced openly, not negotiated in the room."],
             [Ruler, "Built to your measurements", "Send the dimensions of the space. We cut the piece to fit it."],
-            [ShieldTick, "Warranty in writing", "Two years on Standard, five on Top class, covering joinery and finish."],
+            [ShieldTick, "Warranty in writing", "Six months on joinery and finish, whatever class it is built in."],
             [Truck, "We deliver and install", "Free within Kampala Central, quoted honestly beyond it."],
           ].map(([Icon, title, body]) => {
             const I = Icon as typeof Award;
@@ -172,7 +172,7 @@ export default async function AboutPage() {
           {[
             [`${counts}`, "pieces in the catalogue"],
             ["1–2 weeks", "typical build time"],
-            ["5 years", "warranty on Top class"],
+            ["6 months", "warranty on every piece"],
           ].map(([value, label]) => (
             <div key={label}>
               <p className="figure-num text-3xl font-medium">{value}</p>

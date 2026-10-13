@@ -45,7 +45,7 @@ what lets it quote a fixed price and carry a warranty on both joinery and finish
 
 Pricing is published rather than negotiated in the room. Every catalogue piece is
 offered in three named quality classes (Economy, Standard, Top Class) with the
-timber and warranty attached to each, so the customer chooses the class instead of
+timber and finishing attached to each, so the customer chooses the class instead of
 haggling the price.
 
 For fit-out, the site survey and the drawing are free, and no deposit is taken
@@ -59,7 +59,10 @@ until a quote is approved.
 - Phone and WhatsApp are primary contact channels, not fallbacks. A visible phone
   number does real conversion work here.
 - Delivery is free within Kampala Central and quoted by zone beyond it.
-- Build lead time runs roughly one to two weeks for catalogue pieces.
+- Build lead time runs roughly one to two weeks (7–14 days) for catalogue pieces.
+- Warranty is six months on joinery and finish, the same in every quality class.
+  The classes differ by timber and finishing, not by cover.
+- Payment on commissions is 50% deposit, 50% on delivery.
 - Fit-out runs as four stages: survey on site, drawing and itemised price, build
   in the workshop, install and finish.
 

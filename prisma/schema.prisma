@@ -60,7 +60,7 @@ model Product {
   inStock       Boolean @default(true)
   isFeatured    Boolean @default(false)
   leadTimeDays  Int     @default(10)
-  warrantyMonths Int    @default(24)
+  warrantyMonths Int    @default(6)
 
   material   String?
   dimensions String?

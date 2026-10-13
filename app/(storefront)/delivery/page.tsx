@@ -78,7 +78,7 @@ export default async function DeliveryPage() {
         {
           Icon: ShieldTick, title: "Warranty and returns",
           body: [
-            "Standard class carries a two year warranty and Top class five years, covering joinery and finish under normal household use. Economy class is sold without a warranty and we will always tell you so before you buy.",
+            "Every piece carries a six month warranty on joinery and finish under normal household use, in whichever class it is built.",
             "If a joint moves, a drawer stops running true, or a finish fails within the warranty, we collect the piece, repair it and bring it back at our cost.",
             "Made-to-order pieces are cut to your specification, so they cannot be returned simply because you changed your mind. If we got the specification wrong, that is ours to fix.",
             "Damage in transit is our responsibility — check the piece before our driver leaves and tell us there and then.",

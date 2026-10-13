@@ -16,6 +16,15 @@ const ADMIN_HOSTS = new Set([
   "www.admin.urbancraft.co.ug",
 ]);
 
+/**
+ * The founder's personal profile, served at its own host so it can be shared
+ * as his own site rather than a page of the company's.
+ */
+const PROFILE_HOSTS = new Set([
+  "david.urbancraft.co.ug",
+  "www.david.urbancraft.co.ug",
+]);
+
 /** Paths the framework owns; rewriting these breaks the app. */
 function isInfrastructure(pathname: string) {
   return (
@@ -81,6 +90,15 @@ export async function proxy(request: NextRequest) {
     // A control panel has no business in a search index.
     res.headers.set("X-Robots-Tag", "noindex, nofollow");
     return res;
+  }
+
+  if (PROFILE_HOSTS.has(host)) {
+    if (isInfrastructure(pathname)) return NextResponse.next();
+    // One page, so anything under this host resolves to it rather than 404ing
+    // on a stray path someone typed or a stale link.
+    const url = request.nextUrl.clone();
+    url.pathname = "/profile";
+    return NextResponse.rewrite(url);
   }
 
   // The storefront host keeps /admin working for existing bookmarks.

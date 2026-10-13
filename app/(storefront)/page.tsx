@@ -96,7 +96,7 @@ export default async function HomePage() {
           {[
             ["Built to your dimensions", "Send the measurements. We cut to them."],
             ["Three quality classes", "Economy, Standard and Top Class, priced openly."],
-            ["Up to 5 years warranty", "On joinery and finish, in writing."],
+            ["6 months warranty", "On joinery and finish, in writing."],
             ["Delivered and installed", "Free within Kampala Central."],
           ].map(([term, detail]) => (
             <div key={term}>
@@ -248,14 +248,14 @@ export default async function HomePage() {
             <tr className="label-xs border-b border-line text-muted">
               <th scope="col" className="py-3 pr-4">Class</th>
               <th scope="col" className="py-3 pr-4">Timber &amp; finish</th>
-              <th scope="col" className="py-3 text-right">Warranty</th>
+              <th scope="col" className="py-3 text-right">Timber grade</th>
             </tr>
           </thead>
           <tbody>
             {[
-              ["Economy", "Affordable construction, hand-applied finishing. Light or short-term use.", "None"],
-              ["Standard", "Musambya, muvule and comparable hardwoods. Our default joinery and finish.", "2 years"],
-              ["Top Class", "Mahogany, Elgon teak or mugavu, machine-sprayed for an imported finish.", "5 years"],
+              ["Economy", "Affordable construction, hand-applied finishing. Light or short-term use.", "Softwood"],
+              ["Standard", "Musambya, muvule and comparable hardwoods. Our default joinery and finish.", "Hardwood"],
+              ["Top Class", "Mahogany, Elgon teak or mugavu, machine-sprayed for an imported finish.", "Premium"],
             ].map(([name, body, warranty]) => (
               <tr key={name} className="border-b border-line">
                 <th scope="row" className="py-5 pr-4 align-top text-[0.98rem] font-medium">

@@ -57,13 +57,15 @@ export default async function ProfilePage() {
 
       <main className="min-h-dvh bg-paper">
         <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8 lg:py-24">
-          <div className="relative aspect-square w-32 overflow-hidden rounded-full bg-sand sm:w-36">
+          <div className="relative aspect-square w-40 overflow-hidden rounded-full bg-sand sm:w-60">
             <Image
               src={FOUNDER.photo}
               alt={FOUNDER.name}
               fill
               priority
-              sizes="144px"
+              // Must track the rendered width above, or next/image keeps
+              // serving the old 144px crop into a 240px circle.
+              sizes="(min-width: 640px) 240px, 160px"
               placeholder="blur"
               blurDataURL={FOUNDER.blur}
               className="object-cover object-top"

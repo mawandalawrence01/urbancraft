@@ -6,8 +6,54 @@ import { Eye, ArrowUp2, ArrowDown2 } from "iconsax-reactjs";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card, EmptyState, PageHeader } from "@/components/admin/ui";
+import { PhotoUploader } from "@/components/admin/PhotoUploader";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { processAndUpload, uploadsConfigured } from "@/lib/uploads";
+
+/** The shape the project page reads: the first entry is also the cover. */
+type ProjectPhoto = { url: string; width?: number; height?: number; blurDataUrl?: string };
+
+async function uploadProjectPhotos(
+  id: string,
+  _prev: { ok?: boolean; error?: string },
+  formData: FormData,
+) {
+  "use server";
+  await requireAdmin();
+
+  const files = formData.getAll("images").filter((f): f is File => f instanceof File && f.size > 0);
+  if (files.length === 0) return { error: "Choose at least one photo." };
+
+  const project = await prisma.project.findUnique({ where: { id } });
+  if (!project) return { error: "That project no longer exists." };
+
+  const photos = (project.images ?? []) as ProjectPhoto[];
+
+  try {
+    for (const file of files) {
+      const image = await processAndUpload(file, `projects/${project.slug}`);
+      photos.push({
+        url: image.url,
+        width: image.width,
+        height: image.height,
+        blurDataUrl: image.blurDataUrl,
+      });
+    }
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : "Upload failed." };
+  }
+
+  await prisma.project.update({
+    where: { id },
+    data: { images: photos, coverImage: project.coverImage ?? photos[0]?.url ?? null },
+  });
+
+  revalidatePath("/admin/projects");
+  revalidatePath("/projects");
+  revalidatePath(`/projects/${project.slug}`);
+  return { ok: true };
+}
 
 async function togglePublished(id: string, next: boolean) {
   "use server";
@@ -54,8 +100,12 @@ export default async function AdminProjectsPage() {
           {projects.map((p, i) => (
             <Card key={p.id} className="overflow-hidden">
               <div className="relative aspect-[4/3] bg-sand">
-                {p.coverImage && (
+                {p.coverImage ? (
                   <Image src={p.coverImage} alt="" fill sizes="(min-width:1280px) 30vw, 45vw" className="object-cover" />
+                ) : (
+                  <p className="absolute inset-0 grid place-items-center px-4 text-center text-[0.78rem] leading-relaxed text-muted">
+                    No photo yet
+                  </p>
                 )}
                 {!p.isPublished && (
                   <span className="absolute left-2 top-2"><Badge tone="neutral">hidden</Badge></span>
@@ -91,6 +141,14 @@ export default async function AdminProjectsPage() {
                     </button>
                   </form>
                 </div>
+
+                <PhotoUploader
+                  className="mt-3 border-t border-line pt-3"
+                  action={uploadProjectPhotos.bind(null, p.id)}
+                  label={p.coverImage ? "Add photos" : "Add cover photo"}
+                  hint=""
+                  disabled={!uploadsConfigured()}
+                />
               </div>
             </Card>
           ))}

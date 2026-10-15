@@ -32,6 +32,13 @@ export const productCard = {
 
 export type ProductCard = Prisma.ProductGetPayload<{ select: typeof productCard }>;
 
+/**
+ * Counts have to match what a visitor can actually open. An unfiltered count
+ * of the join table includes drafts and archived pieces, so a room advertised
+ * "99" could lead to an empty grid.
+ */
+const liveLinks = { select: { productLinks: { where: { product: { status: "ACTIVE" as const } } } } };
+
 /** The full navigable tree: top-level rooms, each with their leaf categories. */
 export const getCategoryTree = cache(async () => {
   const parents = await prisma.category.findMany({
@@ -41,9 +48,9 @@ export const getCategoryTree = cache(async () => {
       children: {
         where: { isActive: true },
         orderBy: { position: "asc" },
-        include: { _count: { select: { productLinks: true } } },
+        include: { _count: liveLinks },
       },
-      _count: { select: { productLinks: true } },
+      _count: liveLinks,
     },
   });
   return parents;
@@ -55,7 +62,7 @@ export const getCategoryBySlug = cache(async (slug: string) => {
     include: {
       parent: { select: { slug: true, name: true } },
       children: { where: { isActive: true }, orderBy: { position: "asc" },
-                  include: { _count: { select: { productLinks: true } } } },
+                  include: { _count: liveLinks } },
     },
   });
 });

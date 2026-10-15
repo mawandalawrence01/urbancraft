@@ -26,7 +26,14 @@ export default async function RoomsPage() {
       <header className="max-w-2xl">
         <h1 className="text-3xl font-semibold sm:text-4xl">Shop by room</h1>
         <p className="mt-2 text-[0.95rem] text-ink-3">
-          {total} pieces across {tree.length} rooms, each made to order in our Kampala workshop.
+          {total > 0 ? (
+            <>{total} pieces across {tree.length} rooms, each made to order in our Kampala workshop.</>
+          ) : (
+            <>
+              We are rephotographing the catalogue in our own workshop. Everything below is still
+              made to order — call or send your measurements and we will quote it.
+            </>
+          )}
         </p>
       </header>
 
@@ -44,7 +51,8 @@ export default async function RoomsPage() {
                 href={`/c/${room.slug}`}
                 className="flex shrink-0 items-center gap-1 text-[0.85rem] text-tan-2 hover:underline"
               >
-                All {room._count.productLinks} <ArrowRight2 size={14} />
+                All{room._count.productLinks > 0 ? ` ${room._count.productLinks}` : ""}{" "}
+                <ArrowRight2 size={14} />
               </Link>
             </div>
 
@@ -79,7 +87,11 @@ export default async function RoomsPage() {
                   <span>
                     <span className="block text-[0.92rem] font-medium">{child.name}</span>
                     <span className="text-[0.78rem] text-muted">
-                      {child._count.productLinks} piece{child._count.productLinks === 1 ? "" : "s"}
+                      {/* A bare "0 pieces" reads as discontinued; it only means
+                          nothing is photographed yet. */}
+                      {child._count.productLinks > 0
+                        ? `${child._count.productLinks} piece${child._count.productLinks === 1 ? "" : "s"}`
+                        : "Made to order"}
                     </span>
                   </span>
                   <ArrowRight2 size={16} className="shrink-0 text-muted" />

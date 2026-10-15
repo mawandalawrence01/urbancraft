@@ -157,7 +157,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Sea
                 </span>
               </li>
               <li className="flex items-center justify-between gap-3">
-                <span>Image uploads</span>
+                <span>Photo storage (Cloudinary)</span>
                 <span className={uploadsConfigured() ? "text-success" : "text-warn"}>
                   {uploadsConfigured() ? "Connected" : "Not configured"}
                 </span>

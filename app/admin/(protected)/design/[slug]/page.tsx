@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft2, TickCircle, Gallery, Warning2, Eye, EyeSlash } from "iconsax-reactjs";
+import {
+  ArrowLeft2, TickCircle, Gallery, Warning2, Eye, EyeSlash,
+  ArrowUp2, ArrowDown2, Trash,
+} from "iconsax-reactjs";
 
+import { PhotoUploader } from "@/components/admin/PhotoUploader";
 import { SortableShot } from "@/components/admin/SortableShot";
 import { Card, PageHeader } from "@/components/admin/ui";
 import { Badge } from "@/components/ui/Badge";
@@ -10,10 +14,13 @@ import {
   bulkSetOrigin,
   clearDesignFlag,
   deleteDesignImage,
+  reorderDesignImage,
   setImageOrigin,
   toggleServicePublished,
+  uploadDesignImages,
 } from "@/lib/actions/design";
 import { prisma } from "@/lib/db";
+import { uploadsConfigured } from "@/lib/uploads";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +31,9 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
 
   const service = await prisma.designService.findUnique({
     where: { slug },
-    include: { images: { orderBy: [{ origin: "asc" }, { position: "asc" }] } },
+    // Gallery order, so the grid here is the grid on the site and the arrows
+    // move a photo where the visitor will see it move.
+    include: { images: { orderBy: { position: "asc" } } },
   });
   if (!service) notFound();
 
@@ -70,6 +79,19 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
           </div>
         }
       />
+
+      <div className="mb-6 rounded-2xl border border-line bg-paper p-4">
+        <p className="text-[0.87rem] font-medium">Add photos to this gallery</p>
+        <p className="mt-1 text-[0.83rem] leading-relaxed text-muted">
+          They upload to the workshop&apos;s Cloudinary library and arrive here unsorted — mark
+          them as yours below to put them on the site.
+        </p>
+        <PhotoUploader
+          className="mt-3"
+          action={uploadDesignImages.bind(null, service.id)}
+          disabled={!uploadsConfigured()}
+        />
+      </div>
 
       {unset.length > 0 && (
         <div className="mb-6 rounded-2xl border border-line bg-paper p-4">
@@ -132,11 +154,6 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
                         Cleared
                       </Button>
                     </form>
-                    <form action={deleteDesignImage.bind(null, img.id)}>
-                      <Button type="submit" size="sm" variant="ghost" className="text-danger">
-                        Delete
-                      </Button>
-                    </form>
                   </div>
                 </>
               ) : (
@@ -164,6 +181,35 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
                   )}
                 </div>
               )}
+
+              {/* Order and removal, available on every photo rather than only
+                  the flagged ones — the first live photo is the cover. */}
+              <div className="mt-2 flex items-center gap-0.5 border-t border-line pt-2">
+                <form action={reorderDesignImage.bind(null, img.id, "up")}>
+                  <button
+                    type="submit" disabled={i === 0} aria-label="Move earlier"
+                    className="grid size-11 place-items-center rounded-lg hover:bg-sand disabled:opacity-25 sm:size-8"
+                  >
+                    <ArrowUp2 size={14} />
+                  </button>
+                </form>
+                <form action={reorderDesignImage.bind(null, img.id, "down")}>
+                  <button
+                    type="submit" disabled={i === service.images.length - 1} aria-label="Move later"
+                    className="grid size-11 place-items-center rounded-lg hover:bg-sand disabled:opacity-25 sm:size-8"
+                  >
+                    <ArrowDown2 size={14} />
+                  </button>
+                </form>
+                <form action={deleteDesignImage.bind(null, img.id)} className="ml-auto">
+                  <button
+                    type="submit" aria-label="Delete photo"
+                    className="grid size-11 place-items-center rounded-lg text-muted hover:bg-danger-soft hover:text-danger sm:size-8"
+                  >
+                    <Trash size={14} />
+                  </button>
+                </form>
+              </div>
             </div>
           </Card>
         ))}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import { FilterSidebar, FilterToolbar } from "@/components/shop/Filters";
 import { Pagination } from "@/components/shop/Pagination";
@@ -30,16 +31,20 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     getCategoryTree(),
   ]);
 
-  const categories = tree.map((t) => ({
-    slug: t.slug, name: t.name, count: t._count.productLinks,
-  }));
+  // A filter that narrows nothing is not a filter: rooms with no live piece in
+  // them are left out rather than listed as a column of zeroes.
+  const categories = tree
+    .filter((t) => t._count.productLinks > 0)
+    .map((t) => ({ slug: t.slug, name: t.name, count: t._count.productLinks }));
 
   return (
     <div className="container-page pt-8">
       <header className="mb-2">
         <h1 className="text-3xl font-semibold sm:text-4xl">All furniture</h1>
         <p className="mt-2 max-w-xl text-[0.95rem] text-ink-3">
-          {total} pieces, each made to order. Choose your timber and finish at checkout.
+          {total > 0
+            ? `${total} pieces, each made to order. Choose your timber and finish at checkout.`
+            : "Every piece is made to order. Choose your timber and finish at checkout."}
         </p>
       </header>
 
@@ -54,7 +59,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           </Suspense>
 
           {items.length === 0 ? (
-            <EmptyState />
+            <EmptyState filtered={Boolean(min || max || inStockOnly)} />
           ) : (
             <>
               <ProductGrid products={items} />
@@ -73,13 +78,45 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
   );
 }
 
-function EmptyState() {
+/**
+ * Two different nothings. Telling someone to widen a price range they never
+ * set, because the catalogue itself is empty, sends them in circles.
+ */
+function EmptyState({ filtered }: { filtered: boolean }) {
   return (
     <div className="rounded-[var(--radius-card)] border border-line bg-paper px-6 py-16 text-center">
-      <h2 className="font-display text-lg font-semibold">Nothing matches those filters</h2>
-      <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
-        Widen the price range or clear the filters to see the full catalogue.
-      </p>
+      {filtered ? (
+        <>
+          <h2 className="font-display text-lg font-semibold">Nothing matches those filters</h2>
+          <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
+            Widen the price range or clear the filters to see the full catalogue.
+          </p>
+        </>
+      ) : (
+        <>
+          <h2 className="font-display text-lg font-semibold">
+            We are rephotographing the catalogue
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-[0.9rem] leading-relaxed text-muted">
+            Every piece is still made to order in Kansanga. Send us your measurements, or look
+            through the rooms we have fitted while the new photographs go up.
+          </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+            <Link
+              href="/design"
+              className="inline-flex h-11 items-center rounded-[var(--radius-card)] bg-accent px-6 text-[0.9rem] font-medium text-white transition hover:bg-accent-2"
+            >
+              See our work
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex h-11 items-center rounded-[var(--radius-card)] border border-rule px-6 text-[0.9rem] font-medium transition hover:border-ink"
+            >
+              Send measurements
+            </Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }

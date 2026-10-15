@@ -3,12 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      // Admin uploads go to Vercel Blob, which serves them from a per-store
-      // subdomain. Without this every photo the workshop uploads renders as a
-      // broken image: next/image refuses any host that is not listed here.
+      // Admin uploads go to the workshop's Cloudinary account. Without this
+      // every photo they upload renders as a broken image: next/image refuses
+      // any host that is not listed here.
       {
         protocol: "https",
-        hostname: "*.public.blob.vercel-storage.com",
+        hostname: "res.cloudinary.com",
       },
       {
         protocol: "https",

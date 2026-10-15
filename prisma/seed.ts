@@ -15,6 +15,7 @@ for (const file of [".env.local", ".env"]) {
   }
 }
 
+import { access } from "node:fs/promises";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import bcrypt from "bcryptjs";
@@ -28,6 +29,21 @@ const prisma = new PrismaClient({
 const root = process.cwd();
 const readJson = async <T>(p: string): Promise<T> =>
   JSON.parse(await readFile(path.join(root, p), "utf8"));
+
+/**
+ * The scraped catalogue photography was deleted — the workshop uploads its own
+ * now — but data/images.json and data/projects.json still name those files.
+ * Seeding rows that point at files nobody shipped would put broken images back
+ * on the site, so every seeded path is checked against public/ first.
+ */
+const onDisk = async (url: string) => {
+  try {
+    await access(path.join(root, "public", url.replace(/^\//, "")));
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 type Block = [string, string];
 type Catalog = {
@@ -99,6 +115,7 @@ async function main() {
   let created = 0;
   let imagesLinked = 0;
   let variants = 0;
+  let drafted = 0;
 
   for (const [i, p] of catalog.products.entries()) {
     const categoryId = categoryIds.get(p.child) ?? null;
@@ -142,16 +159,23 @@ async function main() {
 
     // images
     await prisma.productImage.deleteMany({ where: { productId: product.id } });
-    const rows = p.images
+    const candidates = p.images
       .map((_, idx) => images[`${p.slug}-${idx + 1}`])
-      .filter(Boolean)
-      .map((m, idx) => ({
-        productId: product.id, url: m.src, alt: p.name,
-        width: m.width, height: m.height, blurDataUrl: m.blurDataURL, position: idx,
-      }));
+      .filter(Boolean);
+    const present = [];
+    for (const m of candidates) if (await onDisk(m.src)) present.push(m);
+
+    const rows = present.map((m, idx) => ({
+      productId: product.id, url: m.src, alt: p.name,
+      width: m.width, height: m.height, blurDataUrl: m.blurDataURL, position: idx,
+    }));
     if (rows.length) {
       await prisma.productImage.createMany({ data: rows });
       imagesLinked += rows.length;
+    } else {
+      // No photograph, no shop page: an empty card is worse than no card.
+      await prisma.product.update({ where: { id: product.id }, data: { status: "DRAFT" } });
+      drafted++;
     }
 
     // quality tiers, where the source listed real tier pricing
@@ -173,19 +197,29 @@ async function main() {
       variants += p.tiers.length;
     }
   }
-  console.log(`products: ${created}, images: ${imagesLinked}, variants: ${variants}`);
+  console.log(
+    `products: ${created}, images: ${imagesLinked}, variants: ${variants}, drafted for want of a photo: ${drafted}`,
+  );
 
   // ---------------------------------------------------------- projects
   for (const [i, pr] of projects.entries()) {
+    const hasCover = await onDisk(pr.coverImage);
+    const cover = hasCover ? pr.coverImage : null;
+    const gallery = hasCover
+      ? [{ url: pr.coverImage, width: pr.width, height: pr.height, blurDataUrl: pr.blurDataUrl }]
+      : [];
+
     await prisma.project.upsert({
       where: { slug: pr.slug },
       create: {
         slug: pr.slug, title: pr.title, summary: pr.summary,
-        coverImage: pr.coverImage, clientType: pr.category, position: i,
-        images: [{ url: pr.coverImage, width: pr.width, height: pr.height, blurDataUrl: pr.blurDataUrl }],
+        coverImage: cover, clientType: pr.category, position: i,
+        images: gallery,
         body: [{ type: "p", text: pr.summary }],
+        // A case study with no photograph of the work is not a case study.
+        isPublished: hasCover,
       },
-      update: { title: pr.title, summary: pr.summary, coverImage: pr.coverImage, clientType: pr.category, position: i },
+      update: { title: pr.title, summary: pr.summary, clientType: pr.category, position: i },
     });
   }
   console.log(`projects: ${projects.length}`);

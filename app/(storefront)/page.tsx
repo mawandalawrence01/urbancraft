@@ -50,6 +50,11 @@ export default async function HomePage() {
   const lead = design[0];
   const firstRoom = rooms[0]?.slug;
 
+  // The Furniture door is normally fronted by a catalogue photograph. While the
+  // catalogue is being rephotographed there is none, and an empty grey panel is
+  // a worse front door than a second picture of the workshop's own work.
+  const furnitureCover = (firstRoom ? covers[firstRoom] : undefined) ?? design[1]?.cover;
+
   return (
     <>
       {/* ===================================================== the two paths */}
@@ -70,11 +75,11 @@ export default async function HomePage() {
           href="/shop"
           title="Furniture"
           body="Sofas, beds, dining sets, wardrobes and office pieces — delivered and installed across Kampala."
-          figure={`${total}`}
-          figureLabel="pieces in the catalogue"
+          figure={total > 0 ? `${total}` : `${rooms.length}`}
+          figureLabel={total > 0 ? "pieces in the catalogue" : "rooms we furnish"}
           action="Browse the catalogue"
-          image={firstRoom ? covers[firstRoom]?.url : undefined}
-          blur={firstRoom ? covers[firstRoom]?.blurDataUrl : undefined}
+          image={furnitureCover?.url}
+          blur={furnitureCover?.blurDataUrl}
           priority
         />
         <PathCard

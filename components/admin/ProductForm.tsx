@@ -352,7 +352,7 @@ function ImageManager({
         </form>
       ) : (
         <p className="mt-4 rounded-lg bg-warn-soft px-3 py-2.5 text-[0.78rem] leading-relaxed text-warn">
-          Set <code className="font-mono">BLOB_READ_WRITE_TOKEN</code> to enable photo uploads.
+          Photo storage is not connected. Add the Cloudinary keys to enable uploads.
         </p>
       )}
     </Card>

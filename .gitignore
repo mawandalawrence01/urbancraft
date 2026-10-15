@@ -57,3 +57,5 @@ next-env.d.ts
 # Raw photo drops; optimised assets live in public/
 IMG-*WA*.jpg*
 IMG-*WA*.jpeg
+WhatsApp *.jpeg
+WhatsApp *.zip

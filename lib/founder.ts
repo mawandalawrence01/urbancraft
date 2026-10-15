@@ -15,10 +15,14 @@ export const FOUNDER = {
   blur:
     "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoMABAAAwBSJaQAAlmI6mG8g9+AAP7uH+6F5YUfLEKKBvzdt93MZKgvY30gTmgdTc/cCRitPurNBe/TR6gfZ7jCrq3DLgAA",
 
-  /** His own words, kept verbatim. */
+  /**
+   * Plain, factual, first person. An earlier version carried the marketing
+   * copy — "no middlemen, no shortcuts, just honest work and beautiful
+   * results" — which read as the founder selling himself. A profile states
+   * who someone is; the site does the selling.
+   */
   story: [
-    "I started Urbancraft with a simple belief: Ugandan homes deserve high-quality, custom furniture that fits perfectly and lasts for years — without the cost of importing it.",
-    "At my workshop in Kansanga, Kitalanga, I personally supervise every project, so every sofa, door, floor and interior detail is done right.",
-    "When you choose Urbancraft you work directly with me and my team. No middlemen, no shortcuts — just honest work and beautiful results.",
+    "I run Urbancraft Furniture & Interior Design, a workshop in Kitalanga, Kansanga, Kampala. We make furniture to order and fit out interiors — kitchens, wardrobes, staircases, ceilings and feature walls.",
+    "I trained in woodworking and I still work on site. Every job is measured, drawn, built in the workshop and installed by the same team, and I supervise each one from the first measurement to the last coat.",
   ],
 } as const;

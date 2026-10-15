@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "profile",
     title: `${FOUNDER.name} — ${FOUNDER.role}, Urbancraft`,
     description:
-      "Work directly with the person who builds your furniture. No middlemen, no shortcuts.",
+      "Furniture maker and interior designer, and the founder of Urbancraft in Kansanga, Kampala.",
     url: "/founder",
     images: ogImageMeta(FOUNDER.ogCard, `${FOUNDER.name}, ${FOUNDER.role} at Urbancraft`),
   },
@@ -77,7 +77,9 @@ export default async function FounderPage() {
             <h1 className="text-[clamp(2rem,4.6vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.025em]">
               {FOUNDER.name}
             </h1>
-            <p className="label-xs mt-3 text-muted">{FOUNDER.role}</p>
+            <p className="mt-3 text-[1.02rem] text-ink-3">
+              Furniture maker and interior designer, Kampala
+            </p>
 
             <div className="mt-7 max-w-[58ch] space-y-4 text-[1.02rem] leading-relaxed text-ink-2">
               {FOUNDER.story.map((para) => (
@@ -109,26 +111,15 @@ export default async function FounderPage() {
           </div>
         </div>
 
-        {/* ------------------------------------------------------- next steps */}
-        <section className="mt-16 grid gap-4 border-t border-line pt-12 sm:grid-cols-3 lg:mt-24 lg:pt-16">
-          {[
-            ["See the work", "Rooms measured, built and fitted by the workshop.", "/projects"],
-            ["About Urbancraft", "The company, the trades and how a job runs.", "/about"],
-            ["Start a project", "Send the room and we will come and measure it.", "/design/enquire"],
-          ].map(([title, body, href]) => (
-            <Link
-              key={href}
-              href={href}
-              className="group rounded-[var(--radius-card)] border border-line p-6 transition hover:border-ink"
-            >
-              <h2 className="flex items-center justify-between gap-3 text-[1rem] font-medium">
-                {title}
-                <ArrowRight2 size={15} className="shrink-0 transition-transform group-hover:translate-x-0.5" />
-              </h2>
-              <p className="mt-2 text-[0.88rem] leading-relaxed text-ink-3">{body}</p>
-            </Link>
-          ))}
-        </section>
+        <div className="mt-14 border-t border-line pt-8">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 text-[0.95rem] text-ink-2 transition hover:gap-3 hover:text-ink"
+          >
+            About Urbancraft <ArrowRight2 size={15} />
+          </Link>
+        </div>
+
       </div>
     </>
   );

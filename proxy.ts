@@ -93,9 +93,21 @@ export async function proxy(request: NextRequest) {
   }
 
   if (PROFILE_HOSTS.has(host)) {
+    // This host needs its own robots.txt and sitemap. Falling through to the
+    // storefront's would hand a crawler a sitemap of www.urbancraft.co.ug URLs
+    // and a Host line naming a different site, leaving this one unlisted.
+    if (pathname === "/robots.txt" || pathname === "/sitemap.xml") {
+      const url = request.nextUrl.clone();
+      url.pathname = `/profile${pathname}`;
+      return NextResponse.rewrite(url);
+    }
+
     if (isInfrastructure(pathname)) return NextResponse.next();
+
     // One page, so anything under this host resolves to it rather than 404ing
-    // on a stray path someone typed or a stale link.
+    // on a stray path someone typed or a stale link. Every one of those paths
+    // carries the same canonical, so they collapse to the root in the index
+    // rather than becoming duplicates of it.
     const url = request.nextUrl.clone();
     url.pathname = "/profile";
     return NextResponse.rewrite(url);

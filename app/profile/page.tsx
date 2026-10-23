@@ -11,10 +11,24 @@ const PROFILE_URL = "https://david.urbancraft.co.ug";
 const COMPANY_URL = "https://www.urbancraft.co.ug";
 
 export const metadata: Metadata = {
-  title: "David Collins Kibirige — Urbancraft, Kampala",
+  // Absolute, so the storefront's "%s · UrbanCraft" template does not append
+  // the company name to his own site's title.
+  title: { absolute: "David Collins Kibirige — Furniture Maker & Interior Designer, Kampala" },
   description:
-    "Furniture maker and interior designer in Kampala. Founder of Urbancraft Furniture & Interior Design, Kitalanga, Kansanga.",
+    "David Collins Kibirige is a Ugandan furniture maker, interior designer and entrepreneur, and the founder of Urbancraft Furniture & Interior Design in Kitalanga, Kansanga, Kampala.",
+  keywords: [
+    "David Collins Kibirige",
+    "Urbancraft Furniture & Interior Design",
+    "furniture maker Kampala",
+    "interior designer Kampala",
+    "custom furniture Uganda",
+  ],
   alternates: { canonical: PROFILE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
   openGraph: {
     type: "profile",
     title: "David Collins Kibirige — Urbancraft, Kampala",
@@ -30,25 +44,60 @@ export default async function ProfilePage() {
   const whatsapp = contact.whatsapp?.replace(/\D/g, "");
   const tel = contact.phone?.replace(/\s/g, "");
 
+  const address = {
+    "@type": "PostalAddress",
+    streetAddress: "Kitalanga, Kansanga — Second Boda Boda Stage",
+    addressLocality: "Kampala",
+    addressCountry: "UG",
+  };
+
+  // Two linked nodes rather than one: Google will show a person and the
+  // business they founded, and founder/foundedBy has to point both ways for
+  // it to connect them.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: FOUNDER.name,
-    jobTitle: "Founder",
-    image: `${COMPANY_URL}${FOUNDER.photo}`,
-    url: PROFILE_URL,
-    telephone: contact.phone,
-    worksFor: {
-      "@type": "Organization",
-      name: "Urbancraft Furniture & Interior Design",
-      url: COMPANY_URL,
-    },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Kitalanga, Kansanga",
-      addressLocality: "Kampala",
-      addressCountry: "UG",
-    },
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${PROFILE_URL}/#person`,
+        name: FOUNDER.name,
+        givenName: "David",
+        familyName: "Kibirige",
+        jobTitle: ["Furniture maker", "Interior designer", "Founder"],
+        description:
+          "Ugandan furniture maker, interior designer and entrepreneur, and the founder of Urbancraft Furniture & Interior Design, a Kampala workshop specialising in modern custom furniture and interior solutions.",
+        image: `${COMPANY_URL}${FOUNDER.photo}`,
+        url: PROFILE_URL,
+        telephone: contact.phone,
+        nationality: { "@type": "Country", name: "Uganda" },
+        knowsAbout: [
+          "Custom furniture",
+          "Interior design",
+          "3D design",
+          "TV and feature walls",
+          "Gypsum ceilings",
+          "Fitted wardrobes",
+          "Wooden staircases",
+          "Fitted kitchens",
+        ],
+        address,
+        worksFor: { "@id": `${COMPANY_URL}/#organisation` },
+        founder: { "@id": `${COMPANY_URL}/#organisation` },
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": `${COMPANY_URL}/#organisation`,
+        name: "Urbancraft Furniture & Interior Design",
+        url: COMPANY_URL,
+        telephone: contact.phone,
+        image: `${COMPANY_URL}${FOUNDER.ogCard}`,
+        description:
+          "Kampala-based workshop making modern custom furniture and fitting out interiors — kitchens, wardrobes, staircases, ceilings and feature walls.",
+        address,
+        areaServed: { "@type": "City", name: "Kampala" },
+        foundedBy: { "@id": `${PROFILE_URL}/#person` },
+      },
+    ],
   };
 
   return (
@@ -75,16 +124,28 @@ export default async function ProfilePage() {
           <h1 className="mt-8 text-[clamp(1.8rem,4vw,2.6rem)] font-medium leading-[1.1] tracking-[-0.02em]">
             {FOUNDER.name}
           </h1>
-          <p className="mt-2 text-[1.02rem] text-ink-3">
-            Furniture maker and interior designer, Kampala
-          </p>
 
-          {/* Plain facts, in his own voice, with nothing to sell. */}
-          <div className="mt-10 max-w-[60ch] space-y-5 text-[1.02rem] leading-relaxed text-ink-2">
-            {FOUNDER.story.map((para) => (
-              <p key={para.slice(0, 24)}>{para}</p>
+          {/* His own approved bio. Emphasis comes from the copy itself, so the
+              runs are modelled rather than parsed out of markdown. */}
+          <div className="mt-10 max-w-[62ch] space-y-5 text-[1.02rem] leading-relaxed text-ink-2">
+            {FOUNDER.bio.map((para) => (
+              <p key={para[0].text.slice(0, 32)}>
+                {para.map((run) =>
+                  run.strong ? (
+                    <strong key={run.text} className="font-medium text-ink">
+                      {run.text}
+                    </strong>
+                  ) : (
+                    <span key={run.text}>{run.text}</span>
+                  ),
+                )}
+              </p>
             ))}
           </div>
+
+          <p className="mt-7 max-w-[62ch] border-l-2 border-accent pl-4 text-[1.02rem] leading-relaxed text-ink-2">
+            <strong className="font-medium text-ink">Mission:</strong> {FOUNDER.mission}
+          </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
             {whatsapp && (

@@ -259,3 +259,42 @@ export async function toggleServicePublished(serviceId: string) {
   });
   revalidateService(service.slug);
 }
+
+/**
+ * Move a photograph into a different gallery.
+ *
+ * Photos arrive from WhatsApp in whatever grouping the sender had in mind, and
+ * a wardrobe front and a door leaf are the same picture to an importer. This is
+ * the only way to correct that without a redeploy, so it is in the admin rather
+ * than in a script.
+ */
+export async function moveDesignImage(imageId: string, targetServiceId: string) {
+  await requireAdmin();
+
+  const image = await prisma.designImage.findUnique({
+    where: { id: imageId },
+    select: { serviceId: true, service: { select: { slug: true } } },
+  });
+  if (!image || image.serviceId === targetServiceId) return;
+
+  const target = await prisma.designService.findUnique({
+    where: { id: targetServiceId },
+    select: { slug: true },
+  });
+  if (!target) return;
+
+  const last = await prisma.designImage.findFirst({
+    where: { serviceId: targetServiceId },
+    orderBy: { position: "desc" },
+    select: { position: true },
+  });
+
+  await prisma.designImage.update({
+    where: { id: imageId },
+    data: { serviceId: targetServiceId, position: (last?.position ?? -1) + 1 },
+  });
+
+  // Both galleries changed, and both are statically generated.
+  revalidateService(image.service.slug);
+  revalidateService(target.slug);
+}

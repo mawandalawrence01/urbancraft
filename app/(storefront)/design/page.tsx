@@ -134,27 +134,30 @@ export default async function DesignPage() {
 
       {/* ========================================================= the stages */}
       <section className="mt-20 bg-sand py-16 lg:mt-28 lg:py-24">
+        {/* One container for the whole band. The heading had its own and the
+            list had none, so the steps and the closing line ran edge to edge
+            on a phone while the heading above them sat in its gutter. */}
         <div className="container-page">
           <h2 className="max-w-[24ch] text-[clamp(1.6rem,3.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em]">
             Four stages, and you see the price before the third
           </h2>
+
+          <ol className="mt-10 grid gap-x-10 gap-y-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
+            {STAGES.map(([title, body], i) => (
+              <li key={title}>
+                <span className="figure-num text-[0.78rem] text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-2 text-[1rem] font-medium">{title}</h3>
+                <p className="mt-1.5 text-[0.88rem] leading-relaxed text-ink-3">{body}</p>
+              </li>
+            ))}
+          </ol>
+
+          <p className="mt-8 text-[0.88rem] text-ink-3">
+            No deposit is taken until you have approved a drawing and a price
+          </p>
         </div>
-
-        <ol className="mt-10 grid gap-x-10 gap-y-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
-          {STAGES.map(([title, body], i) => (
-            <li key={title}>
-              <span className="figure-num text-[0.78rem] text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-2 text-[1rem] font-medium">{title}</h3>
-              <p className="mt-1.5 text-[0.88rem] leading-relaxed text-ink-3">{body}</p>
-            </li>
-          ))}
-        </ol>
-
-        <p className="mt-8 text-[0.88rem] text-ink-3">
-          No deposit is taken until you have approved a drawing and a price
-        </p>
       </section>
 
       {/* ======================================================== the styling */}

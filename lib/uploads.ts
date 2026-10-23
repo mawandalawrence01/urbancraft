@@ -46,6 +46,18 @@ function credentials(): Credentials | null {
 export const uploadsConfigured = () => credentials() !== null;
 
 /**
+ * Which of the three variables are absent.
+ *
+ * "Not configured" is a dead end when you believe you have configured it —
+ * the usual causes are a key set on Preview but not Production, or one of the
+ * three quietly missed. Naming them turns the question into a task.
+ */
+export function missingUploadKeys(): string[] {
+  return (["CLOUDINARY_CLOUD_NAME", "CLOUDINARY_API_KEY", "CLOUDINARY_API_SECRET"] as const)
+    .filter((key) => !process.env[key]);
+}
+
+/**
  * Cloudinary's signature: the signed parameters sorted by name, joined as a
  * query string, with the API secret appended, hashed with SHA-1. `file`,
  * `api_key` and `resource_type` are never part of it.

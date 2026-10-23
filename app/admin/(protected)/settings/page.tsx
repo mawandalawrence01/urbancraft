@@ -10,7 +10,7 @@ import {
   type ContactSettings, type DepositSettings, type HeroSettings,
 } from "@/lib/settings";
 import { isConfigured } from "@/lib/yo";
-import { uploadsConfigured } from "@/lib/uploads";
+import { missingUploadKeys, uploadsConfigured } from "@/lib/uploads";
 
 type SearchParams = Promise<{ saved?: string }>;
 
@@ -162,6 +162,20 @@ export default async function SettingsPage({ searchParams }: { searchParams: Sea
                   {uploadsConfigured() ? "Connected" : "Not configured"}
                 </span>
               </li>
+              {!uploadsConfigured() && (
+                <li className="rounded-lg bg-warn-soft px-3 py-2.5 text-[0.78rem] leading-relaxed text-warn">
+                  Still missing on this server:
+                  <ul className="mt-1.5 space-y-0.5 font-mono text-[0.75rem]">
+                    {missingUploadKeys().map((key) => (
+                      <li key={key}>{key}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-2 font-sans">
+                    Add them in Vercel under Settings &rarr; Environment Variables, tick all three
+                    environments, then redeploy. Photo uploads start working straight away.
+                  </p>
+                </li>
+              )}
             </ul>
             <p className="mt-3 text-[0.78rem] leading-relaxed text-muted">
               These are set with environment variables on the server, not here — see the README for

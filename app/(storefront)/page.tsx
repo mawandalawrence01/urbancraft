@@ -54,6 +54,7 @@ export default async function HomePage() {
   // catalogue is being rephotographed there is none, and an empty grey panel is
   // a worse front door than a second picture of the workshop's own work.
   const furnitureCover = (firstRoom ? covers[firstRoom] : undefined) ?? design[1]?.cover;
+  const roomsHaveCovers = rooms.some((r) => covers[r.slug]);
 
   return (
     <>
@@ -119,11 +120,15 @@ export default async function HomePage() {
             Shop by room
           </h2>
           <Link href="/shop" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
-            All {total} pieces
+            {total > 0 ? `All ${total} pieces` : "All furniture"}
             <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
+        {/* Ten identical "No photograph" frames is not a gallery. While the
+            catalogue is being rephotographed the rooms stay as navigation,
+            just without the empty picture frames. */}
+        {roomsHaveCovers ? (
         <div className="snap-rail container-page gap-4 pb-2 lg:grid lg:grid-cols-5 lg:gap-6 lg:overflow-visible">
           {rooms.map((room) => (
             <Link
@@ -148,13 +153,28 @@ export default async function HomePage() {
               </div>
               <div className="mt-3 flex items-baseline justify-between gap-2">
                 <span className="text-[0.92rem] font-medium">{room.name}</span>
-                <span className="figure-num text-[0.78rem] text-muted">
-                  {room._count.productLinks}
-                </span>
+                {room._count.productLinks > 0 && (
+                  <span className="figure-num text-[0.78rem] text-muted">
+                    {room._count.productLinks}
+                  </span>
+                )}
               </div>
             </Link>
           ))}
         </div>
+        ) : (
+          <div className="container-page flex flex-wrap gap-2.5">
+            {rooms.map((room) => (
+              <Link
+                key={room.slug}
+                href={`/c/${room.slug}`}
+                className="inline-flex h-11 items-center rounded-[var(--radius-card)] border border-line px-4 text-[0.9rem] transition hover:border-ink"
+              >
+                {room.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {featured.length > 0 && (

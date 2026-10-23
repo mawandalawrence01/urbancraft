@@ -5,6 +5,7 @@ import {
   ArrowUp2, ArrowDown2, Trash,
 } from "iconsax-reactjs";
 
+import { MoveToGallery } from "@/components/admin/MoveToGallery";
 import { PhotoUploader } from "@/components/admin/PhotoUploader";
 import { SortableShot } from "@/components/admin/SortableShot";
 import { Card, PageHeader } from "@/components/admin/ui";
@@ -14,6 +15,7 @@ import {
   bulkSetOrigin,
   clearDesignFlag,
   deleteDesignImage,
+  moveDesignImage,
   reorderDesignImage,
   setImageOrigin,
   toggleServicePublished,
@@ -36,6 +38,13 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
     include: { images: { orderBy: { position: "asc" } } },
   });
   if (!service) notFound();
+
+  // Every other gallery this photo could belong in.
+  const otherServices = await prisma.designService.findMany({
+    where: { id: { not: service.id } },
+    select: { id: true, name: true },
+    orderBy: { position: "asc" },
+  });
 
   const unset = service.images.filter((i) => i.origin === "UNSET" && !i.needsReview);
   const own = service.images.filter((i) => i.origin === "OWN_WORK");
@@ -209,6 +218,17 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
                     <Trash size={14} />
                   </button>
                 </form>
+              </div>
+
+              <div className="mt-2">
+                <MoveToGallery
+                  services={otherServices}
+                  action={async (formData: FormData) => {
+                    "use server";
+                    const target = String(formData.get("serviceId") ?? "");
+                    if (target) await moveDesignImage(img.id, target);
+                  }}
+                />
               </div>
             </div>
           </Card>

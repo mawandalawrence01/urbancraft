@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 import { ArrowRight2 } from "iconsax-reactjs";
 
-import { ProductCard } from "@/components/product/ProductCard";
+import { HomeFeed } from "@/components/home/HomeFeed";
 import { prisma } from "@/lib/db";
-import { getCatalogueByRoom, getCategoryTree, getRoomCovers } from "@/lib/catalog";
+import { getCategoryTree, getRoomCovers } from "@/lib/catalog";
+import { getFeedPage } from "@/lib/feed";
 import { getDesignHighlights, getPublishedServices } from "@/lib/design";
 import { getSetting, type ContactSettings } from "@/lib/settings";
 
@@ -24,11 +26,13 @@ const STAGES = [
 ] as const;
 
 export default async function HomePage() {
-  // The whole catalogue, every trade and every project are on this page, so a
-  // visitor can see everything we make without clicking through to find it.
-  const [tree, catalogue, projects, design, fitout, contact] = await Promise.all([
+  // The home page never ends in a dead stop: the whole catalogue, with
+  // photographs of installed work mixed in, keeps loading as the visitor
+  // scrolls. Two batches arrive with the page; the rest come from /api/feed.
+  const [tree, first, second, projects, design, fitout, contact] = await Promise.all([
     getCategoryTree(),
-    getCatalogueByRoom(),
+    getFeedPage(0),
+    getFeedPage(1),
     prisma.project.findMany({
       where: { isPublished: true }, orderBy: { position: "asc" },
     }),
@@ -37,16 +41,11 @@ export default async function HomePage() {
     getSetting<ContactSettings>("site.contact"),
   ]);
 
-  const total = catalogue.total;
+  const total = first.productTotal;
+  const initialFeed = first.hasMore ? [first, second] : [first];
   const rooms = tree.slice(0, 10);
   const covers = await getRoomCovers(rooms.map((r) => r.slug));
   const designCount = fitout.reduce((n, s) => n + s._count.images, 0);
-
-  // Room tiles jump to that room's section below rather than leaving the page.
-  // A room whose pieces are all filed under another room has no section here,
-  // so it keeps linking to its own page.
-  const onPage = new Set(catalogue.rooms.map((r) => r.slug));
-  const roomHref = (slug: string) => (onPage.has(slug) ? `#room-${slug}` : `/c/${slug}`);
 
   // Only the design library carries a provenance gate (an admin marked each
   // image OWN_WORK). heroRank ranks composition, not ownership, and several
@@ -138,7 +137,7 @@ export default async function HomePage() {
           {rooms.map((room) => (
             <Link
               key={room.slug}
-              href={roomHref(room.slug)}
+              href={`/c/${room.slug}`}
               className="group w-[46%] min-w-[10rem] sm:w-[31%] lg:w-auto"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] bg-sand">
@@ -172,7 +171,7 @@ export default async function HomePage() {
             {rooms.map((room) => (
               <Link
                 key={room.slug}
-                href={roomHref(room.slug)}
+                href={`/c/${room.slug}`}
                 className="inline-flex h-11 items-center rounded-[var(--radius-card)] border border-line px-4 text-[0.9rem] transition hover:border-ink"
               >
                 {room.name}
@@ -182,237 +181,217 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* ======================================================= catalogue */}
-      {total > 0 && (
-        <section id="catalogue" className="container-page mt-20 lg:mt-28" aria-labelledby="catalogue-heading">
-          <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-8">
-            <h2
-              id="catalogue-heading"
-              className="text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]"
-            >
-              Every piece we make
-            </h2>
+      {/* ============================================================= feed */}
+      <section id="catalogue" className="container-page mt-20 lg:mt-28" aria-labelledby="catalogue-heading">
+        <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-8">
+          <h2
+            id="catalogue-heading"
+            className="text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]"
+          >
+            {total > 0 ? "Every piece we make" : "Our work, as it leaves the workshop"}
+          </h2>
+          {total > 0 && (
             <p className="text-[0.9rem] text-ink-3">
               <span className="figure-num text-ink">{total}</span> pieces, each made to order
             </p>
-          </div>
+          )}
+        </div>
+      </section>
 
-          {catalogue.rooms.map((room, i) => (
-            <section
-              key={room.slug}
-              id={`room-${room.slug}`}
-              aria-labelledby={`room-${room.slug}-heading`}
-              className={i === 0 ? "mt-10" : "mt-14 lg:mt-20"}
-            >
-              <div className="mb-6 flex flex-wrap items-baseline justify-between gap-4">
-                <h3
-                  id={`room-${room.slug}-heading`}
-                  className="text-[1.25rem] font-medium tracking-[-0.015em]"
-                >
-                  {room.name}
-                  <span className="figure-num ml-2.5 text-[0.85rem] font-normal text-muted">
-                    {room.products.length}
-                  </span>
-                </h3>
-                {room.slug !== "other" && (
-                  <Link
-                    href={`/c/${room.slug}`}
-                    className="group flex items-center gap-1.5 text-[0.88rem] text-ink-2 transition hover:text-ink"
-                  >
-                    Filter {room.name.toLowerCase()}
-                    <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                )}
+      {/* The editorial sections arrive between batches, as part of the scroll,
+          and the closing call only once there is nothing left to load. */}
+      <HomeFeed
+        initial={initialFeed}
+        interludes={[
+          <Fragment key="interiors">
+          {/* ========================================================= interiors */}
+          <section className="mt-20 bg-sand py-16 lg:mt-28 lg:py-24">
+            <div className="container-page">
+              <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+                <div className="max-w-[46ch]">
+                  <h2 className="text-[clamp(1.6rem,3.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em]">
+                    We also build the room itself
+                  </h2>
+                  <p className="mt-3 text-[0.98rem] leading-relaxed text-ink-2">
+                    Measured in your space, made in our workshop and fitted by the people who made
+                    them. The survey and the drawing cost nothing.
+                  </p>
+                </div>
+                <Link href="/design" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
+                  All trades
+                  <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
-                {/* Below the fold, so every card lazy-loads its photograph. */}
-                {room.products.map((p) => <ProductCard key={p.id} product={p} />)}
+
+              {design.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-5">
+                  {design.map((service) => (
+                    <Link key={service.slug} href={`/design/${service.slug}`} className="group">
+                      <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-card)] bg-sand-2">
+                        <Image
+                          src={service.cover.url} alt="" fill
+                          sizes="(min-width:1024px) 16vw, 45vw"
+                          placeholder={service.cover.blurDataUrl ? "blur" : "empty"}
+                          blurDataURL={service.cover.blurDataUrl ?? undefined}
+                          className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
+                        />
+                      </div>
+                      <p className="mt-2.5 text-[0.88rem] font-medium leading-snug">{service.name}</p>
+                      <p className="figure-num text-[0.76rem] text-muted">{service.count} photos</p>
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* The one place numbers belong: the sequence is the information. */}
+              <ol className="mt-14 grid gap-x-10 gap-y-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
+                {STAGES.map(([title, body], i) => (
+                  <li key={title}>
+                    <span className="figure-num text-[0.78rem] text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-2 text-[1rem] font-medium">{title}</h3>
+                    <p className="mt-1.5 text-[0.88rem] leading-relaxed text-ink-3">{body}</p>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Link
+                  href="/design/enquire"
+                  className="inline-flex h-12 items-center gap-2 rounded-[var(--radius-card)] bg-accent px-7 text-[0.92rem] font-medium text-white transition hover:bg-accent-2"
+                >
+                  Book a site survey <ArrowRight2 size={15} />
+                </Link>
+                <Link
+                  href="/projects"
+                  className="inline-flex h-12 items-center rounded-[var(--radius-card)] border border-rule px-7 text-[0.92rem] font-medium transition hover:border-ink"
+                >
+                  See installed work
+                </Link>
+              </div>
+            </div>
+          </section>
+          </Fragment>,
+          <Fragment key="quality">
+          {/* ================================================== quality classes */}
+          <section className="container-page mt-20 lg:mt-28">
+            <h2 className="max-w-[24ch] text-[clamp(1.45rem,3vw,2rem)] font-medium leading-[1.12] tracking-[-0.02em]">
+              The same design, in three quality classes
+            </h2>
+            <p className="mt-3 max-w-[58ch] text-[0.98rem] leading-relaxed text-ink-2">
+              Timber and finishing decide what a piece costs and how long it lasts. All three are
+              published, so you choose the class instead of negotiating the price.
+            </p>
+
+            <table className="mt-8 w-full text-left">
+              <caption className="sr-only">Quality classes, their timbers and warranties</caption>
+              <thead>
+                <tr className="label-xs border-b border-line text-muted">
+                  <th scope="col" className="py-3 pr-4">Class</th>
+                  <th scope="col" className="py-3 pr-4">Timber &amp; finish</th>
+                  <th scope="col" className="py-3 text-right">Timber grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Economy", "Affordable construction, hand-applied finishing. Light or short-term use.", "Softwood"],
+                  ["Standard", "Musambya, muvule and comparable hardwoods. Our default joinery and finish.", "Hardwood"],
+                  ["Top Class", "Mahogany, Elgon teak or mugavu, machine-sprayed for an imported finish.", "Premium"],
+                ].map(([name, body, warranty]) => (
+                  <tr key={name} className="border-b border-line">
+                    <th scope="row" className="py-5 pr-4 align-top text-[0.98rem] font-medium">
+                      {name}
+                    </th>
+                    <td className="max-w-prose py-5 pr-4 align-top text-[0.9rem] leading-relaxed text-ink-3">
+                      {body}
+                    </td>
+                    <td className="figure-num whitespace-nowrap py-5 text-right align-top text-[0.88rem]">
+                      {warranty}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+          </Fragment>,
+          <Fragment key="projects">
+          {projects.length > 0 && (
+            <section className="container-page mt-20 lg:mt-28">
+              <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+                <h2 className="text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]">
+                  Rooms we have fitted
+                </h2>
+                <Link href="/projects" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
+                  All projects
+                  <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+
+              <div className="grid gap-5 sm:grid-cols-3 lg:gap-6">
+                {projects.map((p) => (
+                  <Link key={p.id} href={`/projects/${p.slug}`} className="group">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-sand">
+                      {p.coverImage && (
+                        <Image
+                          src={p.coverImage} alt="" fill
+                          sizes="(min-width:640px) 31vw, 92vw"
+                          className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
+                        />
+                      )}
+                    </div>
+                    <p className="mt-3 text-[0.95rem] font-medium">{p.title}</p>
+                    {p.summary && (
+                      <p className="mt-1 line-clamp-2 text-[0.86rem] leading-relaxed text-ink-3">
+                        {p.summary}
+                      </p>
+                    )}
+                  </Link>
+                ))}
               </div>
             </section>
-          ))}
-        </section>
-      )}
-
-      {/* ========================================================= interiors */}
-      <section className="mt-20 bg-sand py-16 lg:mt-28 lg:py-24">
-        <div className="container-page">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-[46ch]">
-              <h2 className="text-[clamp(1.6rem,3.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em]">
-                We also build the room itself
+          )}
+          </Fragment>,
+        ]}
+        end={
+          <>
+          {/* ============================================================= foot */}
+          <section className="container-page mt-20 lg:mt-28">
+            <div className="border-t border-line py-16 text-center lg:py-20">
+              <h2 className="mx-auto max-w-[22ch] text-[clamp(1.6rem,3.6vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.02em]">
+                Tell us what you need built
               </h2>
-              <p className="mt-3 text-[0.98rem] leading-relaxed text-ink-2">
-                Measured in your space, made in our workshop and fitted by the people who made
-                them. The survey and the drawing cost nothing.
+              <p className="mx-auto mt-4 max-w-[52ch] text-[0.98rem] leading-relaxed text-ink-2">
+                A photo, a sketch or just the measurements is enough to start. For a whole room, the
+                survey and the drawing cost nothing.
               </p>
-            </div>
-            <Link href="/design" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
-              All trades
-              <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-
-          {design.length > 0 && (
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-5">
-              {design.map((service) => (
-                <Link key={service.slug} href={`/design/${service.slug}`} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-card)] bg-sand-2">
-                    <Image
-                      src={service.cover.url} alt="" fill
-                      sizes="(min-width:1024px) 16vw, 45vw"
-                      placeholder={service.cover.blurDataUrl ? "blur" : "empty"}
-                      blurDataURL={service.cover.blurDataUrl ?? undefined}
-                      className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
-                    />
-                  </div>
-                  <p className="mt-2.5 text-[0.88rem] font-medium leading-snug">{service.name}</p>
-                  <p className="figure-num text-[0.76rem] text-muted">{service.count} photos</p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/design/enquire"
+                  className="inline-flex h-12 items-center gap-2 rounded-[var(--radius-card)] bg-ink px-7 text-[0.92rem] font-medium text-white transition hover:bg-ink-2"
+                >
+                  Brief a fit-out <ArrowRight2 size={15} />
                 </Link>
-              ))}
+                <Link
+                  href="/contact"
+                  className="inline-flex h-12 items-center rounded-[var(--radius-card)] border border-rule px-7 text-[0.92rem] font-medium transition hover:border-ink"
+                >
+                  Commission a piece
+                </Link>
+              </div>
+              {contact?.phone && (
+                <a
+                  href={`tel:${contact.phone.replace(/\s/g, "")}`}
+                  className="mt-8 inline-block text-[1.05rem] text-ink-2 transition hover:text-ink"
+                >
+                  or call {contact.phone}
+                </a>
+              )}
             </div>
-          )}
-
-          {/* The one place numbers belong: the sequence is the information. */}
-          <ol className="mt-14 grid gap-x-10 gap-y-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
-            {STAGES.map(([title, body], i) => (
-              <li key={title}>
-                <span className="figure-num text-[0.78rem] text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-2 text-[1rem] font-medium">{title}</h3>
-                <p className="mt-1.5 text-[0.88rem] leading-relaxed text-ink-3">{body}</p>
-              </li>
-            ))}
-          </ol>
-
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              href="/design/enquire"
-              className="inline-flex h-12 items-center gap-2 rounded-[var(--radius-card)] bg-accent px-7 text-[0.92rem] font-medium text-white transition hover:bg-accent-2"
-            >
-              Book a site survey <ArrowRight2 size={15} />
-            </Link>
-            <Link
-              href="/projects"
-              className="inline-flex h-12 items-center rounded-[var(--radius-card)] border border-rule px-7 text-[0.92rem] font-medium transition hover:border-ink"
-            >
-              See installed work
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================== quality classes */}
-      <section className="container-page mt-20 lg:mt-28">
-        <h2 className="max-w-[24ch] text-[clamp(1.45rem,3vw,2rem)] font-medium leading-[1.12] tracking-[-0.02em]">
-          The same design, in three quality classes
-        </h2>
-        <p className="mt-3 max-w-[58ch] text-[0.98rem] leading-relaxed text-ink-2">
-          Timber and finishing decide what a piece costs and how long it lasts. All three are
-          published, so you choose the class instead of negotiating the price.
-        </p>
-
-        <table className="mt-8 w-full text-left">
-          <caption className="sr-only">Quality classes, their timbers and warranties</caption>
-          <thead>
-            <tr className="label-xs border-b border-line text-muted">
-              <th scope="col" className="py-3 pr-4">Class</th>
-              <th scope="col" className="py-3 pr-4">Timber &amp; finish</th>
-              <th scope="col" className="py-3 text-right">Timber grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              ["Economy", "Affordable construction, hand-applied finishing. Light or short-term use.", "Softwood"],
-              ["Standard", "Musambya, muvule and comparable hardwoods. Our default joinery and finish.", "Hardwood"],
-              ["Top Class", "Mahogany, Elgon teak or mugavu, machine-sprayed for an imported finish.", "Premium"],
-            ].map(([name, body, warranty]) => (
-              <tr key={name} className="border-b border-line">
-                <th scope="row" className="py-5 pr-4 align-top text-[0.98rem] font-medium">
-                  {name}
-                </th>
-                <td className="max-w-prose py-5 pr-4 align-top text-[0.9rem] leading-relaxed text-ink-3">
-                  {body}
-                </td>
-                <td className="figure-num whitespace-nowrap py-5 text-right align-top text-[0.88rem]">
-                  {warranty}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      {projects.length > 0 && (
-        <section className="container-page mt-20 lg:mt-28">
-          <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]">
-              Rooms we have fitted
-            </h2>
-            <Link href="/projects" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
-              All projects
-              <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-3 lg:gap-6">
-            {projects.map((p) => (
-              <Link key={p.id} href={`/projects/${p.slug}`} className="group">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-sand">
-                  {p.coverImage && (
-                    <Image
-                      src={p.coverImage} alt="" fill
-                      sizes="(min-width:640px) 31vw, 92vw"
-                      className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
-                    />
-                  )}
-                </div>
-                <p className="mt-3 text-[0.95rem] font-medium">{p.title}</p>
-                {p.summary && (
-                  <p className="mt-1 line-clamp-2 text-[0.86rem] leading-relaxed text-ink-3">
-                    {p.summary}
-                  </p>
-                )}
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* ============================================================= foot */}
-      <section className="container-page mt-20 lg:mt-28">
-        <div className="border-t border-line py-16 text-center lg:py-20">
-          <h2 className="mx-auto max-w-[22ch] text-[clamp(1.6rem,3.6vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.02em]">
-            Tell us what you need built
-          </h2>
-          <p className="mx-auto mt-4 max-w-[52ch] text-[0.98rem] leading-relaxed text-ink-2">
-            A photo, a sketch or just the measurements is enough to start. For a whole room, the
-            survey and the drawing cost nothing.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/design/enquire"
-              className="inline-flex h-12 items-center gap-2 rounded-[var(--radius-card)] bg-ink px-7 text-[0.92rem] font-medium text-white transition hover:bg-ink-2"
-            >
-              Brief a fit-out <ArrowRight2 size={15} />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-[var(--radius-card)] border border-rule px-7 text-[0.92rem] font-medium transition hover:border-ink"
-            >
-              Commission a piece
-            </Link>
-          </div>
-          {contact?.phone && (
-            <a
-              href={`tel:${contact.phone.replace(/\s/g, "")}`}
-              className="mt-8 inline-block text-[1.05rem] text-ink-2 transition hover:text-ink"
-            >
-              or call {contact.phone}
-            </a>
-          )}
-        </div>
-      </section>
+          </section>
+          </>
+        }
+      />
     </>
   );
 }

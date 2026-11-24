@@ -161,43 +161,6 @@ export async function getHeroProducts(take = 3) {
   });
 }
 
-/**
- * Every live piece, grouped under its room, for the home page.
- *
- * A product is linked to several categories (leaf and parent, sometimes more
- * than one room), so grouping by the link table would print the same sofa
- * twice. Each piece goes under exactly one room: its primary category's
- * parent, or the category itself when that is already a room.
- */
-export async function getCatalogueByRoom() {
-  const [tree, products] = await Promise.all([
-    getCategoryTree(),
-    prisma.product.findMany({
-      where: { status: "ACTIVE" },
-      select: {
-        ...productCard,
-        category: { select: { slug: true, name: true, parent: { select: { slug: true } } } },
-      },
-      orderBy: ORDER_BY.featured,
-    }),
-  ]);
-
-  const groups = new Map<string, { slug: string; name: string; products: ProductCard[] }>(
-    tree.map((room) => [room.slug, { slug: room.slug, name: room.name, products: [] }]),
-  );
-  const other: ProductCard[] = [];
-
-  for (const p of products) {
-    const roomSlug = p.category?.parent?.slug ?? p.category?.slug;
-    const group = roomSlug ? groups.get(roomSlug) : undefined;
-    (group ? group.products : other).push(p);
-  }
-
-  const rooms = [...groups.values()].filter((g) => g.products.length > 0);
-  if (other.length > 0) rooms.push({ slug: "other", name: "More pieces", products: other });
-  return { rooms, total: products.length };
-}
-
 /** Lightweight typeahead for the search sheet. */
 export async function quickSearch(q: string, take = 6) {
   if (!q.trim()) return [];

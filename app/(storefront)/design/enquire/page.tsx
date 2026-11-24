@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Start a Design Brief",
   description:
-    "Tell us about the space and we will come and measure it. The site survey and the drawing are free — you only pay once you have approved a price.",
+    "Tell us about the space and we will come and measure it. The site survey and the drawing are free. You only pay once you have approved a price.",
   alternates: { canonical: "/design/enquire" },
 };
 
@@ -48,7 +48,7 @@ export default async function DesignEnquirePage({
         <div>
           <h1 className="text-3xl font-semibold sm:text-4xl">Start a design brief</h1>
           <p className="mt-3 max-w-lg text-[0.95rem] leading-relaxed text-ink-3">
-            The more you tell us now, the more useful the first visit is. None of it is binding —
+            The more you tell us now, the more useful the first visit is. None of it is binding:
             we measure, we draw, and then you decide.
           </p>
 

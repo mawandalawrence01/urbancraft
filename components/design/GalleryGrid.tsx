@@ -33,7 +33,7 @@ export function GalleryGrid({
             >
               <Image
                 src={img.url}
-                alt={img.alt ?? `${serviceName} — UrbanCraft installation`}
+                alt={img.alt ?? `${serviceName} installed by UrbanCraft`}
                 width={img.width ?? 1200}
                 height={img.height ?? 1600}
                 sizes="(min-width:1024px) 31vw, 48vw"

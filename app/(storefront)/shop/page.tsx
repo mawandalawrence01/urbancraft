@@ -9,7 +9,7 @@ import { getCategoryTree, getPriceBounds, listProducts, type SortKey } from "@/l
 export const metadata: Metadata = {
   title: "All Furniture",
   description:
-    "Every piece in the UrbanCraft catalogue — sofas, beds, wall units, dining sets, office and kids furniture, made to order in Kampala.",
+    "Every piece in the UrbanCraft catalogue: sofas, beds, wall units, dining sets, office and kids furniture, made to order in Kampala.",
   alternates: { canonical: "/shop" },
 };
 

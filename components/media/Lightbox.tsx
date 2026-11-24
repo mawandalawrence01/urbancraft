@@ -124,7 +124,7 @@ export function Lightbox({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${label} — image ${current + 1} of ${images.length}`}
+      aria-label={`${label}, image ${current + 1} of ${images.length}`}
       className="animate-fade-in fixed inset-0 z-[100] bg-ink"
     >
       {/* The rail. Each slide is one viewport, so a swipe is one photograph. */}
@@ -144,7 +144,7 @@ export function Lightbox({
           >
             <Image
               src={image.url}
-              alt={image.alt ?? `${label} — image ${i + 1}`}
+              alt={image.alt ?? `${label}, image ${i + 1}`}
               width={image.width ?? 1600}
               height={image.height ?? 1600}
               sizes="100vw"

@@ -92,7 +92,7 @@ export default async function DesignServiceAdminPage({ params }: { params: Param
       <div className="mb-6 rounded-2xl border border-line bg-paper p-4">
         <p className="text-[0.87rem] font-medium">Add photos to this gallery</p>
         <p className="mt-1 text-[0.83rem] leading-relaxed text-muted">
-          They upload to the workshop&apos;s Cloudinary library and arrive here unsorted — mark
+          They upload to the workshop&apos;s Cloudinary library and arrive here unsorted. Mark
           them as yours below to put them on the site.
         </p>
         <PhotoUploader

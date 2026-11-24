@@ -18,7 +18,7 @@ const hanken = Hanken_Grotesk({
 export const metadata: Metadata = {
   metadataBase: siteUrlObject,
   title: {
-    default: "UrbanCraft — Furniture Made to Order in Kampala",
+    default: "UrbanCraft · Furniture Made to Order in Kampala",
     template: "%s · UrbanCraft",
   },
   description:

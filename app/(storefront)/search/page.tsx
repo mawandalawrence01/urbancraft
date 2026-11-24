@@ -59,7 +59,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
               <SearchNormal1 size={34} className="mx-auto text-muted" />
               <h2 className="mt-4 font-display text-lg font-semibold">Nothing matched</h2>
               <p className="mx-auto mt-2 max-w-sm text-[0.9rem] text-muted">
-                Try a room or a piece — “sofa”, “bunk bed”, “wall unit” — or{" "}
+                Try a room or a piece, like “sofa”, “bunk bed” or “wall unit”, or{" "}
                 <Link href="/contact" className="text-tan-2 underline">ask us to build it</Link>.
               </p>
             </div>

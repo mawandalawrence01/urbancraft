@@ -13,7 +13,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "About Urbancraft",
   description:
-    "Urbancraft Furniture and Interior Designing is a full-service furniture and interior company in Kansanga, Kitalanga, Kampala — furniture, doors and frames, floor decking and complete interiors.",
+    "Urbancraft Furniture and Interior Designing is a full-service furniture and interior company in Kansanga, Kitalanga, Kampala: furniture, doors and frames, floor decking and complete interiors.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "website",
@@ -43,7 +43,7 @@ export default async function AboutPage() {
         </h1>
         <p className="mt-5 text-[1.05rem] leading-relaxed text-ink-2">
           Urbancraft Furniture and Interior Designing is a full-service furniture and interior
-          company based in Kansanga &mdash; Kitalanga, Kampala.
+          company based in Kansanga, Kitalanga, Kampala.
         </p>
         <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-3">
           From design to carpentry to final installation, we handle everything under one roof,
@@ -135,7 +135,7 @@ export default async function AboutPage() {
           </p>
           <p>
             We are honest about grades. The same design can be built three ways, and the difference
-            is the timber and the finishing &mdash; not the drawing. We publish all three prices so
+            is the timber and the finishing, not the drawing. We publish all three prices so
             you can pick the one that fits your budget, instead of being sold the cheapest build at
             the best price.
           </p>
@@ -147,7 +147,7 @@ export default async function AboutPage() {
 
         <div className="space-y-3">
           {[
-            [Award, "Three quality classes", "Economy, Standard and Top class — priced openly, not negotiated in the room."],
+            [Award, "Three quality classes", "Economy, Standard and Top class, priced openly, not negotiated in the room."],
             [Ruler, "Built to your measurements", "Send the dimensions of the space. We cut the piece to fit it."],
             [ShieldTick, "Warranty in writing", "Six months on joinery and finish, whatever class it is built in."],
             [Truck, "We deliver and install", "Free within Kampala Central, quoted honestly beyond it."],
@@ -181,7 +181,7 @@ export default async function AboutPage() {
           ))}
         </div>
         <p className="mt-9 max-w-xl text-[0.95rem] leading-relaxed text-white/70">
-          Find us at {contact.address}. We work by appointment &mdash; call before you set off so we
+          Find us at {contact.address}. We work by appointment, so call before you set off so we
           can give you proper time.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">

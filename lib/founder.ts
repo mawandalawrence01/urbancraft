@@ -39,12 +39,12 @@ export const FOUNDER = {
       { text: "Based in " },
       // "Kasanga" in the supplied copy; Kansanga is the spelling of the
       // neighbourhood and the one used everywhere else on the site.
-      { text: "Kitalanga, Kansanga — Second Boda Boda Stage, Kampala", strong: true },
-      { text: ", David is known for quality craftsmanship, timely delivery (7–14 days), affordable pricing direct from workshop, and a professional uniformed team. Urbancraft also supplies branded workwear — overalls, t-shirts, and reflector jackets." },
+      { text: "Kitalanga, Kansanga, Second Boda Boda Stage, Kampala", strong: true },
+      { text: ", David is known for quality craftsmanship, timely delivery (7–14 days), affordable pricing direct from workshop, and a professional uniformed team. Urbancraft also supplies branded workwear: overalls, t-shirts, and reflector jackets." },
     ],
   ] as { text: string; strong?: boolean }[][],
 
-  mission: "To craft durable, modern furniture that tells your story — Built to Last.",
+  mission: "To craft durable, modern furniture that tells your story. Built to Last.",
 
   /**
    * Plain, factual, first person, for the /founder page on the company site.
@@ -53,7 +53,7 @@ export const FOUNDER = {
    * founder selling himself there. See `bio` above.
    */
   story: [
-    "I run Urbancraft Furniture & Interior Design, a workshop in Kitalanga, Kansanga, Kampala. We make furniture to order and fit out interiors — kitchens, wardrobes, staircases, ceilings and feature walls.",
+    "I run Urbancraft Furniture & Interior Design, a workshop in Kitalanga, Kansanga, Kampala. We make furniture to order and fit out interiors: kitchens, wardrobes, staircases, ceilings and feature walls.",
     "I trained in woodworking and I still work on site. Every job is measured, drawn, built in the workshop and installed by the same team, and I supervise each one from the first measurement to the last coat.",
   ],
 } as const;

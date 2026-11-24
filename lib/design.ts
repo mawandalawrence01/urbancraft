@@ -41,8 +41,8 @@ export async function getServiceWithImages(slug: string) {
   });
 }
 
-/** Home page art — only services that actually have an approved photo. */
-export async function getDesignHighlights(limit = 4) {
+/** Home page art: only services that actually have an approved photo. All of them unless limited. */
+export async function getDesignHighlights(limit?: number) {
   const services = await getPublishedServices("FITOUT");
   return services
     .filter((s) => s.images.length > 0)

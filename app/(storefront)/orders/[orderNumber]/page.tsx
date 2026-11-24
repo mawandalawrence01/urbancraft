@@ -236,7 +236,7 @@ export default async function OrderPage({
       </div>
 
       <p className="mt-6 text-[0.8rem] text-muted">
-        Save your order number <strong className="text-ink">{order.orderNumber}</strong> — you can
+        Save your order number <strong className="text-ink">{order.orderNumber}</strong>. You can
         look it up any time at <Link href="/orders/track" className="text-tan-2 underline">track an order</Link>.
       </p>
     </div>

@@ -83,7 +83,7 @@ export function DesignBriefForm({
         error={err("serviceSlug")}
         defaultValue={defaultService}
       >
-        <option value="">Not sure yet — advise me</option>
+        <option value="">Not sure yet, advise me</option>
         {services.map((s) => (
           <option key={s.slug} value={s.slug}>
             {s.name}

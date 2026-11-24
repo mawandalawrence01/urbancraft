@@ -11,13 +11,13 @@ import { absoluteUrl } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: `${FOUNDER.name} — ${FOUNDER.role}`,
+  title: `${FOUNDER.name} · ${FOUNDER.role}`,
   description:
     `${FOUNDER.name} founded Urbancraft Furniture and Interior Designing in Kansanga, Kitalanga, Kampala, and supervises every project in the workshop himself.`,
   alternates: { canonical: "/founder" },
   openGraph: {
     type: "profile",
-    title: `${FOUNDER.name} — ${FOUNDER.role}, Urbancraft`,
+    title: `${FOUNDER.name} · ${FOUNDER.role}, Urbancraft`,
     description:
       "Furniture maker and interior designer, and the founder of Urbancraft in Kansanga, Kampala.",
     url: "/founder",

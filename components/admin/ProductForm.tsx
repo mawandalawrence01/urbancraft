@@ -161,8 +161,8 @@ export function ProductForm({
           {/* These live outside the <form> visually, so bind them by id. */}
           <Field label="Status">
             <select name="status" form="product-form" defaultValue={product.status} className={inputClass}>
-              <option value="ACTIVE">Active — visible in the shop</option>
-              <option value="DRAFT">Draft — hidden</option>
+              <option value="ACTIVE">Active (visible in the shop)</option>
+              <option value="DRAFT">Draft (hidden)</option>
               <option value="ARCHIVED">Archived</option>
             </select>
           </Field>

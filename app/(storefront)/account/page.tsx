@@ -21,7 +21,7 @@ export default async function AccountPage() {
     <div className="container-page max-w-2xl pt-10">
       <h1 className="text-3xl font-semibold">Your account</h1>
       <p className="mt-2 text-[0.93rem] leading-relaxed text-ink-3">
-        You do not need an account to order from us — checkout takes a name, a phone number and an
+        You do not need an account to order from us. Checkout takes a name, a phone number and an
         address. Keep your order number and you can look it up any time.
       </p>
 

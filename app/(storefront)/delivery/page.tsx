@@ -24,7 +24,7 @@ export default async function DeliveryPage() {
       <h1 className="text-3xl font-semibold sm:text-4xl">Delivery, payment &amp; returns</h1>
       <p className="mt-3 text-[0.97rem] leading-relaxed text-ink-3">
         Everything below applies to every order. If something here does not fit your situation,
-        call us — we would rather agree it up front than surprise you later.
+        call us. We would rather agree it up front than surprise you later.
       </p>
 
       <section className="mt-10">
@@ -54,7 +54,7 @@ export default async function DeliveryPage() {
         </table>
         <p className="mt-3 text-[0.85rem] text-muted">
           Delivery includes carrying the piece in and assembling it. Upstairs deliveries with no
-          lift may be quoted separately — tell us at checkout.
+          lift may be quoted separately, so tell us at checkout.
         </p>
       </section>
 
@@ -62,7 +62,7 @@ export default async function DeliveryPage() {
         {
           Icon: Clock, title: "Build times",
           body: [
-            "Most pieces are made to order and take one to two working weeks from the day your deposit clears. Fitted work — kitchens, wardrobes, wall units — takes longer because we survey the space first.",
+            "Most pieces are made to order and take one to two working weeks from the day your deposit clears. Fitted work (kitchens, wardrobes, wall units) takes longer because we survey the space first.",
             "Anything marked “Ready to deliver” is already built and can go out within a few days.",
           ],
         },
@@ -81,7 +81,7 @@ export default async function DeliveryPage() {
             "Every piece carries a six month warranty on joinery and finish under normal household use, in whichever class it is built.",
             "If a joint moves, a drawer stops running true, or a finish fails within the warranty, we collect the piece, repair it and bring it back at our cost.",
             "Made-to-order pieces are cut to your specification, so they cannot be returned simply because you changed your mind. If we got the specification wrong, that is ours to fix.",
-            "Damage in transit is our responsibility — check the piece before our driver leaves and tell us there and then.",
+            "Damage in transit is our responsibility. Check the piece before our driver leaves and tell us there and then.",
           ],
         },
       ].map(({ Icon, title, body }) => (

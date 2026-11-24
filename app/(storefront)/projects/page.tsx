@@ -8,7 +8,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Our Work",
   description:
-    "Fit-outs, built-ins and commissions installed by the UrbanCraft workshop across Kampala — retail, office, hospitality and residential.",
+    "Fit-outs, built-ins and commissions installed by the UrbanCraft workshop across Kampala: retail, office, hospitality and residential.",
   alternates: { canonical: "/projects" },
 };
 

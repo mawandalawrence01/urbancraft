@@ -25,7 +25,7 @@ export const DESIGN_SERVICES = [
     kind: "FITOUT",
     tagline: "Floor to ceiling, wall to wall",
     description:
-      "Fitted storage scribed to the room — no dust gap above, no wasted corner. Internals are planned around what you own: hanging heights, drawer depths and shelf spacing set before anything is cut.",
+      "Fitted storage scribed to the room, with no dust gap above and no wasted corner. Internals are planned around what you own: hanging heights, drawer depths and shelf spacing set before anything is cut.",
   },
   {
     slug: "staircases",

@@ -244,7 +244,7 @@ export default async function ProductPage({ params }: { params: Params }) {
                   <Award size={19} className="text-tan" /> Available in three quality classes
                 </h2>
                 <p className="mt-2 text-[0.87rem] leading-relaxed text-ink-3">
-                  This price is our Standard class — musambya, muvule or similar hardwood.
+                  This price is our Standard class: musambya, muvule or similar hardwood.
                   Economy and Top class are quoted on request; Top class uses mahogany, Elgon
                   teak or mugavu. Every class carries the same 6 month warranty on joinery and
                   finish; the class changes the timber and the finishing, not the cover.

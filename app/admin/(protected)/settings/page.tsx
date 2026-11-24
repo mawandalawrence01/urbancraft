@@ -85,7 +85,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Sea
           <h2 className="font-display font-semibold">Contact details</h2>
           <Field label="Main phone"><input name="phone" defaultValue={contact.phone} className={inputClass} /></Field>
           <Field label="Second phone"><input name="altPhone" defaultValue={contact.altPhone ?? ""} className={inputClass} /></Field>
-          <Field label="WhatsApp number" hint="Digits only, with country code — 256777913616">
+          <Field label="WhatsApp number" hint="Digits only, with country code, e.g. 256777913616">
             <input name="whatsapp" defaultValue={contact.whatsapp} className={inputClass} />
           </Field>
           <Field label="Email"><input name="email" type="email" defaultValue={contact.email} className={inputClass} /></Field>
@@ -178,7 +178,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Sea
               )}
             </ul>
             <p className="mt-3 text-[0.78rem] leading-relaxed text-muted">
-              These are set with environment variables on the server, not here — see the README for
+              These are set with environment variables on the server, not here. See the README for
               the exact names.
             </p>
           </Card>

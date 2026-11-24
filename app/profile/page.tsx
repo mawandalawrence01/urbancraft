@@ -13,7 +13,7 @@ const COMPANY_URL = "https://www.urbancraft.co.ug";
 export const metadata: Metadata = {
   // Absolute, so the storefront's "%s · UrbanCraft" template does not append
   // the company name to his own site's title.
-  title: { absolute: "David Collins Kibirige — Furniture Maker & Interior Designer, Kampala" },
+  title: { absolute: "David Collins Kibirige · Furniture Maker & Interior Designer, Kampala" },
   description:
     "David Collins Kibirige is a Ugandan furniture maker, interior designer and entrepreneur, and the founder of Urbancraft Furniture & Interior Design in Kitalanga, Kansanga, Kampala.",
   keywords: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "profile",
-    title: "David Collins Kibirige — Urbancraft, Kampala",
+    title: "David Collins Kibirige · Urbancraft, Kampala",
     description: "Furniture maker and interior designer in Kampala.",
     url: PROFILE_URL,
     images: [{ url: `${COMPANY_URL}/og/founder.jpg`, width: 1200, height: 630 }],
@@ -46,7 +46,7 @@ export default async function ProfilePage() {
 
   const address = {
     "@type": "PostalAddress",
-    streetAddress: "Kitalanga, Kansanga — Second Boda Boda Stage",
+    streetAddress: "Kitalanga, Kansanga, Second Boda Boda Stage",
     addressLocality: "Kampala",
     addressCountry: "UG",
   };
@@ -92,7 +92,7 @@ export default async function ProfilePage() {
         telephone: contact.phone,
         image: `${COMPANY_URL}${FOUNDER.ogCard}`,
         description:
-          "Kampala-based workshop making modern custom furniture and fitting out interiors — kitchens, wardrobes, staircases, ceilings and feature walls.",
+          "Kampala-based workshop making modern custom furniture and fitting out interiors: kitchens, wardrobes, staircases, ceilings and feature walls.",
         address,
         areaServed: { "@type": "City", name: "Kampala" },
         foundedBy: { "@id": `${PROFILE_URL}/#person` },
@@ -169,7 +169,7 @@ export default async function ProfilePage() {
           </div>
 
           <div className="mt-14 border-t border-line pt-8 text-[0.95rem] leading-relaxed text-ink-3">
-            <p>Kitalanga, Kansanga — 2nd Boda Boda Stage, Kampala</p>
+            <p>Kitalanga, Kansanga, 2nd Boda Boda Stage, Kampala</p>
             <a
               href={COMPANY_URL}
               className="mt-3 inline-flex items-center gap-2 text-ink transition hover:gap-3"

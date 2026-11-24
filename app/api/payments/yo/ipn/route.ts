@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     // Record it, but never act on an unverified notification.
     await prisma.payment.updateMany({
       where: { externalReference: params.external_ref },
-      data: { statusMessage: "Received an IPN whose signature did not verify — ignored." },
+      data: { statusMessage: "Received an IPN whose signature did not verify, so it was ignored." },
     });
     return new NextResponse("OK", { status: 200 });
   }

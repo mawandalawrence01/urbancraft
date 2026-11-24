@@ -71,7 +71,7 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
             >
               <Image
                 src={img.url}
-                alt={img.alt ?? `${name} — view ${i + 1}`}
+                alt={img.alt ?? `${name}, view ${i + 1}`}
                 fill sizes="100vw" priority={i === 0}
                 placeholder={img.blurDataUrl ? "blur" : "empty"}
                 blurDataURL={img.blurDataUrl ?? undefined}
@@ -126,7 +126,7 @@ export function Gallery({ images, name }: { images: GalleryImage[]; name: string
       <Lightbox
         images={images.map((img, i) => ({
           url: img.url,
-          alt: img.alt ?? `${name} — view ${i + 1}`,
+          alt: img.alt ?? `${name}, view ${i + 1}`,
           width: img.width,
           height: img.height,
           blurDataUrl: img.blurDataUrl,

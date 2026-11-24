@@ -101,7 +101,7 @@ async function main() {
         create: {
           slug: cslug, name: cname, parentId: parent.id, position: childPos++,
           description: `${cname} handmade in our Kampala workshop.`,
-          seoTitle: `${cname} in Uganda — Prices & Delivery`,
+          seoTitle: `${cname} in Uganda · Prices & Delivery`,
           seoDescription: `Browse ${cname.toLowerCase()} made to order by UrbanCraft. Choose your timber and finish, delivered across Uganda.`,
         },
         update: { name: cname, parentId: parent.id, position: childPos - 1 },
@@ -134,7 +134,7 @@ async function main() {
         categoryId, position: i,
         // Six months on every class; the class changes the timber, not the cover.
         warrantyMonths: 6,
-        seoTitle: `${p.name} — Price in Uganda`,
+        seoTitle: `${p.name} · Price in Uganda`,
         seoDescription: summary ?? `${p.name} made to order by UrbanCraft Kampala.`,
       },
       update: {
@@ -307,7 +307,7 @@ async function main() {
 
 const TIER_NOTES: Record<string, string> = {
   economy: "Affordable construction with hand-applied finishing. Best for light or short-term use. No warranty.",
-  standard: "Musambya, muvule and comparable hardwoods — the joinery and finish we build by default.",
+  standard: "Musambya, muvule and comparable hardwoods: the joinery and finish we build by default.",
   "top class": "Mahogany, Elgon teak or mugavu with machine-sprayed finishing for an imported look.",
 };
 

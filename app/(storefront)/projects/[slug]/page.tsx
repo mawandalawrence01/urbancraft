@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       url: `/projects/${project.slug}`,
       images: ogImageMeta(
         project.coverImage ? `/og/project/${project.slug}` : DEFAULT_OG_PATH,
-        `${project.title} — installed by UrbanCraft`,
+        `${project.title}, installed by UrbanCraft`,
       ),
     },
     twitter: {

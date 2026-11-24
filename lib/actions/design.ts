@@ -22,7 +22,7 @@ const briefSchema = z.object({
   message: z
     .string()
     .trim()
-    .min(10, "Tell us a little more — at least 10 characters")
+    .min(10, "Tell us a little more: at least 10 characters")
     .max(4000),
 });
 
@@ -73,7 +73,7 @@ export async function submitDesignBrief(
         name: d.name,
         phone: toMsisdn(d.phone)!,
         email: d.email || null,
-        subject: subjectService ? `${subjectService.name} — ${d.spaceType}` : d.spaceType,
+        subject: subjectService ? `${subjectService.name}: ${d.spaceType}` : d.spaceType,
         message: d.message,
         source: "design-brief",
         serviceSlug: d.serviceSlug || null,

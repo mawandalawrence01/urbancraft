@@ -90,7 +90,7 @@ export function SearchSheet({ open, onClose }: { open: boolean; onClose: () => v
           <div className="max-h-[65vh] overflow-y-auto overscroll-contain pt-2">
             {q.trim() && hits.length === 0 && !pending && (
               <p className="px-1 py-6 text-sm text-muted">
-                Nothing matched “{q}”. Try a room, a material, or a piece — “oak”, “6 seater”, “wall unit”.
+                Nothing matched “{q}”. Try a room, a material, or a piece, like “oak”, “6 seater” or “wall unit”.
               </p>
             )}
 

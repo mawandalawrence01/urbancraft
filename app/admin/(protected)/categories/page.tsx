@@ -163,7 +163,7 @@ export default async function CategoriesPage() {
             </Field>
             <Field label="Inside which room?" hint="Leave blank to create a new top-level room.">
               <select name="parentId" className={inputClass} defaultValue="">
-                <option value="">— Top level room —</option>
+                <option value="">Top level room</option>
                 {rooms.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
               </select>
             </Field>

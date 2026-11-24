@@ -19,7 +19,7 @@ export function Footer({
           <Logo showTagline />
           <p className="mt-4 max-w-xs text-[0.88rem] leading-relaxed text-ink-3">
             A workshop in Kansanga, Kampala. We cut, joint and finish every piece ourselves,
-            then deliver it &mdash; or measure your room, draw it, build it and fit it.
+            then deliver it. Or we measure your room, draw it, build it and fit it.
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export function Footer({
 
       <div className="border-t border-line">
         <div className="container-page flex flex-col gap-3 py-6 text-[0.82rem] text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} UrbanCraft &mdash; Furniture &amp; Interiors, Kampala</p>
+          <p>© {year} UrbanCraft Furniture &amp; Interiors, Kampala</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/privacy" className="transition hover:text-ink">Privacy</Link>
             <Link href="/terms" className="transition hover:text-ink">Terms</Link>

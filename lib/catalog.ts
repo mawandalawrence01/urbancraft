@@ -151,20 +151,6 @@ export async function getRelatedProducts(productId: string, categoryId: string |
   });
 }
 
-export async function getFeaturedProducts(take = 8) {
-  return prisma.product.findMany({
-    where: {
-      status: "ACTIVE",
-      OR: [{ heroRank: { not: null } }, { isFeatured: true }],
-      // Never lead the home page with a photo we have flagged for replacement
-      images: { some: { needsReview: false } },
-    },
-    select: productCard,
-    orderBy: [{ heroRank: { sort: "asc", nulls: "last" } }, { position: "asc" }],
-    take,
-  });
-}
-
 /** Hand-picked pieces for the home hero collage. */
 export async function getHeroProducts(take = 3) {
   return prisma.product.findMany({
@@ -175,13 +161,41 @@ export async function getHeroProducts(take = 3) {
   });
 }
 
-export async function getNewestProducts(take = 8) {
-  return prisma.product.findMany({
-    where: { status: "ACTIVE" },
-    select: productCard,
-    orderBy: { publishedAt: "desc" },
-    take,
-  });
+/**
+ * Every live piece, grouped under its room, for the home page.
+ *
+ * A product is linked to several categories (leaf and parent, sometimes more
+ * than one room), so grouping by the link table would print the same sofa
+ * twice. Each piece goes under exactly one room: its primary category's
+ * parent, or the category itself when that is already a room.
+ */
+export async function getCatalogueByRoom() {
+  const [tree, products] = await Promise.all([
+    getCategoryTree(),
+    prisma.product.findMany({
+      where: { status: "ACTIVE" },
+      select: {
+        ...productCard,
+        category: { select: { slug: true, name: true, parent: { select: { slug: true } } } },
+      },
+      orderBy: ORDER_BY.featured,
+    }),
+  ]);
+
+  const groups = new Map<string, { slug: string; name: string; products: ProductCard[] }>(
+    tree.map((room) => [room.slug, { slug: room.slug, name: room.name, products: [] }]),
+  );
+  const other: ProductCard[] = [];
+
+  for (const p of products) {
+    const roomSlug = p.category?.parent?.slug ?? p.category?.slug;
+    const group = roomSlug ? groups.get(roomSlug) : undefined;
+    (group ? group.products : other).push(p);
+  }
+
+  const rooms = [...groups.values()].filter((g) => g.products.length > 0);
+  if (other.length > 0) rooms.push({ slug: "other", name: "More pieces", products: other });
+  return { rooms, total: products.length };
 }
 
 /** Lightweight typeahead for the search sheet. */

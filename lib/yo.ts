@@ -120,7 +120,7 @@ async function call(fields: Record<string, string | undefined>): Promise<YoResul
       ok: false, status: "ERROR", statusCode: "NETWORK",
       statusMessage:
         error instanceof Error && error.name === "TimeoutError"
-          ? "The payment gateway did not respond in time. Your order is saved — please try again."
+          ? "The payment gateway did not respond in time. Your order is saved. Please try again."
           : "Could not reach the payment gateway.",
       transactionReference: null, mnoTransactionReferenceId: null, raw: {},
     };

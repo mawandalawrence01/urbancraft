@@ -9,7 +9,7 @@ const schema = z.object({
   phone: z.string().trim().refine((v) => toMsisdn(v) !== null, "Enter a valid Ugandan number"),
   email: z.string().trim().email("Enter a valid email").optional().or(z.literal("")),
   subject: z.string().trim().max(160).optional().or(z.literal("")),
-  message: z.string().trim().min(10, "Tell us a little more — at least 10 characters").max(4000),
+  message: z.string().trim().min(10, "Tell us a little more: at least 10 characters").max(4000),
 });
 
 export type EnquiryState = { ok?: boolean; error?: string; fieldErrors?: Record<string, string> };

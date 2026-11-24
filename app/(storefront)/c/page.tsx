@@ -10,7 +10,7 @@ export const revalidate = 900;
 export const metadata: Metadata = {
   title: "Shop by Room",
   description:
-    "Browse UrbanCraft furniture by room — living room, bedroom, dining, kids, office, kitchen, bathroom, doors and outdoor. Made to order in Kampala.",
+    "Browse UrbanCraft furniture by room: living room, bedroom, dining, kids, office, kitchen, bathroom, doors and outdoor. Made to order in Kampala.",
   alternates: { canonical: "/c" },
 };
 
@@ -31,7 +31,7 @@ export default async function RoomsPage() {
           ) : (
             <>
               We are rephotographing the catalogue in our own workshop. Everything below is still
-              made to order — call or send your measurements and we will quote it.
+              made to order. Call or send your measurements and we will quote it.
             </>
           )}
         </p>

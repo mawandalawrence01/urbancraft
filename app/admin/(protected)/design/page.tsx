@@ -71,7 +71,7 @@ export default async function DesignAdminPage() {
             <p className="mt-1">
               Imported photos stay invisible to the public site until you say what each one is.
               Mark a photo <strong className="text-ink">Our work</strong> only if UrbanCraft
-              actually built and installed it — that gallery is a claim customers will rely on.
+              actually built and installed it. That gallery is a claim customers will rely on.
               Anything else is a <strong className="text-ink">Reference</strong> and stays private.
             </p>
           </div>

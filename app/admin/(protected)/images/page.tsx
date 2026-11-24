@@ -53,7 +53,7 @@ export default async function ImageReviewPage() {
           <p className="font-medium text-ink">Why these are flagged</p>
           <p className="mt-1">
             These photos were imported from an existing furniture catalogue and visibly show another
-            business&apos;s branding. Replace them with photographs of your own pieces — a phone
+            business&apos;s branding. Replace them with photographs of your own pieces. A phone
             camera in good daylight is enough. For{" "}
             <strong className="text-ink">{strandedProducts.size}</strong> products every photo is
             flagged, so there is nothing clean to fall back on until you upload a replacement.

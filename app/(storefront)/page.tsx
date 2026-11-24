@@ -5,9 +5,7 @@ import { ArrowRight2 } from "iconsax-reactjs";
 
 import { ProductCard } from "@/components/product/ProductCard";
 import { prisma } from "@/lib/db";
-import {
-  getCategoryTree, getFeaturedProducts, getNewestProducts, getRoomCovers,
-} from "@/lib/catalog";
+import { getCatalogueByRoom, getCategoryTree, getRoomCovers } from "@/lib/catalog";
 import { getDesignHighlights, getPublishedServices } from "@/lib/design";
 import { getSetting, type ContactSettings } from "@/lib/settings";
 
@@ -26,22 +24,29 @@ const STAGES = [
 ] as const;
 
 export default async function HomePage() {
-  const [tree, featured, newest, projects, design, fitout, contact, total] = await Promise.all([
+  // The whole catalogue, every trade and every project are on this page, so a
+  // visitor can see everything we make without clicking through to find it.
+  const [tree, catalogue, projects, design, fitout, contact] = await Promise.all([
     getCategoryTree(),
-    getFeaturedProducts(8),
-    getNewestProducts(8),
+    getCatalogueByRoom(),
     prisma.project.findMany({
-      where: { isPublished: true }, orderBy: { position: "asc" }, take: 3,
+      where: { isPublished: true }, orderBy: { position: "asc" },
     }),
-    getDesignHighlights(6),
+    getDesignHighlights(),
     getPublishedServices("FITOUT"),
     getSetting<ContactSettings>("site.contact"),
-    prisma.product.count({ where: { status: "ACTIVE" } }),
   ]);
 
+  const total = catalogue.total;
   const rooms = tree.slice(0, 10);
   const covers = await getRoomCovers(rooms.map((r) => r.slug));
   const designCount = fitout.reduce((n, s) => n + s._count.images, 0);
+
+  // Room tiles jump to that room's section below rather than leaving the page.
+  // A room whose pieces are all filed under another room has no section here,
+  // so it keeps linking to its own page.
+  const onPage = new Set(catalogue.rooms.map((r) => r.slug));
+  const roomHref = (slug: string) => (onPage.has(slug) ? `#room-${slug}` : `/c/${slug}`);
 
   // Only the design library carries a provenance gate (an admin marked each
   // image OWN_WORK). heroRank ranks composition, not ownership, and several
@@ -65,7 +70,7 @@ export default async function HomePage() {
         </h1>
         <p className="mt-5 max-w-[60ch] text-[1.02rem] leading-relaxed text-ink-2">
           We design, build and install all furniture, doors and frames, floor decking and complete
-          interior solutions &mdash; custom-made in Kansanga, Kitalanga for homes, offices and
+          interior solutions, custom-made in Kansanga, Kitalanga for homes, offices and
           hotels across Kampala.
         </p>
       </section>
@@ -73,9 +78,9 @@ export default async function HomePage() {
       {/* Two doors of equal size. Neither outranks the other. */}
       <section className="container-page mt-10 grid gap-5 lg:mt-14 lg:grid-cols-2 lg:gap-6">
         <PathCard
-          href="/shop"
+          href={total > 0 ? "#catalogue" : "/shop"}
           title="Furniture"
-          body="Sofas, beds, dining sets, wardrobes and office pieces — delivered and installed across Kampala."
+          body="Sofas, beds, dining sets, wardrobes and office pieces, delivered and installed across Kampala."
           figure={total > 0 ? `${total}` : `${rooms.length}`}
           figureLabel={total > 0 ? "pieces in the catalogue" : "rooms we furnish"}
           action="Browse the catalogue"
@@ -120,7 +125,7 @@ export default async function HomePage() {
             Shop by room
           </h2>
           <Link href="/shop" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
-            {total > 0 ? `All ${total} pieces` : "All furniture"}
+            Sort and filter
             <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
@@ -133,7 +138,7 @@ export default async function HomePage() {
           {rooms.map((room) => (
             <Link
               key={room.slug}
-              href={`/c/${room.slug}`}
+              href={roomHref(room.slug)}
               className="group w-[46%] min-w-[10rem] sm:w-[31%] lg:w-auto"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] bg-sand">
@@ -167,7 +172,7 @@ export default async function HomePage() {
             {rooms.map((room) => (
               <Link
                 key={room.slug}
-                href={`/c/${room.slug}`}
+                href={roomHref(room.slug)}
                 className="inline-flex h-11 items-center rounded-[var(--radius-card)] border border-line px-4 text-[0.9rem] transition hover:border-ink"
               >
                 {room.name}
@@ -177,14 +182,54 @@ export default async function HomePage() {
         )}
       </section>
 
-      {featured.length > 0 && (
-        <section className="container-page mt-20 lg:mt-28">
-          <h2 className="mb-7 text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]">
-            The ones we repeat most
-          </h2>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
-            {featured.map((p) => <ProductCard key={p.id} product={p} />)}
+      {/* ======================================================= catalogue */}
+      {total > 0 && (
+        <section id="catalogue" className="container-page mt-20 lg:mt-28" aria-labelledby="catalogue-heading">
+          <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-8">
+            <h2
+              id="catalogue-heading"
+              className="text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]"
+            >
+              Every piece we make
+            </h2>
+            <p className="text-[0.9rem] text-ink-3">
+              <span className="figure-num text-ink">{total}</span> pieces, each made to order
+            </p>
           </div>
+
+          {catalogue.rooms.map((room, i) => (
+            <section
+              key={room.slug}
+              id={`room-${room.slug}`}
+              aria-labelledby={`room-${room.slug}-heading`}
+              className={i === 0 ? "mt-10" : "mt-14 lg:mt-20"}
+            >
+              <div className="mb-6 flex flex-wrap items-baseline justify-between gap-4">
+                <h3
+                  id={`room-${room.slug}-heading`}
+                  className="text-[1.25rem] font-medium tracking-[-0.015em]"
+                >
+                  {room.name}
+                  <span className="figure-num ml-2.5 text-[0.85rem] font-normal text-muted">
+                    {room.products.length}
+                  </span>
+                </h3>
+                {room.slug !== "other" && (
+                  <Link
+                    href={`/c/${room.slug}`}
+                    className="group flex items-center gap-1.5 text-[0.88rem] text-ink-2 transition hover:text-ink"
+                  >
+                    Filter {room.name.toLowerCase()}
+                    <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                )}
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+                {/* Below the fold, so every card lazy-loads its photograph. */}
+                {room.products.map((p) => <ProductCard key={p.id} product={p} />)}
+              </div>
+            </section>
+          ))}
         </section>
       )}
 
@@ -297,23 +342,6 @@ export default async function HomePage() {
           </tbody>
         </table>
       </section>
-
-      {newest.length > 0 && (
-        <section className="container-page mt-20 lg:mt-28">
-          <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-[clamp(1.45rem,3vw,2rem)] font-medium tracking-[-0.02em]">
-              Latest from the bench
-            </h2>
-            <Link href="/shop?sort=newest" className="group flex items-center gap-1.5 text-[0.9rem] text-ink-2 transition hover:text-ink">
-              See all
-              <ArrowRight2 size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
-            {newest.map((p) => <ProductCard key={p.id} product={p} />)}
-          </div>
-        </section>
-      )}
 
       {projects.length > 0 && (
         <section className="container-page mt-20 lg:mt-28">

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/design" },
   openGraph: {
     type: "website",
-    title: "Interior Design & Fit-Out — UrbanCraft Kampala",
+    title: "Interior Design & Fit-Out · UrbanCraft Kampala",
     description:
       "Kitchens, wardrobes, staircases, ceilings and feature walls, measured in your space and fitted by the workshop that built them.",
     url: "/design",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 /** Numbered because the sequence is the product: each stage gates the next. */
 const STAGES = [
   ["We measure", "We come to the space and take the dimensions ourselves. Nothing is cut from a sketch someone else made."],
-  ["We draw", "A layout and an itemised price before any timber is bought — including what we would change, and why."],
+  ["We draw", "A layout and an itemised price before any timber is bought, including what we would change, and why."],
   ["We build", "In our own workshop, not subcontracted, so the finish matches across every piece."],
   ["We fit", "Fitted, scribed and finished on site. Then we clear up after ourselves."],
 ] as const;
@@ -52,7 +52,7 @@ export default async function DesignPage() {
             We do not furnish rooms. We build them in.
           </h1>
           <p className="mt-5 max-w-[58ch] text-[1.02rem] leading-relaxed text-ink-2">
-            Kitchens, wardrobes, staircases, ceilings and feature walls &mdash; measured in your
+            Kitchens, wardrobes, staircases, ceilings and feature walls, measured in your
             space, made in our workshop, fitted by the people who made them. One team from the
             first survey to the last coat.
           </p>
@@ -118,9 +118,11 @@ export default async function DesignPage() {
                     <h3 className="text-[1rem] font-medium leading-tight">
                       {service.name}
                     </h3>
-                    <span className="figure-num shrink-0 text-[0.78rem] text-muted">
-                      {service._count.images || "—"}
-                    </span>
+                    {service._count.images > 0 && (
+                      <span className="figure-num shrink-0 text-[0.78rem] text-muted">
+                        {service._count.images}
+                      </span>
+                    )}
                   </div>
                   {service.tagline && (
                     <p className="mt-1.5 text-[0.86rem] leading-relaxed text-ink-3">{service.tagline}</p>

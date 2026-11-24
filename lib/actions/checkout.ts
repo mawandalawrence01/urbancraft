@@ -112,7 +112,7 @@ export async function placeOrder(
           events: {
             create: {
               label: "Mobile money unavailable",
-              detail: "Gateway credentials are not configured — collect payment another way.",
+              detail: "Gateway credentials are not configured. Collect payment another way.",
             },
           },
         },

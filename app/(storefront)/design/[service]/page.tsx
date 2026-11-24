@@ -86,7 +86,7 @@ export default async function DesignServicePage({ params }: { params: Params }) 
 
         {service.images.length > 0 && (
           <p className="mt-6 border-t border-line pt-4 text-[0.88rem] text-muted">
-            {service.images.length} photograph{service.images.length === 1 ? "" : "s"} &mdash; our own installations
+            {service.images.length} photograph{service.images.length === 1 ? "" : "s"} of our own installations
           </p>
         )}
       </section>
@@ -98,7 +98,7 @@ export default async function DesignServicePage({ params }: { params: Params }) 
           serviceName={service.name}
           images={service.images.map((img) => ({
             url: img.url,
-            alt: img.caption ?? `${service.name} — UrbanCraft installation`,
+            alt: img.caption ?? `${service.name} installed by UrbanCraft`,
             width: img.width,
             height: img.height,
             blurDataUrl: img.blurDataUrl,
